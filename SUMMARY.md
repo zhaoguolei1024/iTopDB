@@ -23,7 +23,7 @@
 ## 操作详解 <a id="base2"></a>
 - [test]
 
-## 服务器部署  <a id="base3"></a>
+## 服务器部署  <a id="install"></a>
 
 - [Centos]
    - [Centos7LAMP](install/centos/lamp.md)
