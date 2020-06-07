@@ -26,10 +26,10 @@
 ## 服务器部署  <a id="base3"></a>
 
 - [Centos]
-   - [Centos7 LAMP](install/centos/7/lamp.md)
-   - [Centos7 LNMP](install/centos/7/lnmp.md)
-   - [Centos8 LAMP](install/centos/8/lamp.md)
-   - [Centos8 LNMP](install/centos/8/lnmp.md)
+   - [Centos7LAMP](install/centos/7/lamp.md)
+   - [Centos7LNMP](install/centos/7/lnmp.md)
+   - [Centos8LAMP](install/centos/8/lamp.md)
+   - [Centos8LNMP](install/centos/8/lnmp.md)
 - [Windows](install/centos/7/lamp.md)
 - [Debian](install/centos/7/lamp.md)
 - [Ubuntu](install/centos/7/lamp.md)
