@@ -5,16 +5,16 @@
 ## 基础概述 <a id="base"></a>
 
 - [简介]
-  - [ITIL](install/centos/7/lnmp.md)
-    - [v1](install/centos/7/lnmp.md)
-    - [v2](install/centos/7/lnmp.md)
-    - [v3](install/centos/7/lnmp.md)
-    - [v4](install/centos/7/lnmp.md)
-  - [ITSM](install/centos/7/lnmp.md)
-  - [ITSS](install/centos/7/lnmp.md)
-  - [iTop](install/centos/7/lnmp.md)
-  - [Combodo](install/centos/7/lnmp.md)
-  - [CMDB](install/centos/7/lnmp.md)
+  - [ITIL](install/centos/lnmp.md)
+    - [v1](install/centos/lnmp.md)
+    - [v2](install/centos/lnmp.md)
+    - [v3](install/centos/lnmp.md)
+    - [v4](install/centos/lnmp.md)
+  - [ITSM](install/centos/lnmp.md)
+  - [ITSS](install/centos/lnmp.md)
+  - [iTop](install/centos/lnmp.md)
+  - [Combodo](install/centos/lnmp.md)
+  - [CMDB](install/centos/lnmp.md)
 
 
 ## 功能详解 <a id="base1"></a>
@@ -26,17 +26,17 @@
 ## 服务器部署  <a id="base3"></a>
 
 - [Centos]
-   - [Centos7LAMP](install/centos/7/lamp.md)
-   - [Centos7LNMP](install/centos/7/lnmp.md)
-   - [Centos8LAMP](install/centos/8/lamp.md)
-   - [Centos8LNMP](install/centos/8/lnmp.md)
-- [Windows](install/centos/7/lamp.md)
-- [Debian](install/centos/7/lamp.md)
-- [Ubuntu](install/centos/7/lamp.md)
-- [Redhat](install/centos/7/lamp.md)
-- [Solaris](install/centos/7/lamp.md)
-- [MacOs](install/centos/7/lamp.md)
-- [Windows](install/centos/7/lamp.md)
+   - [Centos7LAMP](install/centos/lamp.md)
+   - [Centos7LNMP](install/centos/lnmp.md)
+   - [Centos8LAMP](install/centos/lamp.md)
+   - [Centos8LNMP](install/centos/lnmp.md)
+- [Windows](install/centos/lamp.md)
+- [Debian](install/centos/lamp.md)
+- [Ubuntu](install/centos/lamp.md)
+- [Redhat](install/centos/lamp.md)
+- [Solaris](install/centos/lamp.md)
+- [MacOs](install/centos/lamp.md)
+- [Windows](install/centos/lamp.md)
 
 
 
