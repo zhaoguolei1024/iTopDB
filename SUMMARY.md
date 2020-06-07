@@ -18,11 +18,10 @@
 ## 基础概述 <a id="base"></a>
 
 - [简介]
-  - [ITIL]
-    - [v1](base/v1.md)
-    - [v2](base/v2.md)
-    - [v3](base/v3.md)
-    - [v4](base/v4.md)
+  - [ITIL v1](base/v1.md)
+  - [ITIL v2](base/v2.md)
+  - [ITIL v3](base/v3.md)
+  - [ITIL v4](base/v4.md)
   - [ITSM](base/ITSM.md)
   - [ITSS](base/ITSS.md)
   - [iTop](base/iTop.md)
