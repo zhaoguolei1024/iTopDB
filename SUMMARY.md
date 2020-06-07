@@ -24,13 +24,19 @@
 
 
 ## 服务器部署
-* Windows
-* Debian
-* Ubuntu
-* Redhat
-* Centos
-* Solaris
-* MacOs
+
+- [Centos]
+  - [Centos7 LAMP](install/centos/7/lamp.md)
+  - [Centos7 LNMP](install/centos/7/lnmp.md)
+  - [Centos8 LAMP](install/centos/8/lamp.md)
+  - [Centos8 LNMP](install/centos/8/lnmp.md)
+- [Windows]
+- [Debian]
+- [Ubuntu]
+- [Redhat]
+- [Solaris]
+- [MacOs]
+- [Windows]
 
 
 
@@ -61,4 +67,3 @@
 
 
 ## 资料文件
-
