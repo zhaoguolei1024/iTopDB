@@ -25,7 +25,7 @@
   - [首页](wiki/27home.md)
 
 
-## 官方wiki <a id="database"></a>
+## 数据库表结构 <a id="database"></a>
 
 - [A]
   - [A](database/A.md)
