@@ -4,7 +4,7 @@
 
 #### iTop适应数字公司（主机，服务提供商，软件发行商）的需求，以管理多个客户，合同和承诺。
 
-![img](D:\GitHub\itopdb\assets\volets-itop-illu1-2.png)
+![img](..\assets\volets-itop-illu1-2.png)
 
 **iTop是**构建涵盖所有客户环境的解决方案**的核心要素**，同时保护每个组织所需的机密性。
 
@@ -22,7 +22,7 @@
 
 #### iTop是用于管理相关硬件，软件和服务的免费软件。没有许可证或限制，社区版本具有100％的功能
 
-![img](D:\GitHub\itopdb\assets\pme.jpg)
+![img](..\assets\pme.jpg)
 
 iTop专为小型IT团队设计。它的实施简便性使您可以快速集中所有设备的信息。帮助台模块使技术团队可以跟踪正在进行的所有活动。
 
@@ -34,7 +34,7 @@ iTop的发行商Combodo及其合作伙伴为希望更快地实施解决方案的
 
 ### 创建您的量身定制的ITSM / CMDB解决方案，几乎立即获得投资回报，真正的IT ERP
 
-![img](D:\GitHub\itopdb\assets\grands-comptes.jpg)
+![img](..\assets\grands-comptes.jpg)
 
 #### iTop是可定制的IT服务管理Web解决方案，无需编程，并且可以集成到复杂的环境中
 
@@ -42,7 +42,7 @@ CMDB数据模型是iTop的核心，是一个可修改且可扩展的存储库，
 
 与多个源进行接口很容易。数据同步引擎和集成的审核功能可确保信息的质量。管理组件之间的关系为相关人员提供了强大的影响分析手段和有针对性的信息。
 
-![img](D:\GitHub\itopdb\assets\arton22.png)
+![img](..\assets\arton22.png)
 
 ##### 可定制的CMDB
 
@@ -50,7 +50,7 @@ CMDB数据模型是iTop的核心，是一个可修改且可扩展的存储库，
 
  
 
-![img](D:\GitHub\itopdb\assets\arton35.png)
+![img](..\assets\arton35.png)
 
 ##### 可定制的工作流程
 
@@ -58,7 +58,7 @@ CMDB数据模型是iTop的核心，是一个可修改且可扩展的存储库，
 
  
 
-![img](D:\GitHub\itopdb\assets\arton36.png)
+![img](..\assets\arton36.png)
 
 ##### 仪表板
 
@@ -66,7 +66,7 @@ IT团队的每个成员都可以使用与其相关的信息来定义其控制屏
 
  
 
-![img](D:\GitHub\itopdb\assets\arton37.png)
+![img](..\assets\arton37.png)
 
 ##### 服务台
 
@@ -74,7 +74,7 @@ IT团队的每个成员都可以使用与其相关的信息来定义其控制屏
 
  
 
-![img](D:\GitHub\itopdb\assets\arton42.png)
+![img](..\assets\arton42.png)
 
 ##### 用户门户
 
@@ -82,7 +82,7 @@ IT团队的每个成员都可以使用与其相关的信息来定义其控制屏
 
  
 
-![img](D:\GitHub\itopdb\assets\arton46.png)
+![img](..\assets\arton46.png)
 
 ##### 自助服务
 
@@ -90,7 +90,7 @@ IT团队的每个成员都可以使用与其相关的信息来定义其控制屏
 
  
 
-![img](D:\GitHub\itopdb\assets\arton45.png)
+![img](..\assets\arton45.png)
 
 ##### 事件管理
 
@@ -98,7 +98,7 @@ IT团队的每个成员都可以使用与其相关的信息来定义其控制屏
 
  
 
-![img](D:\GitHub\itopdb\assets\arton44.png)
+![img](..\assets\arton44.png)
 
 ##### 问题管理
 
@@ -106,7 +106,7 @@ IT团队的每个成员都可以使用与其相关的信息来定义其控制屏
 
  
 
-![img](D:\GitHub\itopdb\assets\arton43.png)
+![img](..\assets\arton43.png)
 
 ##### 更换管理层
 
@@ -125,23 +125,23 @@ IT团队的每个成员都可以使用与其相关的信息来定义其控制屏
 |                                            |                           **社区**                           |                       **Combodo产品**                        |                                                              |
 | :----------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |                                            |                        **iTop 社区**                         |                      **iTop Essential**                      |                    **iTop 专业人士/企业**                    |
-|                可配置的CMDB                |    ![--](D:\GitHub\itopdb\assets\tab-check-community.png)    |    ![--](D:\GitHub\itopdb\assets\tab-check-essential.png)    |       ![--](D:\GitHub\itopdb\assets\tab-check-pro.png)       |
-|           配置管理，联系人，组织           | ![--](D:\GitHub\itopdb\assets\tab-check-community.png) | ![--](D:\GitHub\itopdb\assets\tab-check-essential.png) | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-|                用户请求管理                | ![--](D:\GitHub\itopdb\assets\tab-check-community.png) | ![--](D:\GitHub\itopdb\assets\tab-check-essential.png) | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-|                  事件管理                  | ![--](D:\GitHub\itopdb\assets\tab-check-community.png) | ![--](D:\GitHub\itopdb\assets\tab-check-essential.png) | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-|                  问题管理                  | ![--](D:\GitHub\itopdb\assets\tab-check-community.png) | ![--](D:\GitHub\itopdb\assets\tab-check-essential.png) | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-|                 更换管理层                 | ![--](D:\GitHub\itopdb\assets\tab-check-community.png) | ![--](D:\GitHub\itopdb\assets\tab-check-essential.png) | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-|            导入/导出CSV和Excel             | ![--](D:\GitHub\itopdb\assets\tab-check-community.png) | ![--](D:\GitHub\itopdb\assets\tab-check-essential.png) | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-|                数据同步引擎                | ![--](D:\GitHub\itopdb\assets\tab-check-community.png) | ![--](D:\GitHub\itopdb\assets\tab-check-essential.png) | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-|               图形化影响分析               | ![--](D:\GitHub\itopdb\assets\tab-check-community.png) | ![--](D:\GitHub\itopdb\assets\tab-check-essential.png) | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-|                可配置的通知                | ![--](D:\GitHub\itopdb\assets\tab-check-community.png) | ![--](D:\GitHub\itopdb\assets\tab-check-essential.png) | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-|              REST / JSON API               | ![--](D:\GitHub\itopdb\assets\tab-check-community.png) | ![--](D:\GitHub\itopdb\assets\tab-check-essential.png) | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-|              时间和工作日管理              |                                                              | ![--](D:\GitHub\itopdb\assets\tab-check-essential.png) | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-|            通过电子邮件自动回复            |                                                              | ![--](D:\GitHub\itopdb\assets\tab-check-essential.png) | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-|         通过电子邮件创建和更新票证         |                                                              | ![--](D:\GitHub\itopdb\assets\tab-check-essential.png) | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
+|                可配置的CMDB                |    ![--](..\assets\tab-check-community.png)    |    ![--](..\assets\tab-check-essential.png)    |       ![--](..\assets\tab-check-pro.png)       |
+|           配置管理，联系人，组织           | ![--](..\assets\tab-check-community.png) | ![--](..\assets\tab-check-essential.png) | ![--](..\assets\tab-check-pro.png) |
+|                用户请求管理                | ![--](..\assets\tab-check-community.png) | ![--](..\assets\tab-check-essential.png) | ![--](..\assets\tab-check-pro.png) |
+|                  事件管理                  | ![--](..\assets\tab-check-community.png) | ![--](..\assets\tab-check-essential.png) | ![--](..\assets\tab-check-pro.png) |
+|                  问题管理                  | ![--](..\assets\tab-check-community.png) | ![--](..\assets\tab-check-essential.png) | ![--](..\assets\tab-check-pro.png) |
+|                 更换管理层                 | ![--](..\assets\tab-check-community.png) | ![--](..\assets\tab-check-essential.png) | ![--](..\assets\tab-check-pro.png) |
+|            导入/导出CSV和Excel             | ![--](..\assets\tab-check-community.png) | ![--](..\assets\tab-check-essential.png) | ![--](..\assets\tab-check-pro.png) |
+|                数据同步引擎                | ![--](..\assets\tab-check-community.png) | ![--](..\assets\tab-check-essential.png) | ![--](..\assets\tab-check-pro.png) |
+|               图形化影响分析               | ![--](..\assets\tab-check-community.png) | ![--](..\assets\tab-check-essential.png) | ![--](..\assets\tab-check-pro.png) |
+|                可配置的通知                | ![--](..\assets\tab-check-community.png) | ![--](..\assets\tab-check-essential.png) | ![--](..\assets\tab-check-pro.png) |
+|              REST / JSON API               | ![--](..\assets\tab-check-community.png) | ![--](..\assets\tab-check-essential.png) | ![--](..\assets\tab-check-pro.png) |
+|              时间和工作日管理              |                                                              | ![--](..\assets\tab-check-essential.png) | ![--](..\assets\tab-check-pro.png) |
+|            通过电子邮件自动回复            |                                                              | ![--](..\assets\tab-check-essential.png) | ![--](..\assets\tab-check-pro.png) |
+|         通过电子邮件创建和更新票证         |                                                              | ![--](..\assets\tab-check-essential.png) | ![--](..\assets\tab-check-pro.png) |
 |                  审批规则                  |                                                              |                             简单                             |                           可配置的                           |
-|               参数化响应模型               |                                                              |                                                              | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-|                 满意度调查                 |                                                              |                                                              | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-|               客户要求的型号               |                                                              |                                                              | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-|         ITSM Designer-CMDB图形定制         |                                                              | ![--](D:\GitHub\itopdb\assets\tab-check-essential.png) | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
-| ITSM Designer Pro-图形化定制流程和配置文件 |                                                              |                                                              | ![--](D:\GitHub\itopdb\assets\tab-check-pro.png) |
+|               参数化响应模型               |                                                              |                                                              | ![--](..\assets\tab-check-pro.png) |
+|                 满意度调查                 |                                                              |                                                              | ![--](..\assets\tab-check-pro.png) |
+|               客户要求的型号               |                                                              |                                                              | ![--](..\assets\tab-check-pro.png) |
+|         ITSM Designer-CMDB图形定制         |                                                              | ![--](..\assets\tab-check-essential.png) | ![--](..\assets\tab-check-pro.png) |
+| ITSM Designer Pro-图形化定制流程和配置文件 |                                                              |                                                              | ![--](..\assets\tab-check-pro.png) |
