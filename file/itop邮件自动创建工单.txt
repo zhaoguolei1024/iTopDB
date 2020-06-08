@@ -1,0 +1,57 @@
+
+
+
+邮件生成工单
+1.实现功能：
+1、将邮件主题转成工单标题
+2、邮件内容转成工单描述
+3、发件人地址关联itop联系的邮件地址，并抓取该联系的人所在组织，
+4、邮件附件转成工单附档，如若存在不会重复。
+
+限制：
+1、只扫描一个邮箱帐号的文件夹
+2、生成的工单，类型唯一并可指定，
+
+方法安装及使用方法（windows 平台，iTop2.0）：
+1、下载扩展包，
+2、在php目录下，执行go-pear.bat  ,问题都用默认值。
+3、执行pear install Net_socket
+4、上述两过程若提示少文件，请按提示补充。
+5、安装扩展包，http://localhost/setup，像更新过程一样，
+6、修改配置文件，如下：
+'itop-simple-email-synchro' => array (
+                'protocol' => 'imap',
+                'mail_server' => 'imap.demo.com',
+                'port' => 143,
+                'login' => 'mailbox-name',
+                'pwd' => 'your-password',
+                'mailbox' => '',
+                'pop3_auth_option' => 'USER',
+                'imap_options' => array ('imap'),
+                'debug' => false,
+                'exclude_attachment_types' => array ('application/exe'),
+                'default_values' => array (),
+                'parts_order' => 'text/plain,text/html',
+                'ticket_class' => 'UserRequest',
+                'create_only' => false,
+                'title_pattern' => '/R-([0-9]+)/',
+        ),
+
+7、测试设置、
+php.exe cron.php --auth_user=<user> --auth_pwd=<pwd>   这里的用户密码都是iTOP系统里的管理员帐号。
+
+
+注意：
+windows 需要安装go-pear.phar
+1.下载下面连接的文件至go-pear.phar。
+http://pear.php.net/go-pear.phar
+该文件最好放到Php目录下，因为下一步执行后，会产生很多文件夹和文件。
+
+2.执行php go-pear.phar
+（Windows上执行的时候因为有UAC的问题所以需要以管理员权限运行CMD。
+以管理员权限运行CMD的方法。
+创建CMD.bat文件-〉该文件中只有一条语句:CMD-〉右键以管理员身份运行该BAT文件即可）
+
+3.一路Enter（注意phpl路径）
+
+执行cron.bat时需要修改其配置，尤其是php.ini和params路径，用户名密码信息在cron.distib中

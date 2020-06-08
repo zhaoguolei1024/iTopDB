@@ -1,0 +1,24 @@
+百度经验：
+
+相关篇 图文详解
+
+http://jingyan.baidu.com/article/295430f1c4409e0c7e005011.html
+
+1.必须lamp环境,这里不作说明.参见我的另一篇实战owncloud,
+利用之前搭建的环境.从官方下载itop软件包
+进入/var/www/html目录
+# cd /var/www/html
+下载包
+# wget http://pilotfiber.dl.sourceforge.net/project/itop/itop/2.2.1/iTop-2.2.1-2658.zip
+解压至./html下
+# unzip iTop-2.2.1-2658.zip
+查看解压后的文件,这里我们只需要web文件夹,其他画红框的请随意处理
+浏览器访问
+http://你主机IP/web
+显示如下内容报错信息
+需要web下的log  env-production conf data  四个文件夹没有权限创建
+
+以下略
+。…。…。…。…。…。…。…。…。………
+....................
+.............

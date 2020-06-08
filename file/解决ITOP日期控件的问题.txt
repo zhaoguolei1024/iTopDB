@@ -1,0 +1,8 @@
+需要修改网站根目录下application目录下的itopwebpage.class.inc和portalwebpage.class.inc两个文件。
+
+搜索
+if ($sJSLangShort != '"en"')
+改为
+if ($sJSLangShort == 'NULL')
+
+以上方法由雨博扬版主提供，特别感谢
