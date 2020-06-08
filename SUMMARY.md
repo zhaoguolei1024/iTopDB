@@ -5,6 +5,7 @@
 # 主目录
 
 > - [官方wiki](#wiki)
+> - [数据库表结构](#database)
 > - [基础概述](#base)
 > - [后台模块](#backfunction)
 > - [门户模块](#webfunction)
@@ -22,6 +23,63 @@
 - [什么是iTop](wiki/whatisitop.md)
 - [iTop文档2.7]
   - [首页](wiki/27home.md)
+
+
+## 官方wiki <a id="database"></a>
+
+- [A]
+  - [A](database/A.md)
+- [B]
+  - [B](database/B.md)
+- [C]
+  - [C](database/C.md)
+- [D]
+  - [D](database/D.md)
+- [E]
+  - [E](database/E.md)
+- [F]
+  - [F](database/F.md)
+- [G]
+  - [G](database/G.md)
+- [H]
+  - [H](database/H.md)
+- [I]
+  - [I](database/I.md)
+- [J]
+  - [J](database/J.md)
+- [K]
+  - [K](database/K.md)
+- [L]
+  - [L](database/L.md)
+- [M]
+  - [M](database/M.md)
+- [N]
+  - [N](database/N.md)
+- [O]
+  - [O](database/O.md)
+- [P]
+  - [P](database/P.md)
+- [Q]
+  - [Q](database/Q.md)
+- [R]
+  - [R](database/R.md)
+- [S]
+  - [S](database/S.md)
+- [T]
+  - [T](database/T.md)
+- [U]
+  - [U](database/U.md)
+- [V]
+  - [V](database/V.md)
+- [W]
+  - [W](database/W.md)
+- [X]
+  - [X](database/X.md)
+- [Y]
+  - [Y](database/Y.md)
+- [Z]
+  - [Z](database/Z.md)
+
 
 ## 基础概述 <a id="base"></a>
 
