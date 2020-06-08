@@ -4,6 +4,7 @@
 
 # 主目录
 
+> - [官方wiki](#wiki)
 > - [基础概述](#base)
 > - [后台模块](#backfunction)
 > - [门户模块](#webfunction)
@@ -15,6 +16,12 @@
 > - [行业实施](#implementation)
 > - [常见问题](#question)
 > - [资料文件](#file)
+
+## 官方wiki <a id="wiki"></a>
+
+- [什么是iTop](wiki/whatisitop.md)
+- [iTop文档2.7]
+  - [首页](wiki/27home.md)
 
 ## 基础概述 <a id="base"></a>
 
