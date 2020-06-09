@@ -34,14 +34,33 @@
 ## 数据库表结构 <a id="database"></a>
 
 - [A]
-  - [applicationsolution](database/applicationsolution.md)
-  - [attachment](database/attachment.md)
+  - [applicationsolution](database/A/applicationsolution.md)
+  - [attachment](database/A/attachment.md)
 - [B]
-  - [B](database/B.md)
+  - [brand](database/B/brand.md)
+  - [businessprocess](database/B/businessprocess.md)
 - [C]
-  - [C](database/C.md)
+  - [change](database/C/change.md)
+  - [change_approved](database/C/change_approved.md)
+  - [change_emergency](database/C/change_emergency.md)
+  - [change_normal](database/C/change_normal.md)
+  - [change_routine](database/C/change_routine.md)
+  - [connectableci](database/C/connectableci.md)
+  - [contact](database/C/contact.md)
+  - [contacttype](database/C/contacttype.md)
+  - [contract](database/C/contract.md)
+  - [contracttype](database/C/contracttype.md)
+  - [customercontract](database/C/customercontract.md)
 - [D]
-  - [D](database/D.md)
+  - [databaseschema](database/D/databaseschema.md)
+  - [datacenterdevice](database/D/datacenterdevice.md)
+  - [dbserver](database/D/dbserver.md)
+  - [deliverymodel](database/D/deliverymodel.md)
+  - [document](database/D/document.md)
+  - [documentfile](database/D/documentfile.md)
+  - [documentnote](database/D/documentnote.md)
+  - [documenttype](database/D/documenttype.md)
+  - [documentweb](database/D/documentweb.md)
 - [E]
   - [E](database/E.md)
 - [F]
