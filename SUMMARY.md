@@ -19,7 +19,7 @@
 > - [常见问题](#question)
 > - [资料文件](#file)
 
-## 协同维护 <a id="teamwork"></a>
+## 加入我们协同维护 <a id="teamwork"></a>
 
 - [维护文档](teamwork/contentdiy.md)
 - [维护目录](teamwork/menudiy.md)
