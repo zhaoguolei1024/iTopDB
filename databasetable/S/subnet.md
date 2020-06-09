@@ -1,4 +1,16 @@
-## 该文档尚未维护，点击下方链接加入我们一起来学习维护
+| 列          | 类型                   | 注释 |
+| :---------- | ---------------------- | ---- |
+| id          | int *自动增量*         |      |
+| description | text *NULL*            |      |
+| subnet_name | varchar(255) *NULL* [] |      |
+| org_id      | int *NULL* [**0**]     |      |
+| ip          | varchar(255) *NULL* [] |      |
+| ip_mask     | varchar(255) *NULL* [] |      |
 
-[点击此处加入QQ群【iTopDB.com】](https://jq.qq.com/?_wv=1027&k=iY5f6Yys) QQ群号：657615256
+### 索引
 
+| PRIMARY | *id*          |
+| :------ | ------------- |
+| INDEX   | *org_id*      |
+| INDEX   | *ip*(95)      |
+| INDEX   | *ip_mask*(95) |

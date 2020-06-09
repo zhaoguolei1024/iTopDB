@@ -1,4 +1,23 @@
-## 该文档尚未维护，点击下方链接加入我们一起来学习维护
+|                          |                                               |                                        |
+| :----------------------- | --------------------------------------------- | -------------------------------------- |
+| 列                       | 类型                                          | 注释                                   |
+| id                       | int [**0**]                                   | 关联FunctionalCI数据表的ID             |
+| name                     | varchar(255) *NULL* []                        |                                        |
+| description              | text *NULL*                                   |                                        |
+| org_id                   | int *NULL* [**0**]                            |                                        |
+| organization_name        | varchar(255) *NULL* []                        |                                        |
+| business_criticity       | enum('high','low','medium') *NULL* [**low**]  |                                        |
+| move2production          | date *NULL*                                   |                                        |
+| status                   | enum('active','inactive') *NULL* [**active**] | 是否启用，启用为active，禁用为inactive |
+| redundancy               | varchar(20) *NULL* [**disabled**]             | 冗余配置                               |
+| finalclass               | varchar(255) *NULL* [**FunctionalCI**]        |                                        |
+| friendlyname             | varchar(255) []                               |                                        |
+| obsolescence_flag        | int [**0**]                                   |                                        |
+| obsolescence_date        | date *NULL*                                   |                                        |
+| org_id_friendlyname      | varchar(255) []                               |                                        |
+| org_id_obsolescence_flag | int [**0**]                                   |                                        |
 
-[点击此处加入QQ群【iTopDB.com】](https://jq.qq.com/?_wv=1027&k=iY5f6Yys) QQ群号：657615256
+```
+select distinct `ApplicationSolution`.`id` AS `id`,`ApplicationSolution_FunctionalCI`.`name` AS `name`,`ApplicationSolution_FunctionalCI`.`description` AS `description`,`ApplicationSolution_FunctionalCI`.`org_id` AS `org_id`,`Organization_org_id`.`name` AS `organization_name`,`ApplicationSolution_FunctionalCI`.`business_criticity` AS `business_criticity`,`ApplicationSolution_FunctionalCI`.`move2production` AS `move2production`,`ApplicationSolution`.`status` AS `status`,`ApplicationSolution`.`redundancy` AS `redundancy`,`ApplicationSolution_FunctionalCI`.`finalclass` AS `finalclass`,cast(concat(coalesce(`ApplicationSolution_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,coalesce((`ApplicationSolution`.`status` = 'inactive'),0) AS `obsolescence_flag`,`ApplicationSolution_FunctionalCI`.`obsolescence_date` AS `obsolescence_date`,cast(concat(coalesce(`Organization_org_id`.`name`,'')) as char charset utf8mb4) AS `org_id_friendlyname`,coalesce((`Organization_org_id`.`status` = 'inactive'),0) AS `org_id_obsolescence_flag` from (`applicationsolution` `ApplicationSolution` join (`functionalci` `ApplicationSolution_FunctionalCI` join `organization` `Organization_org_id` on((`ApplicationSolution_FunctionalCI`.`org_id` = `Organization_org_id`.`id`))) on((`ApplicationSolution`.`id` = `ApplicationSolution_FunctionalCI`.`id`))) where (0 <> 1)
+```
 

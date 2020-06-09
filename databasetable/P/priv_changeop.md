@@ -1,4 +1,15 @@
-## 该文档尚未维护，点击下方链接加入我们一起来学习维护
+| 列       | 类型                                   | 注释 |
+| :------- | -------------------------------------- | ---- |
+| id       | int *自动增量*                         |      |
+| changeid | int *NULL* [**0**]                     |      |
+| objclass | varchar(255) *NULL* []                 |      |
+| objkey   | int *NULL* [**0**]                     |      |
+| optype   | varchar(255) *NULL* [**CMDBChangeOp**] |      |
 
-[点击此处加入QQ群【iTopDB.com】](https://jq.qq.com/?_wv=1027&k=iY5f6Yys) QQ群号：657615256
+### 索引
 
+| PRIMARY | *id*                     |
+| :------ | ------------------------ |
+| INDEX   | *changeid*               |
+| INDEX   | *optype*(95)             |
+| INDEX   | *objclass*(95), *objkey* |

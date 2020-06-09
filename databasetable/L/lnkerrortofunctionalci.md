@@ -1,4 +1,13 @@
-## 该文档尚未维护，点击下方链接加入我们一起来学习维护
+| 列              | 类型                   | 注释 |
+| :-------------- | ---------------------- | ---- |
+| link_id         | int *自动增量*         |      |
+| functionalci_id | int *NULL* [**0**]     |      |
+| error_id        | int *NULL* [**0**]     |      |
+| dummy           | varchar(255) *NULL* [] |      |
 
-[点击此处加入QQ群【iTopDB.com】](https://jq.qq.com/?_wv=1027&k=iY5f6Yys) QQ群号：657615256
+### 索引
 
+| PRIMARY | *link_id*         |
+| :------ | ----------------- |
+| INDEX   | *functionalci_id* |
+| INDEX   | *error_id*        |

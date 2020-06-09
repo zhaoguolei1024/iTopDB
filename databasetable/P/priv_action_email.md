@@ -1,4 +1,18 @@
-## 该文档尚未维护，点击下方链接加入我们一起来学习维护
+| 列             | 类型                                            | 注释 |
+| :------------- | ----------------------------------------------- | ---- |
+| id             | int *自动增量*                                  |      |
+| test_recipient | varchar(255) *NULL* []                          |      |
+| from           | varchar(255) *NULL* []                          |      |
+| reply_to       | varchar(255) *NULL* []                          |      |
+| to             | text *NULL*                                     |      |
+| cc             | text *NULL*                                     |      |
+| bcc            | text *NULL*                                     |      |
+| subject        | varchar(255) *NULL* []                          |      |
+| body           | text *NULL*                                     |      |
+| importance     | enum('high','low','normal') *NULL* [**normal**] |      |
 
-[点击此处加入QQ群【iTopDB.com】](https://jq.qq.com/?_wv=1027&k=iY5f6Yys) QQ群号：657615256
+### 索引
 
+| PRIMARY | *id* |
+| :------ | ---- |
+|         |      |

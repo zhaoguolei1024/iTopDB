@@ -1,4 +1,17 @@
-## 该文档尚未维护，点击下方链接加入我们一起来学习维护
+| 列             | 类型                                                         | 注释 |
+| :------------- | ------------------------------------------------------------ | ---- |
+| id             | int *自动增量*                                               |      |
+| sync_source_id | int *NULL* [**0**]                                           |      |
+| attcode        | varchar(255) *NULL* []                                       |      |
+| update         | tinyint(1) *NULL* [**1**]                                    |      |
+| reconcile      | tinyint(1) *NULL* [**0**]                                    |      |
+| update_policy  | enum('master_locked','master_unlocked','write_if_empty') *NULL* [**master_locked**] |      |
+| finalclass     | varchar(255) *NULL* [**SynchroAttribute**]                   |      |
 
-[点击此处加入QQ群【iTopDB.com】](https://jq.qq.com/?_wv=1027&k=iY5f6Yys) QQ群号：657615256
+### 索引
 
+| PRIMARY | *id*             |
+| :------ | ---------------- |
+| INDEX   | *sync_source_id* |
+| INDEX   | *attcode*(95)    |
+| INDEX   | *finalclass*(95) |

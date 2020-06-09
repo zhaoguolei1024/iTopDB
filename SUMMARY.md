@@ -5,7 +5,7 @@
 # 主目录
 
 > - [协同维护](#teamwork)
-> - [官方wiki](#wiki)
+> - [官方中文wiki](#wiki)
 > - [数据库表结构](#databasetable)
 > - [数据库视图](#databaseview)
 > - [基础概述](#base)
