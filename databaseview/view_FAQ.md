@@ -1,4 +1,18 @@
-## 该文档尚未维护，点击下方链接加入我们一起来学习维护
+| 列                       | 类型                   | 注释 |
+| :----------------------- | ---------------------- | ---- |
+| id                       | int [**0**]            |      |
+| title                    | varchar(255) *NULL* [] |      |
+| summary                  | text *NULL*            |      |
+| description              | longtext *NULL*        |      |
+| category_id              | int *NULL* [**0**]     |      |
+| category_name            | varchar(255) *NULL* [] |      |
+| error_code               | varchar(255) *NULL* [] |      |
+| key_words                | varchar(255) *NULL* [] |      |
+| domains                  | varchar(255) *NULL* [] |      |
+| friendlyname             | varchar(255) *NULL*    |      |
+| category_id_friendlyname | varchar(255) *NULL*    |      |
 
-[点击此处加入QQ群【iTopDB.com】](https://jq.qq.com/?_wv=1027&k=iY5f6Yys) QQ群号：657615256
+```
+select distinct `FAQ`.`id` AS `id`,`FAQ`.`title` AS `title`,`FAQ`.`summary` AS `summary`,`FAQ`.`description` AS `description`,`FAQ`.`category_id` AS `category_id`,`FAQCategory_category_id`.`nam` AS `category_name`,`FAQ`.`error_code` AS `error_code`,`FAQ`.`key_words` AS `key_words`,`FAQ`.`domains` AS `domains`,cast(concat(coalesce(`FAQ`.`title`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`FAQCategory_category_id`.`nam`,'')) as char charset utf8mb4) AS `category_id_friendlyname` from (`faq` `FAQ` join `faqcategory` `FAQCategory_category_id` on((`FAQ`.`category_id` = `FAQCategory_category_id`.`id`))) where (0 <> 1)
+```
 

@@ -1,4 +1,19 @@
-## 该文档尚未维护，点击下方链接加入我们一起来学习维护
+| 列                | 类型                                       | 注释 |
+| :---------------- | ------------------------------------------ | ---- |
+| id                | int [**0**]                                |      |
+| name              | varchar(255) *NULL* []                     |      |
+| ipaddress         | varchar(255) *NULL* []                     |      |
+| macaddress        | varchar(255) *NULL* []                     |      |
+| comment           | text *NULL*                                |      |
+| ipgateway         | varchar(255) *NULL* []                     |      |
+| ipmask            | varchar(255) *NULL* []                     |      |
+| speed             | decimal(12,2) *NULL*                       |      |
+| finalclass        | varchar(255) *NULL* [**NetworkInterface**] |      |
+| friendlyname      | varchar(511) *NULL*                        |      |
+| obsolescence_flag | int [**0**]                                |      |
+| obsolescence_date | date *NULL*                                |      |
 
-[点击此处加入QQ群【iTopDB.com】](https://jq.qq.com/?_wv=1027&k=iY5f6Yys) QQ群号：657615256
+```
+select distinct `IPInterface`.`id` AS `id`,`IPInterface_NetworkInterface`.`name` AS `name`,`IPInterface`.`ipaddress` AS `ipaddress`,`IPInterface`.`macaddress` AS `macaddress`,`IPInterface`.`comment` AS `comment`,`IPInterface`.`ipgateway` AS `ipgateway`,`IPInterface`.`ipmask` AS `ipmask`,`IPInterface`.`speed` AS `speed`,`IPInterface_NetworkInterface`.`finalclass` AS `finalclass`,if((`IPInterface_NetworkInterface`.`finalclass` = 'IPInterface'),cast(concat(coalesce(`IPInterface_NetworkInterface`.`name`,'')) as char charset utf8mb4),if((`IPInterface_NetworkInterface`.`finalclass` = 'LogicalInterface'),cast(concat(coalesce(`IPInterface_NetworkInterface`.`name`,''),coalesce(' ',''),coalesce(`VirtualMachine_virtualmachine_id_FunctionalCI`.`name`,'')) as char charset utf8mb4),cast(concat(coalesce(`IPInterface_NetworkInterface`.`name`,''),coalesce(' ',''),coalesce(`ConnectableCI_connectableci_id_FunctionalCI`.`name`,'')) as char charset utf8mb4))) AS `friendlyname`,if((`IPInterface_NetworkInterface`.`finalclass` = 'IPInterface'),coalesce(0,0),if((`IPInterface_NetworkInterface`.`finalclass` = 'LogicalInterface'),coalesce(coalesce((`VirtualMachine_virtualmachine_id_VirtualDevice`.`status` = 'obsolete'),0),0),coalesce(coalesce((`ConnectableCI_connectableci_id_PhysicalDevice`.`status` = 'obsolete'),0),0))) AS `obsolescence_flag`,`IPInterface_NetworkInterface`.`obsolescence_date` AS `obsolescence_date` from (((`ipinterface` `IPInterface` join `networkinterface` `IPInterface_NetworkInterface` on((`IPInterface`.`id` = `IPInterface_NetworkInterface`.`id`))) left join (`logicalinterface` `IPInterface_poly_LogicalInterface` join (`virtualdevice` `VirtualMachine_virtualmachine_id_VirtualDevice` join `functionalci` `VirtualMachine_virtualmachine_id_FunctionalCI` on((`VirtualMachine_virtualmachine_id_VirtualDevice`.`id` = `VirtualMachine_virtualmachine_id_FunctionalCI`.`id`))) on((`IPInterface_poly_LogicalInterface`.`virtualmachine_id` = `VirtualMachine_virtualmachine_id_VirtualDevice`.`id`))) on((`IPInterface`.`id` = `IPInterface_poly_LogicalInterface`.`id`))) left join (`physicalinterface` `IPInterface_poly_PhysicalInterface` join (`physicaldevice` `ConnectableCI_connectableci_id_PhysicalDevice` join `functionalci` `ConnectableCI_connectableci_id_FunctionalCI` on((`ConnectableCI_connectableci_id_PhysicalDevice`.`id` = `ConnectableCI_connectableci_id_FunctionalCI`.`id`))) on((`IPInterface_poly_PhysicalInterface`.`connectableci_id` = `ConnectableCI_connectableci_id_PhysicalDevice`.`id`))) on((`IPInterface`.`id` = `IPInterface_poly_PhysicalInterface`.`id`))) where ((0 <> coalesce((`VirtualMachine_virtualmachine_id_VirtualDevice`.`finalclass` = 'VirtualMachine'),1)) and (0 <> coalesce((`ConnectableCI_connectableci_id_PhysicalDevice`.`finalclass` in ('DatacenterDevice','NetworkDevice','Server','PC','Printer','StorageSystem','SANSwitch','TapeLibrary','NAS','ConnectableCI')),1)))
+```
 

@@ -1,4 +1,13 @@
-## 该文档尚未维护，点击下方链接加入我们一起来学习维护
+| 列                         | 类型                   | 注释 |
+| :------------------------- | ---------------------- | ---- |
+| id                         | int [**0**]            |      |
+| name                       | varchar(255) *NULL* [] |      |
+| icon                       | varchar(255) *NULL*    |      |
+| friendlyname               | varchar(255) *NULL*    |      |
+| ServiceFamilyicon_data     | longblob *NULL*        |      |
+| ServiceFamilyicon_filename | varchar(255) *NULL*    |      |
 
-[点击此处加入QQ群【iTopDB.com】](https://jq.qq.com/?_wv=1027&k=iY5f6Yys) QQ群号：657615256
+```
+select distinct `ServiceFamily`.`id` AS `id`,`ServiceFamily`.`name` AS `name`,`ServiceFamily`.`icon_mimetype` AS `icon`,cast(concat(coalesce(`ServiceFamily`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,`ServiceFamily`.`icon_data` AS `ServiceFamilyicon_data`,`ServiceFamily`.`icon_filename` AS `ServiceFamilyicon_filename` from `servicefamily` `ServiceFamily` where (0 <> 1)
+```
 
