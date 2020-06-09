@@ -35,8 +35,7 @@
 
 - [A]
   - [applicationsolution](database/applicationsolution.md)
-    - [applicationsolution](database/applicationsolution.md)
-    - [attachment](database/attachment.md)
+  - [attachment](database/attachment.md)
 - [B]
   - [B](database/B.md)
 - [C]
