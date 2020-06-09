@@ -25,7 +25,7 @@
 - [维护文档](teamwork/contentdiy.md)
 - [维护目录](teamwork/menudiy.md)
 
-## 官方wiki <a id="wiki"></a>
+## 官方中文wiki <a id="wiki"></a>
 
 - [什么是iTop](wiki/whatisitop.md)
 - [iTop文档2.7]
