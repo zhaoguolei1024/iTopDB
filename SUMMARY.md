@@ -4,6 +4,7 @@
 
 # 主目录
 
+> - [协同维护](#teamwork)
 > - [官方wiki](#wiki)
 > - [数据库表结构](#database)
 > - [基础概述](#base)
@@ -17,6 +18,11 @@
 > - [行业实施](#implementation)
 > - [常见问题](#question)
 > - [资料文件](#file)
+
+## 协同维护 <a id="teamwork"></a>
+
+- [维护文档](teamwork/contentdiy.md)
+- [维护目录](teamwork/menudiy.md)
 
 ## 官方wiki <a id="wiki"></a>
 
