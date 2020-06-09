@@ -34,7 +34,9 @@
 ## 数据库表结构 <a id="database"></a>
 
 - [A]
-  - [A](database/A.md)
+  - [applicationsolution](database/applicationsolution.md)
+    - [applicationsolution](database/applicationsolution.md)
+    - [attachment](database/attachment.md)
 - [B]
   - [B](database/B.md)
 - [C]
