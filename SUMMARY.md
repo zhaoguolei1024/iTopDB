@@ -33,13 +33,13 @@
 
 ## 数据库表结构 <a id="database"></a>
 
-- [A]
+- [A（2）]
   - [applicationsolution](database/A/applicationsolution.md)
   - [attachment](database/A/attachment.md)
-- [B]
+- [B（2）]
   - [brand](database/B/brand.md)
   - [businessprocess](database/B/businessprocess.md)
-- [C]
+- [C（11）]
   - [change](database/C/change.md)
   - [change_approved](database/C/change_approved.md)
   - [change_emergency](database/C/change_emergency.md)
@@ -51,7 +51,7 @@
   - [contract](database/C/contract.md)
   - [contracttype](database/C/contracttype.md)
   - [customercontract](database/C/customercontract.md)
-- [D]
+- [D（9）]
   - [databaseschema](database/D/databaseschema.md)
   - [datacenterdevice](database/D/datacenterdevice.md)
   - [dbserver](database/D/dbserver.md)
@@ -61,20 +61,28 @@
   - [documentnote](database/D/documentnote.md)
   - [documenttype](database/D/documenttype.md)
   - [documentweb](database/D/documentweb.md)
-- [E]
-  - [E](database/E.md)
-- [F]
-  - [F](database/F.md)
-- [G]
-  - [G](database/G.md)
-- [H]
-  - [H](database/H.md)
-- [I]
-  - [I](database/I.md)
-- [J]
-  - [J](database/J.md)
-- [K]
-  - [K](database/K.md)
+- [E（1）]
+  - [enclosure](database/E/enclosure.md)
+- [F（5）]
+  - [faq](database/F/faq.md)
+  - [faqcategory](database/F/faqcategory.md)
+  - [farm](database/F/farm.md)
+  - [fiberchannelinterface](database/F/fiberchannelinterface.md)
+  - [functionalci](database/F/functionalci.md)
+- [G（1）]
+  - [group](database/G/group.md)
+- [H（1）]
+  - [hypervisor](database/H/hypervisor.md)
+- [I（4）]
+  - [inline_image](database/I/inline_image.md)
+  - [iosversion](database/I/iosversion.md)
+  - [ipinterface](database/I/ipinterface.md)
+  - [ipphone](database/I/ipphone.md)
+- [J（0）]
+  - [J](database/J/J.md)
+- [K（2）]
+  - [key_value_store](database/K/key_value_store.md)
+  - [knownerror](database/K/knownerror.md)
 - [L]
   - [L](database/L.md)
 - [M]
