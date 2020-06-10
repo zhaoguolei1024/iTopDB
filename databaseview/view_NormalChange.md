@@ -66,6 +66,168 @@
 | NormalChangeprivate_log_index         | blob *NULL*                                                  |      |
 
 ```
-select distinct `NormalChange`.`id` AS `id`,`NormalChange_Ticket`.`operational_status` AS `operational_status`,`NormalChange_Ticket`.`ref` AS `ref`,`NormalChange_Ticket`.`org_id` AS `org_id`,`Organization_org_id`.`name` AS `org_name`,`NormalChange_Ticket`.`caller_id` AS `caller_id`,`Person_caller_id_Contact`.`name` AS `caller_name`,`NormalChange_Ticket`.`team_id` AS `team_id`,`Team_team_id_Contact`.`email` AS `team_name`,`NormalChange_Ticket`.`agent_id` AS `agent_id`,`Person_agent_id_Contact`.`name` AS `agent_name`,`NormalChange_Ticket`.`title` AS `title`,`NormalChange_Ticket`.`description` AS `description`,`NormalChange_Ticket`.`start_date` AS `start_date`,`NormalChange_Ticket`.`end_date` AS `end_date`,`NormalChange_Ticket`.`last_update` AS `last_update`,`NormalChange_Ticket`.`close_date` AS `close_date`,`NormalChange_Ticket`.`private_log` AS `private_log`,`NormalChange_Change`.`status` AS `status`,`NormalChange_Change`.`reason` AS `reason`,`NormalChange_Change`.`requestor_id` AS `requestor_id`,`Person_requestor_id_Contact`.`email` AS `requestor_email`,`NormalChange_Change`.`creation_date` AS `creation_date`,`NormalChange_Change`.`impact` AS `impact`,`NormalChange_Change`.`supervisor_group_id` AS `supervisor_group_id`,`Team_supervisor_group_id_Contact`.`name` AS `supervisor_group_name`,`NormalChange_Change`.`supervisor_id` AS `supervisor_id`,`Person_supervisor_id_Contact`.`email` AS `supervisor_email`,`NormalChange_Change`.`manager_group_id` AS `manager_group_id`,`Team_manager_group_id_Contact`.`name` AS `manager_group_name`,`NormalChange_Change`.`manager_id` AS `manager_id`,`Person_manager_id_Contact`.`email` AS `manager_email`,`NormalChange_Change`.`outage` AS `outage`,`NormalChange_Change`.`fallback` AS `fallback`,`NormalChange_Change`.`parent_id` AS `parent_id`,`Change_parent_id_Ticket`.`ref` AS `parent_name`,`NormalChange_ApprovedChange`.`approval_date` AS `approval_date`,`NormalChange_ApprovedChange`.`approval_comment` AS `approval_comment`,`NormalChange`.`acceptance_date` AS `acceptance_date`,`NormalChange`.`acceptance_comment` AS `acceptance_comment`,`NormalChange_Ticket`.`finalclass` AS `finalclass`,cast(concat(coalesce(`NormalChange_Ticket`.`ref`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`Organization_org_id`.`name`,'')) as char charset utf8mb4) AS `org_id_friendlyname`,coalesce((`Organization_org_id`.`status` = 'inactive'),0) AS `org_id_obsolescence_flag`,cast(concat(coalesce(`Person_caller_id`.`first_name`,''),coalesce(' ',''),coalesce(`Person_caller_id_Contact`.`name`,'')) as char charset utf8mb4) AS `caller_id_friendlyname`,coalesce((`Person_caller_id_Contact`.`status` = 'inactive'),0) AS `caller_id_obsolescence_flag`,cast(concat(coalesce(`Team_team_id_Contact`.`name`,'')) as char charset utf8mb4) AS `team_id_friendlyname`,coalesce((`Team_team_id_Contact`.`status` = 'inactive'),0) AS `team_id_obsolescence_flag`,cast(concat(coalesce(`Person_agent_id`.`first_name`,''),coalesce(' ',''),coalesce(`Person_agent_id_Contact`.`name`,'')) as char charset utf8mb4) AS `agent_id_friendlyname`,coalesce((`Person_agent_id_Contact`.`status` = 'inactive'),0) AS `agent_id_obsolescence_flag`,cast(concat(coalesce(`Person_requestor_id`.`first_name`,''),coalesce(' ',''),coalesce(`Person_requestor_id_Contact`.`name`,'')) as char charset utf8mb4) AS `requestor_id_friendlyname`,coalesce((`Person_requestor_id_Contact`.`status` = 'inactive'),0) AS `requestor_id_obsolescence_flag`,cast(concat(coalesce(`Team_supervisor_group_id_Contact`.`name`,'')) as char charset utf8mb4) AS `supervisor_group_id_friendlyname`,coalesce((`Team_supervisor_group_id_Contact`.`status` = 'inactive'),0) AS `supervisor_group_id_obsolescence_flag`,cast(concat(coalesce(`Person_supervisor_id`.`first_name`,''),coalesce(' ',''),coalesce(`Person_supervisor_id_Contact`.`name`,'')) as char charset utf8mb4) AS `supervisor_id_friendlyname`,coalesce((`Person_supervisor_id_Contact`.`status` = 'inactive'),0) AS `supervisor_id_obsolescence_flag`,cast(concat(coalesce(`Team_manager_group_id_Contact`.`name`,'')) as char charset utf8mb4) AS `manager_group_id_friendlyname`,coalesce((`Team_manager_group_id_Contact`.`status` = 'inactive'),0) AS `manager_group_id_obsolescence_flag`,cast(concat(coalesce(`Person_manager_id`.`first_name`,''),coalesce(' ',''),coalesce(`Person_manager_id_Contact`.`name`,'')) as char charset utf8mb4) AS `manager_id_friendlyname`,coalesce((`Person_manager_id_Contact`.`status` = 'inactive'),0) AS `manager_id_obsolescence_flag`,cast(concat(coalesce(`Change_parent_id_Ticket`.`ref`,'')) as char charset utf8mb4) AS `parent_id_friendlyname`,`Change_parent_id_Ticket`.`finalclass` AS `parent_id_finalclass_recall`,`NormalChange_Ticket`.`description_format` AS `NormalChangedescription_format`,`NormalChange_Ticket`.`private_log_index` AS `NormalChangeprivate_log_index` from (((`change_normal` `NormalChange` join `change_approved` `NormalChange_ApprovedChange` on((`NormalChange`.`id` = `NormalChange_ApprovedChange`.`id`))) join ((((((`change` `NormalChange_Change` left join (`person` `Person_requestor_id` join `contact` `Person_requestor_id_Contact` on((`Person_requestor_id`.`id` = `Person_requestor_id_Contact`.`id`))) on((`NormalChange_Change`.`requestor_id` = `Person_requestor_id`.`id`))) left join `contact` `Team_supervisor_group_id_Contact` on((`NormalChange_Change`.`supervisor_group_id` = `Team_supervisor_group_id_Contact`.`id`))) left join (`person` `Person_supervisor_id` join `contact` `Person_supervisor_id_Contact` on((`Person_supervisor_id`.`id` = `Person_supervisor_id_Contact`.`id`))) on((`NormalChange_Change`.`supervisor_id` = `Person_supervisor_id`.`id`))) left join `contact` `Team_manager_group_id_Contact` on((`NormalChange_Change`.`manager_group_id` = `Team_manager_group_id_Contact`.`id`))) left join (`person` `Person_manager_id` join `contact` `Person_manager_id_Contact` on((`Person_manager_id`.`id` = `Person_manager_id_Contact`.`id`))) on((`NormalChange_Change`.`manager_id` = `Person_manager_id`.`id`))) left join `ticket` `Change_parent_id_Ticket` on((`NormalChange_Change`.`parent_id` = `Change_parent_id_Ticket`.`id`))) on((`NormalChange`.`id` = `NormalChange_Change`.`id`))) join ((((`ticket` `NormalChange_Ticket` join `organization` `Organization_org_id` on((`NormalChange_Ticket`.`org_id` = `Organization_org_id`.`id`))) left join (`person` `Person_caller_id` join `contact` `Person_caller_id_Contact` on((`Person_caller_id`.`id` = `Person_caller_id_Contact`.`id`))) on((`NormalChange_Ticket`.`caller_id` = `Person_caller_id`.`id`))) left join `contact` `Team_team_id_Contact` on((`NormalChange_Ticket`.`team_id` = `Team_team_id_Contact`.`id`))) left join (`person` `Person_agent_id` join `contact` `Person_agent_id_Contact` on((`Person_agent_id`.`id` = `Person_agent_id_Contact`.`id`))) on((`NormalChange_Ticket`.`agent_id` = `Person_agent_id`.`id`))) on((`NormalChange`.`id` = `NormalChange_Ticket`.`id`))) where ((0 <> coalesce((`Team_team_id_Contact`.`finalclass` = 'Team'),1)) and (0 <> coalesce((`Team_supervisor_group_id_Contact`.`finalclass` = 'Team'),1)) and (0 <> coalesce((`Team_manager_group_id_Contact`.`finalclass` = 'Team'),1)) and (0 <> coalesce((`Change_parent_id_Ticket`.`finalclass` in ('RoutineChange','ApprovedChange','NormalChange','EmergencyChange','Change')),1)))
+SELECT DISTINCT
+	`NormalChange`.`id` AS `id`,
+	`NormalChange_Ticket`.`operational_status` AS `operational_status`,
+	`NormalChange_Ticket`.`ref` AS `ref`,
+	`NormalChange_Ticket`.`org_id` AS `org_id`,
+	`Organization_org_id`.`name` AS `org_name`,
+	`NormalChange_Ticket`.`caller_id` AS `caller_id`,
+	`Person_caller_id_Contact`.`name` AS `caller_name`,
+	`NormalChange_Ticket`.`team_id` AS `team_id`,
+	`Team_team_id_Contact`.`email` AS `team_name`,
+	`NormalChange_Ticket`.`agent_id` AS `agent_id`,
+	`Person_agent_id_Contact`.`name` AS `agent_name`,
+	`NormalChange_Ticket`.`title` AS `title`,
+	`NormalChange_Ticket`.`description` AS `description`,
+	`NormalChange_Ticket`.`start_date` AS `start_date`,
+	`NormalChange_Ticket`.`end_date` AS `end_date`,
+	`NormalChange_Ticket`.`last_update` AS `last_update`,
+	`NormalChange_Ticket`.`close_date` AS `close_date`,
+	`NormalChange_Ticket`.`private_log` AS `private_log`,
+	`NormalChange_Change`.`status` AS `status`,
+	`NormalChange_Change`.`reason` AS `reason`,
+	`NormalChange_Change`.`requestor_id` AS `requestor_id`,
+	`Person_requestor_id_Contact`.`email` AS `requestor_email`,
+	`NormalChange_Change`.`creation_date` AS `creation_date`,
+	`NormalChange_Change`.`impact` AS `impact`,
+	`NormalChange_Change`.`supervisor_group_id` AS `supervisor_group_id`,
+	`Team_supervisor_group_id_Contact`.`name` AS `supervisor_group_name`,
+	`NormalChange_Change`.`supervisor_id` AS `supervisor_id`,
+	`Person_supervisor_id_Contact`.`email` AS `supervisor_email`,
+	`NormalChange_Change`.`manager_group_id` AS `manager_group_id`,
+	`Team_manager_group_id_Contact`.`name` AS `manager_group_name`,
+	`NormalChange_Change`.`manager_id` AS `manager_id`,
+	`Person_manager_id_Contact`.`email` AS `manager_email`,
+	`NormalChange_Change`.`outage` AS `outage`,
+	`NormalChange_Change`.`fallback` AS `fallback`,
+	`NormalChange_Change`.`parent_id` AS `parent_id`,
+	`Change_parent_id_Ticket`.`ref` AS `parent_name`,
+	`NormalChange_ApprovedChange`.`approval_date` AS `approval_date`,
+	`NormalChange_ApprovedChange`.`approval_comment` AS `approval_comment`,
+	`NormalChange`.`acceptance_date` AS `acceptance_date`,
+	`NormalChange`.`acceptance_comment` AS `acceptance_comment`,
+	`NormalChange_Ticket`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `NormalChange_Ticket`.`ref`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	cast( concat( COALESCE ( `Organization_org_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `org_id_friendlyname`,
+	COALESCE (( `Organization_org_id`.`status` = 'inactive' ), 0 ) AS `org_id_obsolescence_flag`,
+	cast(
+		concat(
+			COALESCE ( `Person_caller_id`.`first_name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `Person_caller_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 
+	) AS `caller_id_friendlyname`,
+	COALESCE (( `Person_caller_id_Contact`.`status` = 'inactive' ), 0 ) AS `caller_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Team_team_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `team_id_friendlyname`,
+	COALESCE (( `Team_team_id_Contact`.`status` = 'inactive' ), 0 ) AS `team_id_obsolescence_flag`,
+	cast(
+		concat(
+			COALESCE ( `Person_agent_id`.`first_name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `Person_agent_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 
+	) AS `agent_id_friendlyname`,
+	COALESCE (( `Person_agent_id_Contact`.`status` = 'inactive' ), 0 ) AS `agent_id_obsolescence_flag`,
+	cast(
+		concat(
+			COALESCE ( `Person_requestor_id`.`first_name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `Person_requestor_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 
+	) AS `requestor_id_friendlyname`,
+	COALESCE (( `Person_requestor_id_Contact`.`status` = 'inactive' ), 0 ) AS `requestor_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Team_supervisor_group_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `supervisor_group_id_friendlyname`,
+	COALESCE (( `Team_supervisor_group_id_Contact`.`status` = 'inactive' ), 0 ) AS `supervisor_group_id_obsolescence_flag`,
+	cast(
+		concat(
+			COALESCE ( `Person_supervisor_id`.`first_name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `Person_supervisor_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 
+	) AS `supervisor_id_friendlyname`,
+	COALESCE (( `Person_supervisor_id_Contact`.`status` = 'inactive' ), 0 ) AS `supervisor_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Team_manager_group_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `manager_group_id_friendlyname`,
+	COALESCE (( `Team_manager_group_id_Contact`.`status` = 'inactive' ), 0 ) AS `manager_group_id_obsolescence_flag`,
+	cast(
+		concat(
+			COALESCE ( `Person_manager_id`.`first_name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `Person_manager_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 
+	) AS `manager_id_friendlyname`,
+	COALESCE (( `Person_manager_id_Contact`.`status` = 'inactive' ), 0 ) AS `manager_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Change_parent_id_Ticket`.`ref`, '' )) AS CHAR charset utf8mb4 ) AS `parent_id_friendlyname`,
+	`Change_parent_id_Ticket`.`finalclass` AS `parent_id_finalclass_recall`,
+	`NormalChange_Ticket`.`description_format` AS `NormalChangedescription_format`,
+	`NormalChange_Ticket`.`private_log_index` AS `NormalChangeprivate_log_index` 
+FROM
+	(((
+				`change_normal` `NormalChange`
+				JOIN `change_approved` `NormalChange_ApprovedChange` ON ((
+						`NormalChange`.`id` = `NormalChange_ApprovedChange`.`id` 
+					)))
+			JOIN ((((((
+									`change` `NormalChange_Change`
+									LEFT JOIN (
+										`person` `Person_requestor_id`
+										JOIN `contact` `Person_requestor_id_Contact` ON ((
+												`Person_requestor_id`.`id` = `Person_requestor_id_Contact`.`id` 
+												))) ON ((
+											`NormalChange_Change`.`requestor_id` = `Person_requestor_id`.`id` 
+										)))
+								LEFT JOIN `contact` `Team_supervisor_group_id_Contact` ON ((
+										`NormalChange_Change`.`supervisor_group_id` = `Team_supervisor_group_id_Contact`.`id` 
+									)))
+							LEFT JOIN (
+								`person` `Person_supervisor_id`
+								JOIN `contact` `Person_supervisor_id_Contact` ON ((
+										`Person_supervisor_id`.`id` = `Person_supervisor_id_Contact`.`id` 
+										))) ON ((
+									`NormalChange_Change`.`supervisor_id` = `Person_supervisor_id`.`id` 
+								)))
+						LEFT JOIN `contact` `Team_manager_group_id_Contact` ON ((
+								`NormalChange_Change`.`manager_group_id` = `Team_manager_group_id_Contact`.`id` 
+							)))
+					LEFT JOIN (
+						`person` `Person_manager_id`
+						JOIN `contact` `Person_manager_id_Contact` ON ((
+								`Person_manager_id`.`id` = `Person_manager_id_Contact`.`id` 
+								))) ON ((
+							`NormalChange_Change`.`manager_id` = `Person_manager_id`.`id` 
+						)))
+				LEFT JOIN `ticket` `Change_parent_id_Ticket` ON ((
+						`NormalChange_Change`.`parent_id` = `Change_parent_id_Ticket`.`id` 
+						))) ON ((
+					`NormalChange`.`id` = `NormalChange_Change`.`id` 
+				)))
+		JOIN ((((
+						`ticket` `NormalChange_Ticket`
+						JOIN `organization` `Organization_org_id` ON ((
+								`NormalChange_Ticket`.`org_id` = `Organization_org_id`.`id` 
+							)))
+					LEFT JOIN (
+						`person` `Person_caller_id`
+						JOIN `contact` `Person_caller_id_Contact` ON ((
+								`Person_caller_id`.`id` = `Person_caller_id_Contact`.`id` 
+								))) ON ((
+							`NormalChange_Ticket`.`caller_id` = `Person_caller_id`.`id` 
+						)))
+				LEFT JOIN `contact` `Team_team_id_Contact` ON ((
+						`NormalChange_Ticket`.`team_id` = `Team_team_id_Contact`.`id` 
+					)))
+			LEFT JOIN (
+				`person` `Person_agent_id`
+				JOIN `contact` `Person_agent_id_Contact` ON ((
+						`Person_agent_id`.`id` = `Person_agent_id_Contact`.`id` 
+						))) ON ((
+					`NormalChange_Ticket`.`agent_id` = `Person_agent_id`.`id` 
+				))) ON ((
+				`NormalChange`.`id` = `NormalChange_Ticket`.`id` 
+			))) 
+WHERE
+	((
+			0 <> COALESCE (( `Team_team_id_Contact`.`finalclass` = 'Team' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `Team_supervisor_group_id_Contact`.`finalclass` = 'Team' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `Team_manager_group_id_Contact`.`finalclass` = 'Team' ), 1 )) 
+	AND (
+	0 <> COALESCE (( `Change_parent_id_Ticket`.`finalclass` IN ( 'RoutineChange', 'ApprovedChange', 'NormalChange', 'EmergencyChange', 'Change' )), 1 )))
 ```
 

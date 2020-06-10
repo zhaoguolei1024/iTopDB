@@ -31,6 +31,63 @@
 | model_id_friendlyname         | varchar(255) *NULL*                                          |      |
 
 ```
-select distinct `Rack`.`id` AS `id`,`Rack_FunctionalCI`.`name` AS `name`,`Rack_FunctionalCI`.`description` AS `description`,`Rack_FunctionalCI`.`org_id` AS `org_id`,`Organization_org_id`.`name` AS `organization_name`,`Rack_FunctionalCI`.`business_criticity` AS `business_criticity`,`Rack_FunctionalCI`.`move2production` AS `move2production`,`Rack_PhysicalDevice`.`serialnumber` AS `serialnumber`,`Rack_PhysicalDevice`.`location_id` AS `location_id`,`Location_location_id`.`name` AS `location_name`,`Rack_PhysicalDevice`.`status` AS `status`,`Rack_PhysicalDevice`.`brand_id` AS `brand_id`,`Brand_brand_id_Typology`.`name` AS `brand_name`,`Rack_PhysicalDevice`.`model_id` AS `model_id`,`Model_model_id_Typology`.`name` AS `model_name`,`Rack_PhysicalDevice`.`asset_number` AS `asset_number`,`Rack_PhysicalDevice`.`purchase_date` AS `purchase_date`,`Rack_PhysicalDevice`.`end_of_warranty` AS `end_of_warranty`,`Rack`.`nb_u` AS `nb_u`,`Rack_FunctionalCI`.`finalclass` AS `finalclass`,cast(concat(coalesce(`Rack_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,coalesce((`Rack_PhysicalDevice`.`status` = 'obsolete'),0) AS `obsolescence_flag`,`Rack_FunctionalCI`.`obsolescence_date` AS `obsolescence_date`,cast(concat(coalesce(`Organization_org_id`.`name`,'')) as char charset utf8mb4) AS `org_id_friendlyname`,coalesce((`Organization_org_id`.`status` = 'inactive'),0) AS `org_id_obsolescence_flag`,cast(concat(coalesce(`Location_location_id`.`name`,'')) as char charset utf8mb4) AS `location_id_friendlyname`,coalesce((`Location_location_id`.`status` = 'inactive'),0) AS `location_id_obsolescence_flag`,cast(concat(coalesce(`Brand_brand_id_Typology`.`name`,'')) as char charset utf8mb4) AS `brand_id_friendlyname`,cast(concat(coalesce(`Model_model_id_Typology`.`name`,'')) as char charset utf8mb4) AS `model_id_friendlyname` from ((`rack` `Rack` join (((`physicaldevice` `Rack_PhysicalDevice` left join `location` `Location_location_id` on((`Rack_PhysicalDevice`.`location_id` = `Location_location_id`.`id`))) left join `typology` `Brand_brand_id_Typology` on((`Rack_PhysicalDevice`.`brand_id` = `Brand_brand_id_Typology`.`id`))) left join `typology` `Model_model_id_Typology` on((`Rack_PhysicalDevice`.`model_id` = `Model_model_id_Typology`.`id`))) on((`Rack`.`id` = `Rack_PhysicalDevice`.`id`))) join (`functionalci` `Rack_FunctionalCI` join `organization` `Organization_org_id` on((`Rack_FunctionalCI`.`org_id` = `Organization_org_id`.`id`))) on((`Rack`.`id` = `Rack_FunctionalCI`.`id`))) where ((0 <> coalesce((`Brand_brand_id_Typology`.`finalclass` = 'Brand'),1)) and (0 <> coalesce((`Model_model_id_Typology`.`finalclass` = 'Model'),1)))
+SELECT DISTINCT
+	`Rack`.`id` AS `id`,
+	`Rack_FunctionalCI`.`name` AS `name`,
+	`Rack_FunctionalCI`.`description` AS `description`,
+	`Rack_FunctionalCI`.`org_id` AS `org_id`,
+	`Organization_org_id`.`name` AS `organization_name`,
+	`Rack_FunctionalCI`.`business_criticity` AS `business_criticity`,
+	`Rack_FunctionalCI`.`move2production` AS `move2production`,
+	`Rack_PhysicalDevice`.`serialnumber` AS `serialnumber`,
+	`Rack_PhysicalDevice`.`location_id` AS `location_id`,
+	`Location_location_id`.`name` AS `location_name`,
+	`Rack_PhysicalDevice`.`status` AS `status`,
+	`Rack_PhysicalDevice`.`brand_id` AS `brand_id`,
+	`Brand_brand_id_Typology`.`name` AS `brand_name`,
+	`Rack_PhysicalDevice`.`model_id` AS `model_id`,
+	`Model_model_id_Typology`.`name` AS `model_name`,
+	`Rack_PhysicalDevice`.`asset_number` AS `asset_number`,
+	`Rack_PhysicalDevice`.`purchase_date` AS `purchase_date`,
+	`Rack_PhysicalDevice`.`end_of_warranty` AS `end_of_warranty`,
+	`Rack`.`nb_u` AS `nb_u`,
+	`Rack_FunctionalCI`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `Rack_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	COALESCE (( `Rack_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `obsolescence_flag`,
+	`Rack_FunctionalCI`.`obsolescence_date` AS `obsolescence_date`,
+	cast( concat( COALESCE ( `Organization_org_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `org_id_friendlyname`,
+	COALESCE (( `Organization_org_id`.`status` = 'inactive' ), 0 ) AS `org_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Location_location_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `location_id_friendlyname`,
+	COALESCE (( `Location_location_id`.`status` = 'inactive' ), 0 ) AS `location_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Brand_brand_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `brand_id_friendlyname`,
+	cast( concat( COALESCE ( `Model_model_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `model_id_friendlyname` 
+FROM
+	((
+			`rack` `Rack`
+			JOIN (((
+						`physicaldevice` `Rack_PhysicalDevice`
+						LEFT JOIN `location` `Location_location_id` ON ((
+								`Rack_PhysicalDevice`.`location_id` = `Location_location_id`.`id` 
+							)))
+					LEFT JOIN `typology` `Brand_brand_id_Typology` ON ((
+							`Rack_PhysicalDevice`.`brand_id` = `Brand_brand_id_Typology`.`id` 
+						)))
+				LEFT JOIN `typology` `Model_model_id_Typology` ON ((
+						`Rack_PhysicalDevice`.`model_id` = `Model_model_id_Typology`.`id` 
+						))) ON ((
+					`Rack`.`id` = `Rack_PhysicalDevice`.`id` 
+				)))
+		JOIN (
+			`functionalci` `Rack_FunctionalCI`
+			JOIN `organization` `Organization_org_id` ON ((
+					`Rack_FunctionalCI`.`org_id` = `Organization_org_id`.`id` 
+					))) ON ((
+				`Rack`.`id` = `Rack_FunctionalCI`.`id` 
+			))) 
+WHERE
+	((
+			0 <> COALESCE (( `Brand_brand_id_Typology`.`finalclass` = 'Brand' ), 1 )) 
+	AND (
+	0 <> COALESCE (( `Model_model_id_Typology`.`finalclass` = 'Model' ), 1 )))
 ```
 

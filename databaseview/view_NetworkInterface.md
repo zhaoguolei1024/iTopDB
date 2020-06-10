@@ -8,6 +8,100 @@
 | obsolescence_date | date *NULL*                                |      |
 
 ```
-select distinct `NetworkInterface`.`id` AS `id`,`NetworkInterface`.`name` AS `name`,`NetworkInterface`.`finalclass` AS `finalclass`,if((`NetworkInterface`.`finalclass` = 'NetworkInterface'),cast(concat(coalesce(`NetworkInterface`.`name`,'')) as char charset utf8mb4),if((`NetworkInterface`.`finalclass` = 'LogicalInterface'),cast(concat(coalesce(`NetworkInterface`.`name`,''),coalesce(' ',''),coalesce(`VirtualMachine_virtualmachine_id_FunctionalCI`.`name`,'')) as char charset utf8mb4),if((`NetworkInterface`.`finalclass` = 'FiberChannelInterface'),cast(concat(coalesce(`NetworkInterface`.`name`,''),coalesce(' ',''),coalesce(`DatacenterDevice_datacenterdevice_id_FunctionalCI`.`name`,'')) as char charset utf8mb4),cast(concat(coalesce(`NetworkInterface`.`name`,''),coalesce(' ',''),coalesce(`ConnectableCI_connectableci_id_FunctionalCI`.`name`,'')) as char charset utf8mb4)))) AS `friendlyname`,if((`NetworkInterface`.`finalclass` = 'NetworkInterface'),coalesce(0,0),if((`NetworkInterface`.`finalclass` = 'LogicalInterface'),coalesce(coalesce((`VirtualMachine_virtualmachine_id_VirtualDevice`.`status` = 'obsolete'),0),0),if((`NetworkInterface`.`finalclass` = 'FiberChannelInterface'),coalesce(coalesce((`DatacenterDevice_datacenterdevice_id_PhysicalDevice`.`status` = 'obsolete'),0),0),coalesce(coalesce((`ConnectableCI_connectableci_id_PhysicalDevice`.`status` = 'obsolete'),0),0)))) AS `obsolescence_flag`,`NetworkInterface`.`obsolescence_date` AS `obsolescence_date` from (((`networkinterface` `NetworkInterface` left join (`logicalinterface` `NetworkInterface_poly_LogicalInterface` join (`virtualdevice` `VirtualMachine_virtualmachine_id_VirtualDevice` join `functionalci` `VirtualMachine_virtualmachine_id_FunctionalCI` on((`VirtualMachine_virtualmachine_id_VirtualDevice`.`id` = `VirtualMachine_virtualmachine_id_FunctionalCI`.`id`))) on((`NetworkInterface_poly_LogicalInterface`.`virtualmachine_id` = `VirtualMachine_virtualmachine_id_VirtualDevice`.`id`))) on((`NetworkInterface`.`id` = `NetworkInterface_poly_LogicalInterface`.`id`))) left join (`fiberchannelinterface` `NetworkInterface_poly_FiberChannelInterface` join (`physicaldevice` `DatacenterDevice_datacenterdevice_id_PhysicalDevice` join `functionalci` `DatacenterDevice_datacenterdevice_id_FunctionalCI` on((`DatacenterDevice_datacenterdevice_id_PhysicalDevice`.`id` = `DatacenterDevice_datacenterdevice_id_FunctionalCI`.`id`))) on((`NetworkInterface_poly_FiberChannelInterface`.`datacenterdevice_id` = `DatacenterDevice_datacenterdevice_id_PhysicalDevice`.`id`))) on((`NetworkInterface`.`id` = `NetworkInterface_poly_FiberChannelInterface`.`id`))) left join (`physicalinterface` `NetworkInterface_poly_PhysicalInterface` join (`physicaldevice` `ConnectableCI_connectableci_id_PhysicalDevice` join `functionalci` `ConnectableCI_connectableci_id_FunctionalCI` on((`ConnectableCI_connectableci_id_PhysicalDevice`.`id` = `ConnectableCI_connectableci_id_FunctionalCI`.`id`))) on((`NetworkInterface_poly_PhysicalInterface`.`connectableci_id` = `ConnectableCI_connectableci_id_PhysicalDevice`.`id`))) on((`NetworkInterface`.`id` = `NetworkInterface_poly_PhysicalInterface`.`id`))) where ((0 <> coalesce((`VirtualMachine_virtualmachine_id_VirtualDevice`.`finalclass` = 'VirtualMachine'),1)) and (0 <> coalesce((`DatacenterDevice_datacenterdevice_id_PhysicalDevice`.`finalclass` in ('NetworkDevice','Server','StorageSystem','SANSwitch','TapeLibrary','NAS','DatacenterDevice')),1)) and (0 <> coalesce((`ConnectableCI_connectableci_id_PhysicalDevice`.`finalclass` in ('DatacenterDevice','NetworkDevice','Server','PC','Printer','StorageSystem','SANSwitch','TapeLibrary','NAS','ConnectableCI')),1)))
+SELECT DISTINCT
+	`NetworkInterface`.`id` AS `id`,
+	`NetworkInterface`.`name` AS `name`,
+	`NetworkInterface`.`finalclass` AS `finalclass`,
+IF
+	((
+			`NetworkInterface`.`finalclass` = 'NetworkInterface' 
+			),
+		cast( concat( COALESCE ( `NetworkInterface`.`name`, '' )) AS CHAR charset utf8mb4 ),
+	IF
+		((
+				`NetworkInterface`.`finalclass` = 'LogicalInterface' 
+				),
+			cast(
+				concat(
+					COALESCE ( `NetworkInterface`.`name`, '' ),
+					COALESCE ( ' ', '' ),
+				COALESCE ( `VirtualMachine_virtualmachine_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 
+			),
+		IF
+			((
+					`NetworkInterface`.`finalclass` = 'FiberChannelInterface' 
+					),
+				cast(
+					concat(
+						COALESCE ( `NetworkInterface`.`name`, '' ),
+						COALESCE ( ' ', '' ),
+					COALESCE ( `DatacenterDevice_datacenterdevice_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 
+				),
+				cast(
+					concat(
+						COALESCE ( `NetworkInterface`.`name`, '' ),
+						COALESCE ( ' ', '' ),
+					COALESCE ( `ConnectableCI_connectableci_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 
+				)))) AS `friendlyname`,
+IF
+	((
+			`NetworkInterface`.`finalclass` = 'NetworkInterface' 
+			),
+		COALESCE ( 0, 0 ),
+	IF
+		((
+				`NetworkInterface`.`finalclass` = 'LogicalInterface' 
+				),
+			COALESCE ( COALESCE (( `VirtualMachine_virtualmachine_id_VirtualDevice`.`status` = 'obsolete' ), 0 ), 0 ),
+		IF
+			((
+					`NetworkInterface`.`finalclass` = 'FiberChannelInterface' 
+					),
+				COALESCE ( COALESCE (( `DatacenterDevice_datacenterdevice_id_PhysicalDevice`.`status` = 'obsolete' ), 0 ), 0 ),
+			COALESCE ( COALESCE (( `ConnectableCI_connectableci_id_PhysicalDevice`.`status` = 'obsolete' ), 0 ), 0 )))) AS `obsolescence_flag`,
+	`NetworkInterface`.`obsolescence_date` AS `obsolescence_date` 
+FROM
+	(((
+				`networkinterface` `NetworkInterface`
+				LEFT JOIN (
+					`logicalinterface` `NetworkInterface_poly_LogicalInterface`
+					JOIN (
+						`virtualdevice` `VirtualMachine_virtualmachine_id_VirtualDevice`
+						JOIN `functionalci` `VirtualMachine_virtualmachine_id_FunctionalCI` ON ((
+								`VirtualMachine_virtualmachine_id_VirtualDevice`.`id` = `VirtualMachine_virtualmachine_id_FunctionalCI`.`id` 
+								))) ON ((
+							`NetworkInterface_poly_LogicalInterface`.`virtualmachine_id` = `VirtualMachine_virtualmachine_id_VirtualDevice`.`id` 
+						))) ON ((
+						`NetworkInterface`.`id` = `NetworkInterface_poly_LogicalInterface`.`id` 
+					)))
+			LEFT JOIN (
+				`fiberchannelinterface` `NetworkInterface_poly_FiberChannelInterface`
+				JOIN (
+					`physicaldevice` `DatacenterDevice_datacenterdevice_id_PhysicalDevice`
+					JOIN `functionalci` `DatacenterDevice_datacenterdevice_id_FunctionalCI` ON ((
+							`DatacenterDevice_datacenterdevice_id_PhysicalDevice`.`id` = `DatacenterDevice_datacenterdevice_id_FunctionalCI`.`id` 
+							))) ON ((
+						`NetworkInterface_poly_FiberChannelInterface`.`datacenterdevice_id` = `DatacenterDevice_datacenterdevice_id_PhysicalDevice`.`id` 
+					))) ON ((
+					`NetworkInterface`.`id` = `NetworkInterface_poly_FiberChannelInterface`.`id` 
+				)))
+		LEFT JOIN (
+			`physicalinterface` `NetworkInterface_poly_PhysicalInterface`
+			JOIN (
+				`physicaldevice` `ConnectableCI_connectableci_id_PhysicalDevice`
+				JOIN `functionalci` `ConnectableCI_connectableci_id_FunctionalCI` ON ((
+						`ConnectableCI_connectableci_id_PhysicalDevice`.`id` = `ConnectableCI_connectableci_id_FunctionalCI`.`id` 
+						))) ON ((
+					`NetworkInterface_poly_PhysicalInterface`.`connectableci_id` = `ConnectableCI_connectableci_id_PhysicalDevice`.`id` 
+				))) ON ((
+				`NetworkInterface`.`id` = `NetworkInterface_poly_PhysicalInterface`.`id` 
+			))) 
+WHERE
+	((
+			0 <> COALESCE (( `VirtualMachine_virtualmachine_id_VirtualDevice`.`finalclass` = 'VirtualMachine' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `DatacenterDevice_datacenterdevice_id_PhysicalDevice`.`finalclass` IN ( 'NetworkDevice', 'Server', 'StorageSystem', 'SANSwitch', 'TapeLibrary', 'NAS', 'DatacenterDevice' )), 1 )) 
+	AND (
+	0 <> COALESCE (( `ConnectableCI_connectableci_id_PhysicalDevice`.`finalclass` IN ( 'DatacenterDevice', 'NetworkDevice', 'Server', 'PC', 'Printer', 'StorageSystem', 'SANSwitch', 'TapeLibrary', 'NAS', 'ConnectableCI' )), 1 )))
 ```
 

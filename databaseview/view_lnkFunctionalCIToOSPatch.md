@@ -12,6 +12,127 @@
 | functionalci_id_obsolescence_flag | int [**0**]                            |      |
 
 ```
-select distinct `lnkFunctionalCIToOSPatch`.`id` AS `id`,`lnkFunctionalCIToOSPatch`.`ospatch_id` AS `ospatch_id`,`OSPatch_ospatch_id_Patch`.`name` AS `ospatch_name`,`lnkFunctionalCIToOSPatch`.`functionalci_id` AS `functionalci_id`,`FunctionalCI_functionalci_id`.`name` AS `functionalci_name`,cast(concat(coalesce(`lnkFunctionalCIToOSPatch`.`ospatch_id`,''),coalesce(' ',''),coalesce(`lnkFunctionalCIToOSPatch`.`functionalci_id`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`OSPatch_ospatch_id_Patch`.`name`,'')) as char charset utf8mb4) AS `ospatch_id_friendlyname`,if((`FunctionalCI_functionalci_id`.`finalclass` in ('Middleware','DBServer','WebServer','PCSoftware','OtherSoftware')),cast(concat(coalesce(`FunctionalCI_functionalci_id`.`name`,''),coalesce(' ',''),coalesce(`FunctionalCI_system_id`.`name`,'')) as char charset utf8mb4),cast(concat(coalesce(`FunctionalCI_functionalci_id`.`name`,'')) as char charset utf8mb4)) AS `functionalci_id_friendlyname`,`FunctionalCI_functionalci_id`.`finalclass` AS `functionalci_id_finalclass_recall`,if((`FunctionalCI_functionalci_id`.`finalclass` = 'FunctionalCI'),coalesce(0,0),if((`FunctionalCI_functionalci_id`.`finalclass` in ('Hypervisor','Farm','VirtualMachine')),coalesce((`FunctionalCI_functionalci_id_poly_VirtualDevice`.`status` = 'obsolete'),0),if((`FunctionalCI_functionalci_id`.`finalclass` = 'WebApplication'),coalesce(coalesce((`WebServer_webserver_id_SoftwareInstance`.`status` = 'inactive'),0),0),if((`FunctionalCI_functionalci_id`.`finalclass` = 'DatabaseSchema'),coalesce(coalesce((`DBServer_dbserver_id_SoftwareInstance`.`status` = 'inactive'),0),0),if((`FunctionalCI_functionalci_id`.`finalclass` = 'MiddlewareInstance'),coalesce(coalesce((`Middleware_middleware_id_SoftwareInstance`.`status` = 'inactive'),0),0),if((`FunctionalCI_functionalci_id`.`finalclass` in ('Middleware','DBServer','WebServer','PCSoftware','OtherSoftware')),coalesce((`FunctionalCI_functionalci_id_poly_SoftwareInstance`.`status` = 'inactive'),0),if((`FunctionalCI_functionalci_id`.`finalclass` = 'BusinessProcess'),coalesce((`FunctionalCI_functionalci_id_poly_BusinessProcess`.`status` = 'inactive'),0),if((`FunctionalCI_functionalci_id`.`finalclass` = 'ApplicationSolution'),coalesce((`FunctionalCI_functionalci_id_poly_ApplicationSolution`.`status` = 'inactive'),0),coalesce((`FunctionalCI_functionalci_id_poly_PhysicalDevice`.`status` = 'obsolete'),0))))))))) AS `functionalci_id_obsolescence_flag` from ((`lnkfunctionalcitoospatch` `lnkFunctionalCIToOSPatch` join `patch` `OSPatch_ospatch_id_Patch` on((`lnkFunctionalCIToOSPatch`.`ospatch_id` = `OSPatch_ospatch_id_Patch`.`id`))) join ((((((((`functionalci` `FunctionalCI_functionalci_id` left join (`softwareinstance` `FunctionalCI_functionalci_id_poly_SoftwareInstance` join `functionalci` `FunctionalCI_system_id` on((`FunctionalCI_functionalci_id_poly_SoftwareInstance`.`functionalci_id` = `FunctionalCI_system_id`.`id`))) on((`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_SoftwareInstance`.`id`))) left join `virtualdevice` `FunctionalCI_functionalci_id_poly_VirtualDevice` on((`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_VirtualDevice`.`id`))) left join (`webapplication` `FunctionalCI_functionalci_id_poly_WebApplication` join `softwareinstance` `WebServer_webserver_id_SoftwareInstance` on((`FunctionalCI_functionalci_id_poly_WebApplication`.`webserver_id` = `WebServer_webserver_id_SoftwareInstance`.`id`))) on((`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_WebApplication`.`id`))) left join (`databaseschema` `FunctionalCI_functionalci_id_poly_DatabaseSchema` join `softwareinstance` `DBServer_dbserver_id_SoftwareInstance` on((`FunctionalCI_functionalci_id_poly_DatabaseSchema`.`dbserver_id` = `DBServer_dbserver_id_SoftwareInstance`.`id`))) on((`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_DatabaseSchema`.`id`))) left join (`middlewareinstance` `FunctionalCI_functionalci_id_poly_MiddlewareInstance` join `softwareinstance` `Middleware_middleware_id_SoftwareInstance` on((`FunctionalCI_functionalci_id_poly_MiddlewareInstance`.`middleware_id` = `Middleware_middleware_id_SoftwareInstance`.`id`))) on((`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_MiddlewareInstance`.`id`))) left join `businessprocess` `FunctionalCI_functionalci_id_poly_BusinessProcess` on((`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_BusinessProcess`.`id`))) left join `applicationsolution` `FunctionalCI_functionalci_id_poly_ApplicationSolution` on((`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_ApplicationSolution`.`id`))) left join `physicaldevice` `FunctionalCI_functionalci_id_poly_PhysicalDevice` on((`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_PhysicalDevice`.`id`))) on((`lnkFunctionalCIToOSPatch`.`functionalci_id` = `FunctionalCI_functionalci_id`.`id`))) where ((0 <> coalesce((`OSPatch_ospatch_id_Patch`.`finalclass` = 'OSPatch'),1)) and (0 <> coalesce((`WebServer_webserver_id_SoftwareInstance`.`finalclass` = 'WebServer'),1)) and (0 <> coalesce((`DBServer_dbserver_id_SoftwareInstance`.`finalclass` = 'DBServer'),1)) and (0 <> coalesce((`Middleware_middleware_id_SoftwareInstance`.`finalclass` = 'Middleware'),1)))
+SELECT DISTINCT
+	`lnkFunctionalCIToOSPatch`.`id` AS `id`,
+	`lnkFunctionalCIToOSPatch`.`ospatch_id` AS `ospatch_id`,
+	`OSPatch_ospatch_id_Patch`.`name` AS `ospatch_name`,
+	`lnkFunctionalCIToOSPatch`.`functionalci_id` AS `functionalci_id`,
+	`FunctionalCI_functionalci_id`.`name` AS `functionalci_name`,
+	cast(
+		concat(
+			COALESCE ( `lnkFunctionalCIToOSPatch`.`ospatch_id`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `lnkFunctionalCIToOSPatch`.`functionalci_id`, '' )) AS CHAR charset utf8mb4 
+	) AS `friendlyname`,
+	cast( concat( COALESCE ( `OSPatch_ospatch_id_Patch`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `ospatch_id_friendlyname`,
+IF
+	((
+			`FunctionalCI_functionalci_id`.`finalclass` IN ( 'Middleware', 'DBServer', 'WebServer', 'PCSoftware', 'OtherSoftware' )),
+		cast(
+			concat(
+				COALESCE ( `FunctionalCI_functionalci_id`.`name`, '' ),
+				COALESCE ( ' ', '' ),
+			COALESCE ( `FunctionalCI_system_id`.`name`, '' )) AS CHAR charset utf8mb4 
+		),
+	cast( concat( COALESCE ( `FunctionalCI_functionalci_id`.`name`, '' )) AS CHAR charset utf8mb4 )) AS `functionalci_id_friendlyname`,
+	`FunctionalCI_functionalci_id`.`finalclass` AS `functionalci_id_finalclass_recall`,
+IF
+	((
+			`FunctionalCI_functionalci_id`.`finalclass` = 'FunctionalCI' 
+			),
+		COALESCE ( 0, 0 ),
+	IF
+		((
+				`FunctionalCI_functionalci_id`.`finalclass` IN ( 'Hypervisor', 'Farm', 'VirtualMachine' )),
+			COALESCE (( `FunctionalCI_functionalci_id_poly_VirtualDevice`.`status` = 'obsolete' ), 0 ),
+		IF
+			((
+					`FunctionalCI_functionalci_id`.`finalclass` = 'WebApplication' 
+					),
+				COALESCE ( COALESCE (( `WebServer_webserver_id_SoftwareInstance`.`status` = 'inactive' ), 0 ), 0 ),
+			IF
+				((
+						`FunctionalCI_functionalci_id`.`finalclass` = 'DatabaseSchema' 
+						),
+					COALESCE ( COALESCE (( `DBServer_dbserver_id_SoftwareInstance`.`status` = 'inactive' ), 0 ), 0 ),
+				IF
+					((
+							`FunctionalCI_functionalci_id`.`finalclass` = 'MiddlewareInstance' 
+							),
+						COALESCE ( COALESCE (( `Middleware_middleware_id_SoftwareInstance`.`status` = 'inactive' ), 0 ), 0 ),
+					IF
+						((
+								`FunctionalCI_functionalci_id`.`finalclass` IN ( 'Middleware', 'DBServer', 'WebServer', 'PCSoftware', 'OtherSoftware' )),
+							COALESCE (( `FunctionalCI_functionalci_id_poly_SoftwareInstance`.`status` = 'inactive' ), 0 ),
+						IF
+							((
+									`FunctionalCI_functionalci_id`.`finalclass` = 'BusinessProcess' 
+									),
+								COALESCE (( `FunctionalCI_functionalci_id_poly_BusinessProcess`.`status` = 'inactive' ), 0 ),
+							IF
+								((
+										`FunctionalCI_functionalci_id`.`finalclass` = 'ApplicationSolution' 
+										),
+									COALESCE (( `FunctionalCI_functionalci_id_poly_ApplicationSolution`.`status` = 'inactive' ), 0 ),
+								COALESCE (( `FunctionalCI_functionalci_id_poly_PhysicalDevice`.`status` = 'obsolete' ), 0 ))))))))) AS `functionalci_id_obsolescence_flag` 
+FROM
+	((
+			`lnkfunctionalcitoospatch` `lnkFunctionalCIToOSPatch`
+			JOIN `patch` `OSPatch_ospatch_id_Patch` ON ((
+					`lnkFunctionalCIToOSPatch`.`ospatch_id` = `OSPatch_ospatch_id_Patch`.`id` 
+				)))
+		JOIN ((((((((
+										`functionalci` `FunctionalCI_functionalci_id`
+										LEFT JOIN (
+											`softwareinstance` `FunctionalCI_functionalci_id_poly_SoftwareInstance`
+											JOIN `functionalci` `FunctionalCI_system_id` ON ((
+													`FunctionalCI_functionalci_id_poly_SoftwareInstance`.`functionalci_id` = `FunctionalCI_system_id`.`id` 
+													))) ON ((
+												`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_SoftwareInstance`.`id` 
+											)))
+									LEFT JOIN `virtualdevice` `FunctionalCI_functionalci_id_poly_VirtualDevice` ON ((
+											`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_VirtualDevice`.`id` 
+										)))
+								LEFT JOIN (
+									`webapplication` `FunctionalCI_functionalci_id_poly_WebApplication`
+									JOIN `softwareinstance` `WebServer_webserver_id_SoftwareInstance` ON ((
+											`FunctionalCI_functionalci_id_poly_WebApplication`.`webserver_id` = `WebServer_webserver_id_SoftwareInstance`.`id` 
+											))) ON ((
+										`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_WebApplication`.`id` 
+									)))
+							LEFT JOIN (
+								`databaseschema` `FunctionalCI_functionalci_id_poly_DatabaseSchema`
+								JOIN `softwareinstance` `DBServer_dbserver_id_SoftwareInstance` ON ((
+										`FunctionalCI_functionalci_id_poly_DatabaseSchema`.`dbserver_id` = `DBServer_dbserver_id_SoftwareInstance`.`id` 
+										))) ON ((
+									`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_DatabaseSchema`.`id` 
+								)))
+						LEFT JOIN (
+							`middlewareinstance` `FunctionalCI_functionalci_id_poly_MiddlewareInstance`
+							JOIN `softwareinstance` `Middleware_middleware_id_SoftwareInstance` ON ((
+									`FunctionalCI_functionalci_id_poly_MiddlewareInstance`.`middleware_id` = `Middleware_middleware_id_SoftwareInstance`.`id` 
+									))) ON ((
+								`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_MiddlewareInstance`.`id` 
+							)))
+					LEFT JOIN `businessprocess` `FunctionalCI_functionalci_id_poly_BusinessProcess` ON ((
+							`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_BusinessProcess`.`id` 
+						)))
+				LEFT JOIN `applicationsolution` `FunctionalCI_functionalci_id_poly_ApplicationSolution` ON ((
+						`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_ApplicationSolution`.`id` 
+					)))
+			LEFT JOIN `physicaldevice` `FunctionalCI_functionalci_id_poly_PhysicalDevice` ON ((
+					`FunctionalCI_functionalci_id`.`id` = `FunctionalCI_functionalci_id_poly_PhysicalDevice`.`id` 
+					))) ON ((
+				`lnkFunctionalCIToOSPatch`.`functionalci_id` = `FunctionalCI_functionalci_id`.`id` 
+			))) 
+WHERE
+	((
+			0 <> COALESCE (( `OSPatch_ospatch_id_Patch`.`finalclass` = 'OSPatch' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `WebServer_webserver_id_SoftwareInstance`.`finalclass` = 'WebServer' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `DBServer_dbserver_id_SoftwareInstance`.`finalclass` = 'DBServer' ), 1 )) 
+	AND (
+	0 <> COALESCE (( `Middleware_middleware_id_SoftwareInstance`.`finalclass` = 'Middleware' ), 1 )))
 ```
 

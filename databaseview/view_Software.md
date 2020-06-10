@@ -8,6 +8,22 @@
 | friendlyname | varchar(511) *NULL*                                          |      |
 
 ```
-select distinct `Software`.`id` AS `id`,`Software`.`name` AS `name`,`Software`.`vendor` AS `vendor`,`Software`.`version` AS `version`,`Software`.`type` AS `type`,cast(concat(coalesce(`Software`.`name`,''),coalesce(' ',''),coalesce(`Software`.`version`,'')) as char charset utf8mb4) AS `friendlyname` from `software` `Software` where (0 <> 1)
+SELECT DISTINCT
+	`Software`.`id` AS `id`,
+	`Software`.`name` AS `name`,
+	`Software`.`vendor` AS `vendor`,
+	`Software`.`version` AS `version`,
+	`Software`.`type` AS `type`,
+	cast(
+		concat(
+			COALESCE ( `Software`.`name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `Software`.`version`, '' )) AS CHAR charset utf8mb4 
+	) AS `friendlyname` 
+FROM
+	`software` `Software` 
+WHERE
+	(
+	0 <> 1)
 ```
 

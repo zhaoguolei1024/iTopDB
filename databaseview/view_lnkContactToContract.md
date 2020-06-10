@@ -13,6 +13,47 @@
 | contact_id_obsolescence_flag  | int [**0**]                        |      |
 
 ```
-select distinct `lnkContactToContract`.`id` AS `id`,`lnkContactToContract`.`contract_id` AS `contract_id`,`Contract_contract_id`.`name` AS `contract_name`,`lnkContactToContract`.`contact_id` AS `contact_id`,`Contact_contact_id`.`name` AS `contact_name`,cast(concat(coalesce(`lnkContactToContract`.`contract_id`,''),coalesce(' ',''),coalesce(`lnkContactToContract`.`contact_id`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`Contract_contract_id`.`name`,'')) as char charset utf8mb4) AS `contract_id_friendlyname`,`Contract_contract_id`.`finalclass` AS `contract_id_finalclass_recall`,if((`Contact_contact_id`.`finalclass` in ('Team','Contact')),cast(concat(coalesce(`Contact_contact_id`.`name`,'')) as char charset utf8mb4),cast(concat(coalesce(`Contact_contact_id_poly_Person`.`first_name`,''),coalesce(' ',''),coalesce(`Contact_contact_id`.`name`,'')) as char charset utf8mb4)) AS `contact_id_friendlyname`,`Contact_contact_id`.`finalclass` AS `contact_id_finalclass_recall`,coalesce((`Contact_contact_id`.`status` = 'inactive'),0) AS `contact_id_obsolescence_flag` from ((`lnkcontacttocontract` `lnkContactToContract` join `contract` `Contract_contract_id` on((`lnkContactToContract`.`contract_id` = `Contract_contract_id`.`id`))) join (`contact` `Contact_contact_id` left join `person` `Contact_contact_id_poly_Person` on((`Contact_contact_id`.`id` = `Contact_contact_id_poly_Person`.`id`))) on((`lnkContactToContract`.`contact_id` = `Contact_contact_id`.`id`))) where (0 <> 1)
+SELECT DISTINCT
+	`lnkContactToContract`.`id` AS `id`,
+	`lnkContactToContract`.`contract_id` AS `contract_id`,
+	`Contract_contract_id`.`name` AS `contract_name`,
+	`lnkContactToContract`.`contact_id` AS `contact_id`,
+	`Contact_contact_id`.`name` AS `contact_name`,
+	cast(
+		concat(
+			COALESCE ( `lnkContactToContract`.`contract_id`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `lnkContactToContract`.`contact_id`, '' )) AS CHAR charset utf8mb4 
+	) AS `friendlyname`,
+	cast( concat( COALESCE ( `Contract_contract_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `contract_id_friendlyname`,
+	`Contract_contract_id`.`finalclass` AS `contract_id_finalclass_recall`,
+IF
+	((
+			`Contact_contact_id`.`finalclass` IN ( 'Team', 'Contact' )),
+		cast( concat( COALESCE ( `Contact_contact_id`.`name`, '' )) AS CHAR charset utf8mb4 ),
+		cast(
+			concat(
+				COALESCE ( `Contact_contact_id_poly_Person`.`first_name`, '' ),
+				COALESCE ( ' ', '' ),
+			COALESCE ( `Contact_contact_id`.`name`, '' )) AS CHAR charset utf8mb4 
+		)) AS `contact_id_friendlyname`,
+	`Contact_contact_id`.`finalclass` AS `contact_id_finalclass_recall`,
+	COALESCE (( `Contact_contact_id`.`status` = 'inactive' ), 0 ) AS `contact_id_obsolescence_flag` 
+FROM
+	((
+			`lnkcontacttocontract` `lnkContactToContract`
+			JOIN `contract` `Contract_contract_id` ON ((
+					`lnkContactToContract`.`contract_id` = `Contract_contract_id`.`id` 
+				)))
+		JOIN (
+			`contact` `Contact_contact_id`
+			LEFT JOIN `person` `Contact_contact_id_poly_Person` ON ((
+					`Contact_contact_id`.`id` = `Contact_contact_id_poly_Person`.`id` 
+					))) ON ((
+				`lnkContactToContract`.`contact_id` = `Contact_contact_id`.`id` 
+			))) 
+WHERE
+	(
+	0 <> 1)
 ```
 

@@ -58,6 +58,152 @@
 | iosversion_id_friendlyname        | varchar(511) *NULL*                                          |      |
 
 ```
-select distinct `NetworkDevice`.`id` AS `id`,`NetworkDevice_FunctionalCI`.`name` AS `name`,`NetworkDevice_FunctionalCI`.`description` AS `description`,`NetworkDevice_FunctionalCI`.`org_id` AS `org_id`,`Organization_org_id`.`name` AS `organization_name`,`NetworkDevice_FunctionalCI`.`business_criticity` AS `business_criticity`,`NetworkDevice_FunctionalCI`.`move2production` AS `move2production`,`NetworkDevice_PhysicalDevice`.`serialnumber` AS `serialnumber`,`NetworkDevice_PhysicalDevice`.`location_id` AS `location_id`,`Location_location_id`.`name` AS `location_name`,`NetworkDevice_PhysicalDevice`.`status` AS `status`,`NetworkDevice_PhysicalDevice`.`brand_id` AS `brand_id`,`Brand_brand_id_Typology`.`name` AS `brand_name`,`NetworkDevice_PhysicalDevice`.`model_id` AS `model_id`,`Model_model_id_Typology`.`name` AS `model_name`,`NetworkDevice_PhysicalDevice`.`asset_number` AS `asset_number`,`NetworkDevice_PhysicalDevice`.`purchase_date` AS `purchase_date`,`NetworkDevice_PhysicalDevice`.`end_of_warranty` AS `end_of_warranty`,`NetworkDevice_DatacenterDevice`.`rack_id` AS `rack_id`,`Rack_rack_id_FunctionalCI`.`name` AS `rack_name`,`NetworkDevice_DatacenterDevice`.`enclosure_id` AS `enclosure_id`,`Enclosure_enclosure_id_FunctionalCI`.`name` AS `enclosure_name`,`NetworkDevice_DatacenterDevice`.`nb_u` AS `nb_u`,`NetworkDevice_DatacenterDevice`.`managementip` AS `managementip`,`NetworkDevice_DatacenterDevice`.`powera_id` AS `powerA_id`,`PowerConnection_powerA_id_FunctionalCI`.`name` AS `powerA_name`,`NetworkDevice_DatacenterDevice`.`powerB_id` AS `powerB_id`,`PowerConnection_powerB_id_FunctionalCI`.`name` AS `powerB_name`,`NetworkDevice_DatacenterDevice`.`redundancy` AS `redundancy`,`NetworkDevice`.`networkdevicetype_id` AS `networkdevicetype_id`,`NetworkDeviceType_networkdevicetype_id_Typology`.`name` AS `networkdevicetype_name`,`NetworkDevice`.`iosversion_id` AS `iosversion_id`,`IOSVersion_iosversion_id_Typology`.`name` AS `iosversion_name`,`NetworkDevice`.`ram` AS `ram`,`NetworkDevice_FunctionalCI`.`finalclass` AS `finalclass`,cast(concat(coalesce(`NetworkDevice_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,coalesce((`NetworkDevice_PhysicalDevice`.`status` = 'obsolete'),0) AS `obsolescence_flag`,`NetworkDevice_FunctionalCI`.`obsolescence_date` AS `obsolescence_date`,cast(concat(coalesce(`Organization_org_id`.`name`,'')) as char charset utf8mb4) AS `org_id_friendlyname`,coalesce((`Organization_org_id`.`status` = 'inactive'),0) AS `org_id_obsolescence_flag`,cast(concat(coalesce(`Location_location_id`.`name`,'')) as char charset utf8mb4) AS `location_id_friendlyname`,coalesce((`Location_location_id`.`status` = 'inactive'),0) AS `location_id_obsolescence_flag`,cast(concat(coalesce(`Brand_brand_id_Typology`.`name`,'')) as char charset utf8mb4) AS `brand_id_friendlyname`,cast(concat(coalesce(`Model_model_id_Typology`.`name`,'')) as char charset utf8mb4) AS `model_id_friendlyname`,cast(concat(coalesce(`Rack_rack_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `rack_id_friendlyname`,coalesce((`Rack_rack_id_PhysicalDevice`.`status` = 'obsolete'),0) AS `rack_id_obsolescence_flag`,cast(concat(coalesce(`Enclosure_enclosure_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `enclosure_id_friendlyname`,coalesce((`Enclosure_enclosure_id_PhysicalDevice`.`status` = 'obsolete'),0) AS `enclosure_id_obsolescence_flag`,cast(concat(coalesce(`PowerConnection_powerA_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `powerA_id_friendlyname`,`PowerConnection_powerA_id_FunctionalCI`.`finalclass` AS `powerA_id_finalclass_recall`,coalesce((`PowerConnection_powerA_id_PhysicalDevice`.`status` = 'obsolete'),0) AS `powerA_id_obsolescence_flag`,cast(concat(coalesce(`PowerConnection_powerB_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `powerB_id_friendlyname`,`PowerConnection_powerB_id_FunctionalCI`.`finalclass` AS `powerB_id_finalclass_recall`,coalesce((`PowerConnection_powerB_id_PhysicalDevice`.`status` = 'obsolete'),0) AS `powerB_id_obsolescence_flag`,cast(concat(coalesce(`NetworkDeviceType_networkdevicetype_id_Typology`.`name`,'')) as char charset utf8mb4) AS `networkdevicetype_id_friendlyname`,cast(concat(coalesce(`Brand_brand_id1_Typology`.`name`,''),coalesce(' ',''),coalesce(`IOSVersion_iosversion_id_Typology`.`name`,'')) as char charset utf8mb4) AS `iosversion_id_friendlyname` from (((((`networkdevice` `NetworkDevice` join `typology` `NetworkDeviceType_networkdevicetype_id_Typology` on((`NetworkDevice`.`networkdevicetype_id` = `NetworkDeviceType_networkdevicetype_id_Typology`.`id`))) left join ((`iosversion` `IOSVersion_iosversion_id` join `typology` `Brand_brand_id1_Typology` on((`IOSVersion_iosversion_id`.`brand_id` = `Brand_brand_id1_Typology`.`id`))) join `typology` `IOSVersion_iosversion_id_Typology` on((`IOSVersion_iosversion_id`.`id` = `IOSVersion_iosversion_id_Typology`.`id`))) on((`NetworkDevice`.`iosversion_id` = `IOSVersion_iosversion_id`.`id`))) join ((((`datacenterdevice` `NetworkDevice_DatacenterDevice` left join (`physicaldevice` `Rack_rack_id_PhysicalDevice` join `functionalci` `Rack_rack_id_FunctionalCI` on((`Rack_rack_id_PhysicalDevice`.`id` = `Rack_rack_id_FunctionalCI`.`id`))) on((`NetworkDevice_DatacenterDevice`.`rack_id` = `Rack_rack_id_PhysicalDevice`.`id`))) left join (`physicaldevice` `Enclosure_enclosure_id_PhysicalDevice` join `functionalci` `Enclosure_enclosure_id_FunctionalCI` on((`Enclosure_enclosure_id_PhysicalDevice`.`id` = `Enclosure_enclosure_id_FunctionalCI`.`id`))) on((`NetworkDevice_DatacenterDevice`.`enclosure_id` = `Enclosure_enclosure_id_PhysicalDevice`.`id`))) left join (`physicaldevice` `PowerConnection_powerA_id_PhysicalDevice` join `functionalci` `PowerConnection_powerA_id_FunctionalCI` on((`PowerConnection_powerA_id_PhysicalDevice`.`id` = `PowerConnection_powerA_id_FunctionalCI`.`id`))) on((`NetworkDevice_DatacenterDevice`.`powera_id` = `PowerConnection_powerA_id_PhysicalDevice`.`id`))) left join (`physicaldevice` `PowerConnection_powerB_id_PhysicalDevice` join `functionalci` `PowerConnection_powerB_id_FunctionalCI` on((`PowerConnection_powerB_id_PhysicalDevice`.`id` = `PowerConnection_powerB_id_FunctionalCI`.`id`))) on((`NetworkDevice_DatacenterDevice`.`powerB_id` = `PowerConnection_powerB_id_PhysicalDevice`.`id`))) on((`NetworkDevice`.`id` = `NetworkDevice_DatacenterDevice`.`id`))) join (((`physicaldevice` `NetworkDevice_PhysicalDevice` left join `location` `Location_location_id` on((`NetworkDevice_PhysicalDevice`.`location_id` = `Location_location_id`.`id`))) left join `typology` `Brand_brand_id_Typology` on((`NetworkDevice_PhysicalDevice`.`brand_id` = `Brand_brand_id_Typology`.`id`))) left join `typology` `Model_model_id_Typology` on((`NetworkDevice_PhysicalDevice`.`model_id` = `Model_model_id_Typology`.`id`))) on((`NetworkDevice`.`id` = `NetworkDevice_PhysicalDevice`.`id`))) join (`functionalci` `NetworkDevice_FunctionalCI` join `organization` `Organization_org_id` on((`NetworkDevice_FunctionalCI`.`org_id` = `Organization_org_id`.`id`))) on((`NetworkDevice`.`id` = `NetworkDevice_FunctionalCI`.`id`))) where ((0 <> coalesce((`Brand_brand_id_Typology`.`finalclass` = 'Brand'),1)) and (0 <> coalesce((`Model_model_id_Typology`.`finalclass` = 'Model'),1)) and (0 <> coalesce((`Rack_rack_id_PhysicalDevice`.`finalclass` = 'Rack'),1)) and (0 <> coalesce((`Enclosure_enclosure_id_PhysicalDevice`.`finalclass` = 'Enclosure'),1)) and (0 <> coalesce((`PowerConnection_powerA_id_PhysicalDevice`.`finalclass` in ('PowerSource','PDU','PowerConnection')),1)) and (0 <> coalesce((`PowerConnection_powerB_id_PhysicalDevice`.`finalclass` in ('PowerSource','PDU','PowerConnection')),1)) and (0 <> coalesce((`NetworkDeviceType_networkdevicetype_id_Typology`.`finalclass` = 'NetworkDeviceType'),1)) and (0 <> coalesce((`Brand_brand_id1_Typology`.`finalclass` = 'Brand'),1)))
+SELECT DISTINCT
+	`NetworkDevice`.`id` AS `id`,
+	`NetworkDevice_FunctionalCI`.`name` AS `name`,
+	`NetworkDevice_FunctionalCI`.`description` AS `description`,
+	`NetworkDevice_FunctionalCI`.`org_id` AS `org_id`,
+	`Organization_org_id`.`name` AS `organization_name`,
+	`NetworkDevice_FunctionalCI`.`business_criticity` AS `business_criticity`,
+	`NetworkDevice_FunctionalCI`.`move2production` AS `move2production`,
+	`NetworkDevice_PhysicalDevice`.`serialnumber` AS `serialnumber`,
+	`NetworkDevice_PhysicalDevice`.`location_id` AS `location_id`,
+	`Location_location_id`.`name` AS `location_name`,
+	`NetworkDevice_PhysicalDevice`.`status` AS `status`,
+	`NetworkDevice_PhysicalDevice`.`brand_id` AS `brand_id`,
+	`Brand_brand_id_Typology`.`name` AS `brand_name`,
+	`NetworkDevice_PhysicalDevice`.`model_id` AS `model_id`,
+	`Model_model_id_Typology`.`name` AS `model_name`,
+	`NetworkDevice_PhysicalDevice`.`asset_number` AS `asset_number`,
+	`NetworkDevice_PhysicalDevice`.`purchase_date` AS `purchase_date`,
+	`NetworkDevice_PhysicalDevice`.`end_of_warranty` AS `end_of_warranty`,
+	`NetworkDevice_DatacenterDevice`.`rack_id` AS `rack_id`,
+	`Rack_rack_id_FunctionalCI`.`name` AS `rack_name`,
+	`NetworkDevice_DatacenterDevice`.`enclosure_id` AS `enclosure_id`,
+	`Enclosure_enclosure_id_FunctionalCI`.`name` AS `enclosure_name`,
+	`NetworkDevice_DatacenterDevice`.`nb_u` AS `nb_u`,
+	`NetworkDevice_DatacenterDevice`.`managementip` AS `managementip`,
+	`NetworkDevice_DatacenterDevice`.`powera_id` AS `powerA_id`,
+	`PowerConnection_powerA_id_FunctionalCI`.`name` AS `powerA_name`,
+	`NetworkDevice_DatacenterDevice`.`powerB_id` AS `powerB_id`,
+	`PowerConnection_powerB_id_FunctionalCI`.`name` AS `powerB_name`,
+	`NetworkDevice_DatacenterDevice`.`redundancy` AS `redundancy`,
+	`NetworkDevice`.`networkdevicetype_id` AS `networkdevicetype_id`,
+	`NetworkDeviceType_networkdevicetype_id_Typology`.`name` AS `networkdevicetype_name`,
+	`NetworkDevice`.`iosversion_id` AS `iosversion_id`,
+	`IOSVersion_iosversion_id_Typology`.`name` AS `iosversion_name`,
+	`NetworkDevice`.`ram` AS `ram`,
+	`NetworkDevice_FunctionalCI`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `NetworkDevice_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	COALESCE (( `NetworkDevice_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `obsolescence_flag`,
+	`NetworkDevice_FunctionalCI`.`obsolescence_date` AS `obsolescence_date`,
+	cast( concat( COALESCE ( `Organization_org_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `org_id_friendlyname`,
+	COALESCE (( `Organization_org_id`.`status` = 'inactive' ), 0 ) AS `org_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Location_location_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `location_id_friendlyname`,
+	COALESCE (( `Location_location_id`.`status` = 'inactive' ), 0 ) AS `location_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Brand_brand_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `brand_id_friendlyname`,
+	cast( concat( COALESCE ( `Model_model_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `model_id_friendlyname`,
+	cast( concat( COALESCE ( `Rack_rack_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `rack_id_friendlyname`,
+	COALESCE (( `Rack_rack_id_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `rack_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Enclosure_enclosure_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `enclosure_id_friendlyname`,
+	COALESCE (( `Enclosure_enclosure_id_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `enclosure_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `PowerConnection_powerA_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `powerA_id_friendlyname`,
+	`PowerConnection_powerA_id_FunctionalCI`.`finalclass` AS `powerA_id_finalclass_recall`,
+	COALESCE (( `PowerConnection_powerA_id_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `powerA_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `PowerConnection_powerB_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `powerB_id_friendlyname`,
+	`PowerConnection_powerB_id_FunctionalCI`.`finalclass` AS `powerB_id_finalclass_recall`,
+	COALESCE (( `PowerConnection_powerB_id_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `powerB_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `NetworkDeviceType_networkdevicetype_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `networkdevicetype_id_friendlyname`,
+	cast(
+		concat(
+			COALESCE ( `Brand_brand_id1_Typology`.`name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `IOSVersion_iosversion_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 
+	) AS `iosversion_id_friendlyname` 
+FROM
+	(((((
+						`networkdevice` `NetworkDevice`
+						JOIN `typology` `NetworkDeviceType_networkdevicetype_id_Typology` ON ((
+								`NetworkDevice`.`networkdevicetype_id` = `NetworkDeviceType_networkdevicetype_id_Typology`.`id` 
+							)))
+					LEFT JOIN ((
+							`iosversion` `IOSVersion_iosversion_id`
+							JOIN `typology` `Brand_brand_id1_Typology` ON ((
+									`IOSVersion_iosversion_id`.`brand_id` = `Brand_brand_id1_Typology`.`id` 
+								)))
+						JOIN `typology` `IOSVersion_iosversion_id_Typology` ON ((
+								`IOSVersion_iosversion_id`.`id` = `IOSVersion_iosversion_id_Typology`.`id` 
+								))) ON ((
+							`NetworkDevice`.`iosversion_id` = `IOSVersion_iosversion_id`.`id` 
+						)))
+				JOIN ((((
+								`datacenterdevice` `NetworkDevice_DatacenterDevice`
+								LEFT JOIN (
+									`physicaldevice` `Rack_rack_id_PhysicalDevice`
+									JOIN `functionalci` `Rack_rack_id_FunctionalCI` ON ((
+											`Rack_rack_id_PhysicalDevice`.`id` = `Rack_rack_id_FunctionalCI`.`id` 
+											))) ON ((
+										`NetworkDevice_DatacenterDevice`.`rack_id` = `Rack_rack_id_PhysicalDevice`.`id` 
+									)))
+							LEFT JOIN (
+								`physicaldevice` `Enclosure_enclosure_id_PhysicalDevice`
+								JOIN `functionalci` `Enclosure_enclosure_id_FunctionalCI` ON ((
+										`Enclosure_enclosure_id_PhysicalDevice`.`id` = `Enclosure_enclosure_id_FunctionalCI`.`id` 
+										))) ON ((
+									`NetworkDevice_DatacenterDevice`.`enclosure_id` = `Enclosure_enclosure_id_PhysicalDevice`.`id` 
+								)))
+						LEFT JOIN (
+							`physicaldevice` `PowerConnection_powerA_id_PhysicalDevice`
+							JOIN `functionalci` `PowerConnection_powerA_id_FunctionalCI` ON ((
+									`PowerConnection_powerA_id_PhysicalDevice`.`id` = `PowerConnection_powerA_id_FunctionalCI`.`id` 
+									))) ON ((
+								`NetworkDevice_DatacenterDevice`.`powera_id` = `PowerConnection_powerA_id_PhysicalDevice`.`id` 
+							)))
+					LEFT JOIN (
+						`physicaldevice` `PowerConnection_powerB_id_PhysicalDevice`
+						JOIN `functionalci` `PowerConnection_powerB_id_FunctionalCI` ON ((
+								`PowerConnection_powerB_id_PhysicalDevice`.`id` = `PowerConnection_powerB_id_FunctionalCI`.`id` 
+								))) ON ((
+							`NetworkDevice_DatacenterDevice`.`powerB_id` = `PowerConnection_powerB_id_PhysicalDevice`.`id` 
+						))) ON ((
+						`NetworkDevice`.`id` = `NetworkDevice_DatacenterDevice`.`id` 
+					)))
+			JOIN (((
+						`physicaldevice` `NetworkDevice_PhysicalDevice`
+						LEFT JOIN `location` `Location_location_id` ON ((
+								`NetworkDevice_PhysicalDevice`.`location_id` = `Location_location_id`.`id` 
+							)))
+					LEFT JOIN `typology` `Brand_brand_id_Typology` ON ((
+							`NetworkDevice_PhysicalDevice`.`brand_id` = `Brand_brand_id_Typology`.`id` 
+						)))
+				LEFT JOIN `typology` `Model_model_id_Typology` ON ((
+						`NetworkDevice_PhysicalDevice`.`model_id` = `Model_model_id_Typology`.`id` 
+						))) ON ((
+					`NetworkDevice`.`id` = `NetworkDevice_PhysicalDevice`.`id` 
+				)))
+		JOIN (
+			`functionalci` `NetworkDevice_FunctionalCI`
+			JOIN `organization` `Organization_org_id` ON ((
+					`NetworkDevice_FunctionalCI`.`org_id` = `Organization_org_id`.`id` 
+					))) ON ((
+				`NetworkDevice`.`id` = `NetworkDevice_FunctionalCI`.`id` 
+			))) 
+WHERE
+	((
+			0 <> COALESCE (( `Brand_brand_id_Typology`.`finalclass` = 'Brand' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `Model_model_id_Typology`.`finalclass` = 'Model' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `Rack_rack_id_PhysicalDevice`.`finalclass` = 'Rack' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `Enclosure_enclosure_id_PhysicalDevice`.`finalclass` = 'Enclosure' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `PowerConnection_powerA_id_PhysicalDevice`.`finalclass` IN ( 'PowerSource', 'PDU', 'PowerConnection' )), 1 )) 
+		AND (
+		0 <> COALESCE (( `PowerConnection_powerB_id_PhysicalDevice`.`finalclass` IN ( 'PowerSource', 'PDU', 'PowerConnection' )), 1 )) 
+		AND (
+		0 <> COALESCE (( `NetworkDeviceType_networkdevicetype_id_Typology`.`finalclass` = 'NetworkDeviceType' ), 1 )) 
+	AND (
+	0 <> COALESCE (( `Brand_brand_id1_Typology`.`finalclass` = 'Brand' ), 1 )))
 ```
 

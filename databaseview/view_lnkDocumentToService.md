@@ -12,6 +12,38 @@
 | document_id_obsolescence_flag | int [**0**]                        |      |
 
 ```
-select distinct `lnkDocumentToService`.`id` AS `id`,`lnkDocumentToService`.`service_id` AS `service_id`,`Service_service_id`.`name` AS `service_name`,`lnkDocumentToService`.`document_id` AS `document_id`,`Document_document_id`.`name` AS `document_name`,cast(concat(coalesce(`lnkDocumentToService`.`service_id`,''),coalesce(' ',''),coalesce(`lnkDocumentToService`.`document_id`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`Service_service_id`.`name`,'')) as char charset utf8mb4) AS `service_id_friendlyname`,if((`Document_document_id`.`finalclass` = 'Document'),cast(concat(coalesce('Document','')) as char charset utf8mb4),cast(concat(coalesce(`Document_document_id`.`name`,'')) as char charset utf8mb4)) AS `document_id_friendlyname`,`Document_document_id`.`finalclass` AS `document_id_finalclass_recall`,coalesce((`Document_document_id`.`status` = 'obsolete'),0) AS `document_id_obsolescence_flag` from ((`lnkdocumenttoservice` `lnkDocumentToService` join `service` `Service_service_id` on((`lnkDocumentToService`.`service_id` = `Service_service_id`.`id`))) join `document` `Document_document_id` on((`lnkDocumentToService`.`document_id` = `Document_document_id`.`id`))) where (0 <> 1)
+SELECT DISTINCT
+	`lnkDocumentToService`.`id` AS `id`,
+	`lnkDocumentToService`.`service_id` AS `service_id`,
+	`Service_service_id`.`name` AS `service_name`,
+	`lnkDocumentToService`.`document_id` AS `document_id`,
+	`Document_document_id`.`name` AS `document_name`,
+	cast(
+		concat(
+			COALESCE ( `lnkDocumentToService`.`service_id`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `lnkDocumentToService`.`document_id`, '' )) AS CHAR charset utf8mb4 
+	) AS `friendlyname`,
+	cast( concat( COALESCE ( `Service_service_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `service_id_friendlyname`,
+IF
+	((
+			`Document_document_id`.`finalclass` = 'Document' 
+			),
+		cast( concat( COALESCE ( 'Document', '' )) AS CHAR charset utf8mb4 ),
+	cast( concat( COALESCE ( `Document_document_id`.`name`, '' )) AS CHAR charset utf8mb4 )) AS `document_id_friendlyname`,
+	`Document_document_id`.`finalclass` AS `document_id_finalclass_recall`,
+	COALESCE (( `Document_document_id`.`status` = 'obsolete' ), 0 ) AS `document_id_obsolescence_flag` 
+FROM
+	((
+			`lnkdocumenttoservice` `lnkDocumentToService`
+			JOIN `service` `Service_service_id` ON ((
+					`lnkDocumentToService`.`service_id` = `Service_service_id`.`id` 
+				)))
+		JOIN `document` `Document_document_id` ON ((
+				`lnkDocumentToService`.`document_id` = `Document_document_id`.`id` 
+			))) 
+WHERE
+	(
+	0 <> 1)
 ```
 

@@ -15,6 +15,36 @@
 | slt_id_friendlyname | varchar(255) *NULL*                       |      |
 
 ```
-select distinct `lnkSLAToSLT`.`id` AS `id`,`lnkSLAToSLT`.`sla_id` AS `sla_id`,`SLA_sla_id`.`name` AS `sla_name`,`lnkSLAToSLT`.`slt_id` AS `slt_id`,`SLT_slt_id`.`name` AS `slt_name`,`SLT_slt_id`.`metric` AS `slt_metric`,`SLT_slt_id`.`request_type` AS `slt_request_type`,`SLT_slt_id`.`priority` AS `slt_ticket_priority`,`SLT_slt_id`.`value` AS `slt_value`,`SLT_slt_id`.`unit` AS `slt_value_unit`,cast(concat(coalesce(`lnkSLAToSLT`.`sla_id`,''),coalesce(' ',''),coalesce(`lnkSLAToSLT`.`slt_id`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`SLA_sla_id`.`name`,'')) as char charset utf8mb4) AS `sla_id_friendlyname`,cast(concat(coalesce(`SLT_slt_id`.`name`,'')) as char charset utf8mb4) AS `slt_id_friendlyname` from ((`lnkslatoslt` `lnkSLAToSLT` join `sla` `SLA_sla_id` on((`lnkSLAToSLT`.`sla_id` = `SLA_sla_id`.`id`))) join `slt` `SLT_slt_id` on((`lnkSLAToSLT`.`slt_id` = `SLT_slt_id`.`id`))) where (0 <> 1)
+SELECT DISTINCT
+	`lnkSLAToSLT`.`id` AS `id`,
+	`lnkSLAToSLT`.`sla_id` AS `sla_id`,
+	`SLA_sla_id`.`name` AS `sla_name`,
+	`lnkSLAToSLT`.`slt_id` AS `slt_id`,
+	`SLT_slt_id`.`name` AS `slt_name`,
+	`SLT_slt_id`.`metric` AS `slt_metric`,
+	`SLT_slt_id`.`request_type` AS `slt_request_type`,
+	`SLT_slt_id`.`priority` AS `slt_ticket_priority`,
+	`SLT_slt_id`.`value` AS `slt_value`,
+	`SLT_slt_id`.`unit` AS `slt_value_unit`,
+	cast(
+		concat(
+			COALESCE ( `lnkSLAToSLT`.`sla_id`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `lnkSLAToSLT`.`slt_id`, '' )) AS CHAR charset utf8mb4 
+	) AS `friendlyname`,
+	cast( concat( COALESCE ( `SLA_sla_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `sla_id_friendlyname`,
+	cast( concat( COALESCE ( `SLT_slt_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `slt_id_friendlyname` 
+FROM
+	((
+			`lnkslatoslt` `lnkSLAToSLT`
+			JOIN `sla` `SLA_sla_id` ON ((
+					`lnkSLAToSLT`.`sla_id` = `SLA_sla_id`.`id` 
+				)))
+		JOIN `slt` `SLT_slt_id` ON ((
+				`lnkSLAToSLT`.`slt_id` = `SLT_slt_id`.`id` 
+			))) 
+WHERE
+	(
+	0 <> 1)
 ```
 

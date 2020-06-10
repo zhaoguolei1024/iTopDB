@@ -21,6 +21,48 @@
 | osversion_id_friendlyname | varchar(255) *NULL*               |      |
 
 ```
-select distinct `OSLicence`.`id` AS `id`,`OSLicence_Licence`.`name` AS `name`,`OSLicence_Licence`.`org_id` AS `org_id`,`Organization_org_id`.`name` AS `organization_name`,`OSLicence_Licence`.`usage_limit` AS `usage_limit`,`OSLicence_Licence`.`description` AS `description`,`OSLicence_Licence`.`start_date` AS `start_date`,`OSLicence_Licence`.`end_date` AS `end_date`,`OSLicence_Licence`.`licence_key` AS `licence_key`,`OSLicence_Licence`.`perpetual` AS `perpetual`,`OSLicence`.`osversion_id` AS `osversion_id`,`OSVersion_osversion_id_Typology`.`name` AS `osversion_name`,`OSLicence_Licence`.`finalclass` AS `finalclass`,cast(concat(coalesce(`OSLicence_Licence`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,coalesce(((`OSLicence_Licence`.`perpetual` = 'no') and ((`OSLicence_Licence`.`end_date` is null) = 0) and (`OSLicence_Licence`.`end_date` < date_format((now() - interval 15 month),'%Y-%m-%d 00:00:00'))),0) AS `obsolescence_flag`,`OSLicence_Licence`.`obsolescence_date` AS `obsolescence_date`,cast(concat(coalesce(`Organization_org_id`.`name`,'')) as char charset utf8mb4) AS `org_id_friendlyname`,coalesce((`Organization_org_id`.`status` = 'inactive'),0) AS `org_id_obsolescence_flag`,cast(concat(coalesce(`OSVersion_osversion_id_Typology`.`name`,'')) as char charset utf8mb4) AS `osversion_id_friendlyname` from ((`oslicence` `OSLicence` join `typology` `OSVersion_osversion_id_Typology` on((`OSLicence`.`osversion_id` = `OSVersion_osversion_id_Typology`.`id`))) join (`licence` `OSLicence_Licence` join `organization` `Organization_org_id` on((`OSLicence_Licence`.`org_id` = `Organization_org_id`.`id`))) on((`OSLicence`.`id` = `OSLicence_Licence`.`id`))) where (0 <> coalesce((`OSVersion_osversion_id_Typology`.`finalclass` = 'OSVersion'),1))
+SELECT DISTINCT
+	`OSLicence`.`id` AS `id`,
+	`OSLicence_Licence`.`name` AS `name`,
+	`OSLicence_Licence`.`org_id` AS `org_id`,
+	`Organization_org_id`.`name` AS `organization_name`,
+	`OSLicence_Licence`.`usage_limit` AS `usage_limit`,
+	`OSLicence_Licence`.`description` AS `description`,
+	`OSLicence_Licence`.`start_date` AS `start_date`,
+	`OSLicence_Licence`.`end_date` AS `end_date`,
+	`OSLicence_Licence`.`licence_key` AS `licence_key`,
+	`OSLicence_Licence`.`perpetual` AS `perpetual`,
+	`OSLicence`.`osversion_id` AS `osversion_id`,
+	`OSVersion_osversion_id_Typology`.`name` AS `osversion_name`,
+	`OSLicence_Licence`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `OSLicence_Licence`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	COALESCE (((
+				`OSLicence_Licence`.`perpetual` = 'no' 
+				) 
+			AND (( `OSLicence_Licence`.`end_date` IS NULL ) = 0 ) 
+			AND (
+			`OSLicence_Licence`.`end_date` < date_format(( now() - INTERVAL 15 MONTH ), '%Y-%m-%d 00:00:00' ))),
+		0 
+	) AS `obsolescence_flag`,
+	`OSLicence_Licence`.`obsolescence_date` AS `obsolescence_date`,
+	cast( concat( COALESCE ( `Organization_org_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `org_id_friendlyname`,
+	COALESCE (( `Organization_org_id`.`status` = 'inactive' ), 0 ) AS `org_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `OSVersion_osversion_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `osversion_id_friendlyname` 
+FROM
+	((
+			`oslicence` `OSLicence`
+			JOIN `typology` `OSVersion_osversion_id_Typology` ON ((
+					`OSLicence`.`osversion_id` = `OSVersion_osversion_id_Typology`.`id` 
+				)))
+		JOIN (
+			`licence` `OSLicence_Licence`
+			JOIN `organization` `Organization_org_id` ON ((
+					`OSLicence_Licence`.`org_id` = `Organization_org_id`.`id` 
+					))) ON ((
+				`OSLicence`.`id` = `OSLicence_Licence`.`id` 
+			))) 
+WHERE
+	(
+	0 <> COALESCE (( `OSVersion_osversion_id_Typology`.`finalclass` = 'OSVersion' ), 1 ))
 ```
 

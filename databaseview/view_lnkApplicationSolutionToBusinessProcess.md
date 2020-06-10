@@ -12,6 +12,41 @@
 | applicationsolution_id_obsolescence_flag | int [**0**]            |      |
 
 ```
-select distinct `lnkApplicationSolutionToBusinessProcess`.`id` AS `id`,`lnkApplicationSolutionToBusinessProcess`.`businessprocess_id` AS `businessprocess_id`,`BusinessProcess_businessprocess_id_FunctionalCI`.`name` AS `businessprocess_name`,`lnkApplicationSolutionToBusinessProcess`.`applicationsolution_id` AS `applicationsolution_id`,`ApplicationSolution_applicationsolution_id_FunctionalCI`.`name` AS `applicationsolution_name`,cast(concat(coalesce(`lnkApplicationSolutionToBusinessProcess`.`businessprocess_id`,''),coalesce(' ',''),coalesce(`lnkApplicationSolutionToBusinessProcess`.`applicationsolution_id`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`BusinessProcess_businessprocess_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `businessprocess_id_friendlyname`,coalesce((`BusinessProcess_businessprocess_id`.`status` = 'inactive'),0) AS `businessprocess_id_obsolescence_flag`,cast(concat(coalesce(`ApplicationSolution_applicationsolution_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `applicationsolution_id_friendlyname`,coalesce((`ApplicationSolution_applicationsolution_id`.`status` = 'inactive'),0) AS `applicationsolution_id_obsolescence_flag` from ((`lnkapplicationsolutiontobusinessprocess` `lnkApplicationSolutionToBusinessProcess` join (`businessprocess` `BusinessProcess_businessprocess_id` join `functionalci` `BusinessProcess_businessprocess_id_FunctionalCI` on((`BusinessProcess_businessprocess_id`.`id` = `BusinessProcess_businessprocess_id_FunctionalCI`.`id`))) on((`lnkApplicationSolutionToBusinessProcess`.`businessprocess_id` = `BusinessProcess_businessprocess_id`.`id`))) join (`applicationsolution` `ApplicationSolution_applicationsolution_id` join `functionalci` `ApplicationSolution_applicationsolution_id_FunctionalCI` on((`ApplicationSolution_applicationsolution_id`.`id` = `ApplicationSolution_applicationsolution_id_FunctionalCI`.`id`))) on((`lnkApplicationSolutionToBusinessProcess`.`applicationsolution_id` = `ApplicationSolution_applicationsolution_id`.`id`))) where (0 <> 1)
+SELECT DISTINCT
+	`lnkApplicationSolutionToBusinessProcess`.`id` AS `id`,
+	`lnkApplicationSolutionToBusinessProcess`.`businessprocess_id` AS `businessprocess_id`,
+	`BusinessProcess_businessprocess_id_FunctionalCI`.`name` AS `businessprocess_name`,
+	`lnkApplicationSolutionToBusinessProcess`.`applicationsolution_id` AS `applicationsolution_id`,
+	`ApplicationSolution_applicationsolution_id_FunctionalCI`.`name` AS `applicationsolution_name`,
+	cast(
+		concat(
+			COALESCE ( `lnkApplicationSolutionToBusinessProcess`.`businessprocess_id`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `lnkApplicationSolutionToBusinessProcess`.`applicationsolution_id`, '' )) AS CHAR charset utf8mb4 
+	) AS `friendlyname`,
+	cast( concat( COALESCE ( `BusinessProcess_businessprocess_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `businessprocess_id_friendlyname`,
+	COALESCE (( `BusinessProcess_businessprocess_id`.`status` = 'inactive' ), 0 ) AS `businessprocess_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `ApplicationSolution_applicationsolution_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `applicationsolution_id_friendlyname`,
+	COALESCE (( `ApplicationSolution_applicationsolution_id`.`status` = 'inactive' ), 0 ) AS `applicationsolution_id_obsolescence_flag` 
+FROM
+	((
+			`lnkapplicationsolutiontobusinessprocess` `lnkApplicationSolutionToBusinessProcess`
+			JOIN (
+				`businessprocess` `BusinessProcess_businessprocess_id`
+				JOIN `functionalci` `BusinessProcess_businessprocess_id_FunctionalCI` ON ((
+						`BusinessProcess_businessprocess_id`.`id` = `BusinessProcess_businessprocess_id_FunctionalCI`.`id` 
+						))) ON ((
+					`lnkApplicationSolutionToBusinessProcess`.`businessprocess_id` = `BusinessProcess_businessprocess_id`.`id` 
+				)))
+		JOIN (
+			`applicationsolution` `ApplicationSolution_applicationsolution_id`
+			JOIN `functionalci` `ApplicationSolution_applicationsolution_id_FunctionalCI` ON ((
+					`ApplicationSolution_applicationsolution_id`.`id` = `ApplicationSolution_applicationsolution_id_FunctionalCI`.`id` 
+					))) ON ((
+				`lnkApplicationSolutionToBusinessProcess`.`applicationsolution_id` = `ApplicationSolution_applicationsolution_id`.`id` 
+			))) 
+WHERE
+	(
+	0 <> 1)
 ```
 

@@ -31,6 +31,63 @@
 | model_id_friendlyname         | varchar(255) *NULL*                                          |      |
 
 ```
-select distinct `TelephonyCI`.`id` AS `id`,`TelephonyCI_FunctionalCI`.`name` AS `name`,`TelephonyCI_FunctionalCI`.`description` AS `description`,`TelephonyCI_FunctionalCI`.`org_id` AS `org_id`,`Organization_org_id`.`name` AS `organization_name`,`TelephonyCI_FunctionalCI`.`business_criticity` AS `business_criticity`,`TelephonyCI_FunctionalCI`.`move2production` AS `move2production`,`TelephonyCI_PhysicalDevice`.`serialnumber` AS `serialnumber`,`TelephonyCI_PhysicalDevice`.`location_id` AS `location_id`,`Location_location_id`.`name` AS `location_name`,`TelephonyCI_PhysicalDevice`.`status` AS `status`,`TelephonyCI_PhysicalDevice`.`brand_id` AS `brand_id`,`Brand_brand_id_Typology`.`name` AS `brand_name`,`TelephonyCI_PhysicalDevice`.`model_id` AS `model_id`,`Model_model_id_Typology`.`name` AS `model_name`,`TelephonyCI_PhysicalDevice`.`asset_number` AS `asset_number`,`TelephonyCI_PhysicalDevice`.`purchase_date` AS `purchase_date`,`TelephonyCI_PhysicalDevice`.`end_of_warranty` AS `end_of_warranty`,`TelephonyCI`.`phonenumber` AS `phonenumber`,`TelephonyCI_FunctionalCI`.`finalclass` AS `finalclass`,cast(concat(coalesce(`TelephonyCI_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,coalesce((`TelephonyCI_PhysicalDevice`.`status` = 'obsolete'),0) AS `obsolescence_flag`,`TelephonyCI_FunctionalCI`.`obsolescence_date` AS `obsolescence_date`,cast(concat(coalesce(`Organization_org_id`.`name`,'')) as char charset utf8mb4) AS `org_id_friendlyname`,coalesce((`Organization_org_id`.`status` = 'inactive'),0) AS `org_id_obsolescence_flag`,cast(concat(coalesce(`Location_location_id`.`name`,'')) as char charset utf8mb4) AS `location_id_friendlyname`,coalesce((`Location_location_id`.`status` = 'inactive'),0) AS `location_id_obsolescence_flag`,cast(concat(coalesce(`Brand_brand_id_Typology`.`name`,'')) as char charset utf8mb4) AS `brand_id_friendlyname`,cast(concat(coalesce(`Model_model_id_Typology`.`name`,'')) as char charset utf8mb4) AS `model_id_friendlyname` from ((`telephonyci` `TelephonyCI` join (((`physicaldevice` `TelephonyCI_PhysicalDevice` left join `location` `Location_location_id` on((`TelephonyCI_PhysicalDevice`.`location_id` = `Location_location_id`.`id`))) left join `typology` `Brand_brand_id_Typology` on((`TelephonyCI_PhysicalDevice`.`brand_id` = `Brand_brand_id_Typology`.`id`))) left join `typology` `Model_model_id_Typology` on((`TelephonyCI_PhysicalDevice`.`model_id` = `Model_model_id_Typology`.`id`))) on((`TelephonyCI`.`id` = `TelephonyCI_PhysicalDevice`.`id`))) join (`functionalci` `TelephonyCI_FunctionalCI` join `organization` `Organization_org_id` on((`TelephonyCI_FunctionalCI`.`org_id` = `Organization_org_id`.`id`))) on((`TelephonyCI`.`id` = `TelephonyCI_FunctionalCI`.`id`))) where ((0 <> coalesce((`Brand_brand_id_Typology`.`finalclass` = 'Brand'),1)) and (0 <> coalesce((`Model_model_id_Typology`.`finalclass` = 'Model'),1)))
+SELECT DISTINCT
+	`TelephonyCI`.`id` AS `id`,
+	`TelephonyCI_FunctionalCI`.`name` AS `name`,
+	`TelephonyCI_FunctionalCI`.`description` AS `description`,
+	`TelephonyCI_FunctionalCI`.`org_id` AS `org_id`,
+	`Organization_org_id`.`name` AS `organization_name`,
+	`TelephonyCI_FunctionalCI`.`business_criticity` AS `business_criticity`,
+	`TelephonyCI_FunctionalCI`.`move2production` AS `move2production`,
+	`TelephonyCI_PhysicalDevice`.`serialnumber` AS `serialnumber`,
+	`TelephonyCI_PhysicalDevice`.`location_id` AS `location_id`,
+	`Location_location_id`.`name` AS `location_name`,
+	`TelephonyCI_PhysicalDevice`.`status` AS `status`,
+	`TelephonyCI_PhysicalDevice`.`brand_id` AS `brand_id`,
+	`Brand_brand_id_Typology`.`name` AS `brand_name`,
+	`TelephonyCI_PhysicalDevice`.`model_id` AS `model_id`,
+	`Model_model_id_Typology`.`name` AS `model_name`,
+	`TelephonyCI_PhysicalDevice`.`asset_number` AS `asset_number`,
+	`TelephonyCI_PhysicalDevice`.`purchase_date` AS `purchase_date`,
+	`TelephonyCI_PhysicalDevice`.`end_of_warranty` AS `end_of_warranty`,
+	`TelephonyCI`.`phonenumber` AS `phonenumber`,
+	`TelephonyCI_FunctionalCI`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `TelephonyCI_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	COALESCE (( `TelephonyCI_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `obsolescence_flag`,
+	`TelephonyCI_FunctionalCI`.`obsolescence_date` AS `obsolescence_date`,
+	cast( concat( COALESCE ( `Organization_org_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `org_id_friendlyname`,
+	COALESCE (( `Organization_org_id`.`status` = 'inactive' ), 0 ) AS `org_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Location_location_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `location_id_friendlyname`,
+	COALESCE (( `Location_location_id`.`status` = 'inactive' ), 0 ) AS `location_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Brand_brand_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `brand_id_friendlyname`,
+	cast( concat( COALESCE ( `Model_model_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `model_id_friendlyname` 
+FROM
+	((
+			`telephonyci` `TelephonyCI`
+			JOIN (((
+						`physicaldevice` `TelephonyCI_PhysicalDevice`
+						LEFT JOIN `location` `Location_location_id` ON ((
+								`TelephonyCI_PhysicalDevice`.`location_id` = `Location_location_id`.`id` 
+							)))
+					LEFT JOIN `typology` `Brand_brand_id_Typology` ON ((
+							`TelephonyCI_PhysicalDevice`.`brand_id` = `Brand_brand_id_Typology`.`id` 
+						)))
+				LEFT JOIN `typology` `Model_model_id_Typology` ON ((
+						`TelephonyCI_PhysicalDevice`.`model_id` = `Model_model_id_Typology`.`id` 
+						))) ON ((
+					`TelephonyCI`.`id` = `TelephonyCI_PhysicalDevice`.`id` 
+				)))
+		JOIN (
+			`functionalci` `TelephonyCI_FunctionalCI`
+			JOIN `organization` `Organization_org_id` ON ((
+					`TelephonyCI_FunctionalCI`.`org_id` = `Organization_org_id`.`id` 
+					))) ON ((
+				`TelephonyCI`.`id` = `TelephonyCI_FunctionalCI`.`id` 
+			))) 
+WHERE
+	((
+			0 <> COALESCE (( `Brand_brand_id_Typology`.`finalclass` = 'Brand' ), 1 )) 
+	AND (
+	0 <> COALESCE (( `Model_model_id_Typology`.`finalclass` = 'Model' ), 1 )))
 ```
 

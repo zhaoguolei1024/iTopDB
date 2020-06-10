@@ -10,6 +10,26 @@
 | osversion_id_friendlyname | varchar(255) *NULL*             |      |
 
 ```
-select distinct `OSPatch`.`id` AS `id`,`OSPatch_Patch`.`name` AS `name`,`OSPatch_Patch`.`description` AS `description`,`OSPatch`.`osversion_id` AS `osversion_id`,`OSVersion_osversion_id_Typology`.`name` AS `osversion_name`,`OSPatch_Patch`.`finalclass` AS `finalclass`,cast(concat(coalesce(`OSPatch_Patch`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`OSVersion_osversion_id_Typology`.`name`,'')) as char charset utf8mb4) AS `osversion_id_friendlyname` from ((`ospatch` `OSPatch` join `typology` `OSVersion_osversion_id_Typology` on((`OSPatch`.`osversion_id` = `OSVersion_osversion_id_Typology`.`id`))) join `patch` `OSPatch_Patch` on((`OSPatch`.`id` = `OSPatch_Patch`.`id`))) where (0 <> coalesce((`OSVersion_osversion_id_Typology`.`finalclass` = 'OSVersion'),1))
+SELECT DISTINCT
+	`OSPatch`.`id` AS `id`,
+	`OSPatch_Patch`.`name` AS `name`,
+	`OSPatch_Patch`.`description` AS `description`,
+	`OSPatch`.`osversion_id` AS `osversion_id`,
+	`OSVersion_osversion_id_Typology`.`name` AS `osversion_name`,
+	`OSPatch_Patch`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `OSPatch_Patch`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	cast( concat( COALESCE ( `OSVersion_osversion_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `osversion_id_friendlyname` 
+FROM
+	((
+			`ospatch` `OSPatch`
+			JOIN `typology` `OSVersion_osversion_id_Typology` ON ((
+					`OSPatch`.`osversion_id` = `OSVersion_osversion_id_Typology`.`id` 
+				)))
+		JOIN `patch` `OSPatch_Patch` ON ((
+				`OSPatch`.`id` = `OSPatch_Patch`.`id` 
+			))) 
+WHERE
+	(
+	0 <> COALESCE (( `OSVersion_osversion_id_Typology`.`finalclass` = 'OSVersion' ), 1 ))
 ```
 

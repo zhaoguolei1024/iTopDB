@@ -10,6 +10,31 @@
 | providercontract_id_friendlyname | varchar(255) *NULL*    |      |
 
 ```
-select distinct `lnkProviderContractToService`.`id` AS `id`,`lnkProviderContractToService`.`service_id` AS `service_id`,`Service_service_id`.`name` AS `service_name`,`lnkProviderContractToService`.`providercontract_id` AS `providercontract_id`,`ProviderContract_providercontract_id_Contract`.`name` AS `providercontract_name`,cast(concat(coalesce(`lnkProviderContractToService`.`service_id`,''),coalesce(' ',''),coalesce(`lnkProviderContractToService`.`providercontract_id`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`Service_service_id`.`name`,'')) as char charset utf8mb4) AS `service_id_friendlyname`,cast(concat(coalesce(`ProviderContract_providercontract_id_Contract`.`name`,'')) as char charset utf8mb4) AS `providercontract_id_friendlyname` from ((`lnkprovidercontracttoservice` `lnkProviderContractToService` join `service` `Service_service_id` on((`lnkProviderContractToService`.`service_id` = `Service_service_id`.`id`))) join `contract` `ProviderContract_providercontract_id_Contract` on((`lnkProviderContractToService`.`providercontract_id` = `ProviderContract_providercontract_id_Contract`.`id`))) where (0 <> coalesce((`ProviderContract_providercontract_id_Contract`.`finalclass` = 'ProviderContract'),1))
+SELECT DISTINCT
+	`lnkProviderContractToService`.`id` AS `id`,
+	`lnkProviderContractToService`.`service_id` AS `service_id`,
+	`Service_service_id`.`name` AS `service_name`,
+	`lnkProviderContractToService`.`providercontract_id` AS `providercontract_id`,
+	`ProviderContract_providercontract_id_Contract`.`name` AS `providercontract_name`,
+	cast(
+		concat(
+			COALESCE ( `lnkProviderContractToService`.`service_id`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `lnkProviderContractToService`.`providercontract_id`, '' )) AS CHAR charset utf8mb4 
+	) AS `friendlyname`,
+	cast( concat( COALESCE ( `Service_service_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `service_id_friendlyname`,
+	cast( concat( COALESCE ( `ProviderContract_providercontract_id_Contract`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `providercontract_id_friendlyname` 
+FROM
+	((
+			`lnkprovidercontracttoservice` `lnkProviderContractToService`
+			JOIN `service` `Service_service_id` ON ((
+					`lnkProviderContractToService`.`service_id` = `Service_service_id`.`id` 
+				)))
+		JOIN `contract` `ProviderContract_providercontract_id_Contract` ON ((
+				`lnkProviderContractToService`.`providercontract_id` = `ProviderContract_providercontract_id_Contract`.`id` 
+			))) 
+WHERE
+	(
+	0 <> COALESCE (( `ProviderContract_providercontract_id_Contract`.`finalclass` = 'ProviderContract' ), 1 ))
 ```
 

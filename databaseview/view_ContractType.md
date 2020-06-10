@@ -6,6 +6,15 @@
 | friendlyname | varchar(255) *NULL*                |      |
 
 ```
-select distinct `ContractType_Typology`.`id` AS `id`,`ContractType_Typology`.`name` AS `name`,`ContractType_Typology`.`finalclass` AS `finalclass`,cast(concat(coalesce(`ContractType_Typology`.`name`,'')) as char charset utf8mb4) AS `friendlyname` from `typology` `ContractType_Typology` where (0 <> coalesce((`ContractType_Typology`.`finalclass` = 'ContractType'),1))
+SELECT DISTINCT
+	`ContractType_Typology`.`id` AS `id`,
+	`ContractType_Typology`.`name` AS `name`,
+	`ContractType_Typology`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `ContractType_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname` 
+FROM
+	`typology` `ContractType_Typology` 
+WHERE
+	(
+	0 <> COALESCE (( `ContractType_Typology`.`finalclass` = 'ContractType' ), 1 ))
 ```
 

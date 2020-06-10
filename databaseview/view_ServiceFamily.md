@@ -8,6 +8,17 @@
 | ServiceFamilyicon_filename | varchar(255) *NULL*    |      |
 
 ```
-select distinct `ServiceFamily`.`id` AS `id`,`ServiceFamily`.`name` AS `name`,`ServiceFamily`.`icon_mimetype` AS `icon`,cast(concat(coalesce(`ServiceFamily`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,`ServiceFamily`.`icon_data` AS `ServiceFamilyicon_data`,`ServiceFamily`.`icon_filename` AS `ServiceFamilyicon_filename` from `servicefamily` `ServiceFamily` where (0 <> 1)
+SELECT DISTINCT
+	`ServiceFamily`.`id` AS `id`,
+	`ServiceFamily`.`name` AS `name`,
+	`ServiceFamily`.`icon_mimetype` AS `icon`,
+	cast( concat( COALESCE ( `ServiceFamily`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	`ServiceFamily`.`icon_data` AS `ServiceFamilyicon_data`,
+	`ServiceFamily`.`icon_filename` AS `ServiceFamilyicon_filename` 
+FROM
+	`servicefamily` `ServiceFamily` 
+WHERE
+	(
+	0 <> 1)
 ```
 

@@ -10,6 +10,19 @@
 | friendlyname | varchar(255) *NULL*                       |      |
 
 ```
-select distinct `SLT`.`id` AS `id`,`SLT`.`name` AS `name`,`SLT`.`priority` AS `priority`,`SLT`.`request_type` AS `request_type`,`SLT`.`metric` AS `metric`,`SLT`.`value` AS `value`,`SLT`.`unit` AS `unit`,cast(concat(coalesce(`SLT`.`name`,'')) as char charset utf8mb4) AS `friendlyname` from `slt` `SLT` where (0 <> 1)
+SELECT DISTINCT
+	`SLT`.`id` AS `id`,
+	`SLT`.`name` AS `name`,
+	`SLT`.`priority` AS `priority`,
+	`SLT`.`request_type` AS `request_type`,
+	`SLT`.`metric` AS `metric`,
+	`SLT`.`value` AS `value`,
+	`SLT`.`unit` AS `unit`,
+	cast( concat( COALESCE ( `SLT`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname` 
+FROM
+	`slt` `SLT` 
+WHERE
+	(
+	0 <> 1)
 ```
 

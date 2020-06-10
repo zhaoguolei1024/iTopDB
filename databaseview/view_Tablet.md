@@ -30,6 +30,60 @@
 | model_id_friendlyname         | varchar(255) *NULL*                                          |      |
 
 ```
-select distinct `Tablet_PhysicalDevice`.`id` AS `id`,`Tablet_FunctionalCI`.`name` AS `name`,`Tablet_FunctionalCI`.`description` AS `description`,`Tablet_FunctionalCI`.`org_id` AS `org_id`,`Organization_org_id`.`name` AS `organization_name`,`Tablet_FunctionalCI`.`business_criticity` AS `business_criticity`,`Tablet_FunctionalCI`.`move2production` AS `move2production`,`Tablet_PhysicalDevice`.`serialnumber` AS `serialnumber`,`Tablet_PhysicalDevice`.`location_id` AS `location_id`,`Location_location_id`.`name` AS `location_name`,`Tablet_PhysicalDevice`.`status` AS `status`,`Tablet_PhysicalDevice`.`brand_id` AS `brand_id`,`Brand_brand_id_Typology`.`name` AS `brand_name`,`Tablet_PhysicalDevice`.`model_id` AS `model_id`,`Model_model_id_Typology`.`name` AS `model_name`,`Tablet_PhysicalDevice`.`asset_number` AS `asset_number`,`Tablet_PhysicalDevice`.`purchase_date` AS `purchase_date`,`Tablet_PhysicalDevice`.`end_of_warranty` AS `end_of_warranty`,`Tablet_FunctionalCI`.`finalclass` AS `finalclass`,cast(concat(coalesce(`Tablet_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,coalesce((`Tablet_PhysicalDevice`.`status` = 'obsolete'),0) AS `obsolescence_flag`,`Tablet_FunctionalCI`.`obsolescence_date` AS `obsolescence_date`,cast(concat(coalesce(`Organization_org_id`.`name`,'')) as char charset utf8mb4) AS `org_id_friendlyname`,coalesce((`Organization_org_id`.`status` = 'inactive'),0) AS `org_id_obsolescence_flag`,cast(concat(coalesce(`Location_location_id`.`name`,'')) as char charset utf8mb4) AS `location_id_friendlyname`,coalesce((`Location_location_id`.`status` = 'inactive'),0) AS `location_id_obsolescence_flag`,cast(concat(coalesce(`Brand_brand_id_Typology`.`name`,'')) as char charset utf8mb4) AS `brand_id_friendlyname`,cast(concat(coalesce(`Model_model_id_Typology`.`name`,'')) as char charset utf8mb4) AS `model_id_friendlyname` from ((((`physicaldevice` `Tablet_PhysicalDevice` left join `location` `Location_location_id` on((`Tablet_PhysicalDevice`.`location_id` = `Location_location_id`.`id`))) left join `typology` `Brand_brand_id_Typology` on((`Tablet_PhysicalDevice`.`brand_id` = `Brand_brand_id_Typology`.`id`))) left join `typology` `Model_model_id_Typology` on((`Tablet_PhysicalDevice`.`model_id` = `Model_model_id_Typology`.`id`))) join (`functionalci` `Tablet_FunctionalCI` join `organization` `Organization_org_id` on((`Tablet_FunctionalCI`.`org_id` = `Organization_org_id`.`id`))) on((`Tablet_PhysicalDevice`.`id` = `Tablet_FunctionalCI`.`id`))) where ((0 <> coalesce((`Brand_brand_id_Typology`.`finalclass` = 'Brand'),1)) and (0 <> coalesce((`Model_model_id_Typology`.`finalclass` = 'Model'),1)) and (0 <> coalesce((`Tablet_PhysicalDevice`.`finalclass` = 'Tablet'),1)))
+SELECT DISTINCT
+	`Tablet_PhysicalDevice`.`id` AS `id`,
+	`Tablet_FunctionalCI`.`name` AS `name`,
+	`Tablet_FunctionalCI`.`description` AS `description`,
+	`Tablet_FunctionalCI`.`org_id` AS `org_id`,
+	`Organization_org_id`.`name` AS `organization_name`,
+	`Tablet_FunctionalCI`.`business_criticity` AS `business_criticity`,
+	`Tablet_FunctionalCI`.`move2production` AS `move2production`,
+	`Tablet_PhysicalDevice`.`serialnumber` AS `serialnumber`,
+	`Tablet_PhysicalDevice`.`location_id` AS `location_id`,
+	`Location_location_id`.`name` AS `location_name`,
+	`Tablet_PhysicalDevice`.`status` AS `status`,
+	`Tablet_PhysicalDevice`.`brand_id` AS `brand_id`,
+	`Brand_brand_id_Typology`.`name` AS `brand_name`,
+	`Tablet_PhysicalDevice`.`model_id` AS `model_id`,
+	`Model_model_id_Typology`.`name` AS `model_name`,
+	`Tablet_PhysicalDevice`.`asset_number` AS `asset_number`,
+	`Tablet_PhysicalDevice`.`purchase_date` AS `purchase_date`,
+	`Tablet_PhysicalDevice`.`end_of_warranty` AS `end_of_warranty`,
+	`Tablet_FunctionalCI`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `Tablet_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	COALESCE (( `Tablet_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `obsolescence_flag`,
+	`Tablet_FunctionalCI`.`obsolescence_date` AS `obsolescence_date`,
+	cast( concat( COALESCE ( `Organization_org_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `org_id_friendlyname`,
+	COALESCE (( `Organization_org_id`.`status` = 'inactive' ), 0 ) AS `org_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Location_location_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `location_id_friendlyname`,
+	COALESCE (( `Location_location_id`.`status` = 'inactive' ), 0 ) AS `location_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Brand_brand_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `brand_id_friendlyname`,
+	cast( concat( COALESCE ( `Model_model_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `model_id_friendlyname` 
+FROM
+	((((
+					`physicaldevice` `Tablet_PhysicalDevice`
+					LEFT JOIN `location` `Location_location_id` ON ((
+							`Tablet_PhysicalDevice`.`location_id` = `Location_location_id`.`id` 
+						)))
+				LEFT JOIN `typology` `Brand_brand_id_Typology` ON ((
+						`Tablet_PhysicalDevice`.`brand_id` = `Brand_brand_id_Typology`.`id` 
+					)))
+			LEFT JOIN `typology` `Model_model_id_Typology` ON ((
+					`Tablet_PhysicalDevice`.`model_id` = `Model_model_id_Typology`.`id` 
+				)))
+		JOIN (
+			`functionalci` `Tablet_FunctionalCI`
+			JOIN `organization` `Organization_org_id` ON ((
+					`Tablet_FunctionalCI`.`org_id` = `Organization_org_id`.`id` 
+					))) ON ((
+				`Tablet_PhysicalDevice`.`id` = `Tablet_FunctionalCI`.`id` 
+			))) 
+WHERE
+	((
+			0 <> COALESCE (( `Brand_brand_id_Typology`.`finalclass` = 'Brand' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `Model_model_id_Typology`.`finalclass` = 'Model' ), 1 )) 
+	AND (
+	0 <> COALESCE (( `Tablet_PhysicalDevice`.`finalclass` = 'Tablet' ), 1 )))
 ```
 

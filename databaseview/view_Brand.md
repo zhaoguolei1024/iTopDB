@@ -7,6 +7,15 @@
 | friendlyname | varchar(255) *NULL*                |      |
 
 ```
-select distinct `Brand_Typology`.`id` AS `id`,`Brand_Typology`.`name` AS `name`,`Brand_Typology`.`finalclass` AS `finalclass`,cast(concat(coalesce(`Brand_Typology`.`name`,'')) as char charset utf8mb4) AS `friendlyname` from `typology` `Brand_Typology` where (0 <> coalesce((`Brand_Typology`.`finalclass` = 'Brand'),1))
+SELECT DISTINCT
+	`Brand_Typology`.`id` AS `id`,
+	`Brand_Typology`.`name` AS `name`,
+	`Brand_Typology`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `Brand_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname` 
+FROM
+	`typology` `Brand_Typology` 
+WHERE
+	(
+	0 <> COALESCE (( `Brand_Typology`.`finalclass` = 'Brand' ), 1 ))
 ```
 

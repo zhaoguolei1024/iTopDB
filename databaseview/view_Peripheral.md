@@ -30,6 +30,60 @@
 | model_id_friendlyname         | varchar(255) *NULL*                                          |      |
 
 ```
-select distinct `Peripheral_PhysicalDevice`.`id` AS `id`,`Peripheral_FunctionalCI`.`name` AS `name`,`Peripheral_FunctionalCI`.`description` AS `description`,`Peripheral_FunctionalCI`.`org_id` AS `org_id`,`Organization_org_id`.`name` AS `organization_name`,`Peripheral_FunctionalCI`.`business_criticity` AS `business_criticity`,`Peripheral_FunctionalCI`.`move2production` AS `move2production`,`Peripheral_PhysicalDevice`.`serialnumber` AS `serialnumber`,`Peripheral_PhysicalDevice`.`location_id` AS `location_id`,`Location_location_id`.`name` AS `location_name`,`Peripheral_PhysicalDevice`.`status` AS `status`,`Peripheral_PhysicalDevice`.`brand_id` AS `brand_id`,`Brand_brand_id_Typology`.`name` AS `brand_name`,`Peripheral_PhysicalDevice`.`model_id` AS `model_id`,`Model_model_id_Typology`.`name` AS `model_name`,`Peripheral_PhysicalDevice`.`asset_number` AS `asset_number`,`Peripheral_PhysicalDevice`.`purchase_date` AS `purchase_date`,`Peripheral_PhysicalDevice`.`end_of_warranty` AS `end_of_warranty`,`Peripheral_FunctionalCI`.`finalclass` AS `finalclass`,cast(concat(coalesce(`Peripheral_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,coalesce((`Peripheral_PhysicalDevice`.`status` = 'obsolete'),0) AS `obsolescence_flag`,`Peripheral_FunctionalCI`.`obsolescence_date` AS `obsolescence_date`,cast(concat(coalesce(`Organization_org_id`.`name`,'')) as char charset utf8mb4) AS `org_id_friendlyname`,coalesce((`Organization_org_id`.`status` = 'inactive'),0) AS `org_id_obsolescence_flag`,cast(concat(coalesce(`Location_location_id`.`name`,'')) as char charset utf8mb4) AS `location_id_friendlyname`,coalesce((`Location_location_id`.`status` = 'inactive'),0) AS `location_id_obsolescence_flag`,cast(concat(coalesce(`Brand_brand_id_Typology`.`name`,'')) as char charset utf8mb4) AS `brand_id_friendlyname`,cast(concat(coalesce(`Model_model_id_Typology`.`name`,'')) as char charset utf8mb4) AS `model_id_friendlyname` from ((((`physicaldevice` `Peripheral_PhysicalDevice` left join `location` `Location_location_id` on((`Peripheral_PhysicalDevice`.`location_id` = `Location_location_id`.`id`))) left join `typology` `Brand_brand_id_Typology` on((`Peripheral_PhysicalDevice`.`brand_id` = `Brand_brand_id_Typology`.`id`))) left join `typology` `Model_model_id_Typology` on((`Peripheral_PhysicalDevice`.`model_id` = `Model_model_id_Typology`.`id`))) join (`functionalci` `Peripheral_FunctionalCI` join `organization` `Organization_org_id` on((`Peripheral_FunctionalCI`.`org_id` = `Organization_org_id`.`id`))) on((`Peripheral_PhysicalDevice`.`id` = `Peripheral_FunctionalCI`.`id`))) where ((0 <> coalesce((`Brand_brand_id_Typology`.`finalclass` = 'Brand'),1)) and (0 <> coalesce((`Model_model_id_Typology`.`finalclass` = 'Model'),1)) and (0 <> coalesce((`Peripheral_PhysicalDevice`.`finalclass` = 'Peripheral'),1)))
+SELECT DISTINCT
+	`Peripheral_PhysicalDevice`.`id` AS `id`,
+	`Peripheral_FunctionalCI`.`name` AS `name`,
+	`Peripheral_FunctionalCI`.`description` AS `description`,
+	`Peripheral_FunctionalCI`.`org_id` AS `org_id`,
+	`Organization_org_id`.`name` AS `organization_name`,
+	`Peripheral_FunctionalCI`.`business_criticity` AS `business_criticity`,
+	`Peripheral_FunctionalCI`.`move2production` AS `move2production`,
+	`Peripheral_PhysicalDevice`.`serialnumber` AS `serialnumber`,
+	`Peripheral_PhysicalDevice`.`location_id` AS `location_id`,
+	`Location_location_id`.`name` AS `location_name`,
+	`Peripheral_PhysicalDevice`.`status` AS `status`,
+	`Peripheral_PhysicalDevice`.`brand_id` AS `brand_id`,
+	`Brand_brand_id_Typology`.`name` AS `brand_name`,
+	`Peripheral_PhysicalDevice`.`model_id` AS `model_id`,
+	`Model_model_id_Typology`.`name` AS `model_name`,
+	`Peripheral_PhysicalDevice`.`asset_number` AS `asset_number`,
+	`Peripheral_PhysicalDevice`.`purchase_date` AS `purchase_date`,
+	`Peripheral_PhysicalDevice`.`end_of_warranty` AS `end_of_warranty`,
+	`Peripheral_FunctionalCI`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `Peripheral_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	COALESCE (( `Peripheral_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `obsolescence_flag`,
+	`Peripheral_FunctionalCI`.`obsolescence_date` AS `obsolescence_date`,
+	cast( concat( COALESCE ( `Organization_org_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `org_id_friendlyname`,
+	COALESCE (( `Organization_org_id`.`status` = 'inactive' ), 0 ) AS `org_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Location_location_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `location_id_friendlyname`,
+	COALESCE (( `Location_location_id`.`status` = 'inactive' ), 0 ) AS `location_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Brand_brand_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `brand_id_friendlyname`,
+	cast( concat( COALESCE ( `Model_model_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `model_id_friendlyname` 
+FROM
+	((((
+					`physicaldevice` `Peripheral_PhysicalDevice`
+					LEFT JOIN `location` `Location_location_id` ON ((
+							`Peripheral_PhysicalDevice`.`location_id` = `Location_location_id`.`id` 
+						)))
+				LEFT JOIN `typology` `Brand_brand_id_Typology` ON ((
+						`Peripheral_PhysicalDevice`.`brand_id` = `Brand_brand_id_Typology`.`id` 
+					)))
+			LEFT JOIN `typology` `Model_model_id_Typology` ON ((
+					`Peripheral_PhysicalDevice`.`model_id` = `Model_model_id_Typology`.`id` 
+				)))
+		JOIN (
+			`functionalci` `Peripheral_FunctionalCI`
+			JOIN `organization` `Organization_org_id` ON ((
+					`Peripheral_FunctionalCI`.`org_id` = `Organization_org_id`.`id` 
+					))) ON ((
+				`Peripheral_PhysicalDevice`.`id` = `Peripheral_FunctionalCI`.`id` 
+			))) 
+WHERE
+	((
+			0 <> COALESCE (( `Brand_brand_id_Typology`.`finalclass` = 'Brand' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `Model_model_id_Typology`.`finalclass` = 'Model' ), 1 )) 
+	AND (
+	0 <> COALESCE (( `Peripheral_PhysicalDevice`.`finalclass` = 'Peripheral' ), 1 )))
 ```
 

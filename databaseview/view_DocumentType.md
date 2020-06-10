@@ -6,6 +6,15 @@
 | friendlyname | varchar(255) *NULL*                |      |
 
 ```
-select distinct `DocumentType_Typology`.`id` AS `id`,`DocumentType_Typology`.`name` AS `name`,`DocumentType_Typology`.`finalclass` AS `finalclass`,cast(concat(coalesce(`DocumentType_Typology`.`name`,'')) as char charset utf8mb4) AS `friendlyname` from `typology` `DocumentType_Typology` where (0 <> coalesce((`DocumentType_Typology`.`finalclass` = 'DocumentType'),1))
+SELECT DISTINCT
+	`DocumentType_Typology`.`id` AS `id`,
+	`DocumentType_Typology`.`name` AS `name`,
+	`DocumentType_Typology`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `DocumentType_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname` 
+FROM
+	`typology` `DocumentType_Typology` 
+WHERE
+	(
+	0 <> COALESCE (( `DocumentType_Typology`.`finalclass` = 'DocumentType' ), 1 ))
 ```
 

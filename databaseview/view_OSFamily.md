@@ -6,6 +6,15 @@
 | friendlyname | varchar(255) *NULL*                |      |
 
 ```
-select distinct `OSFamily_Typology`.`id` AS `id`,`OSFamily_Typology`.`name` AS `name`,`OSFamily_Typology`.`finalclass` AS `finalclass`,cast(concat(coalesce(`OSFamily_Typology`.`name`,'')) as char charset utf8mb4) AS `friendlyname` from `typology` `OSFamily_Typology` where (0 <> coalesce((`OSFamily_Typology`.`finalclass` = 'OSFamily'),1))
+SELECT DISTINCT
+	`OSFamily_Typology`.`id` AS `id`,
+	`OSFamily_Typology`.`name` AS `name`,
+	`OSFamily_Typology`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `OSFamily_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname` 
+FROM
+	`typology` `OSFamily_Typology` 
+WHERE
+	(
+	0 <> COALESCE (( `OSFamily_Typology`.`finalclass` = 'OSFamily' ), 1 ))
 ```
 

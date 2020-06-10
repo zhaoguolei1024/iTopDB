@@ -16,6 +16,32 @@
 | deliverymodel_id_friendlyname | varchar(255) *NULL*                           |      |
 
 ```
-select distinct `Organization`.`id` AS `id`,`Organization`.`name` AS `name`,`Organization`.`code` AS `code`,`Organization`.`status` AS `status`,`Organization`.`parent_id` AS `parent_id`,`Organization_parent_id`.`name` AS `parent_name`,`Organization`.`deliverymodel_id` AS `deliverymodel_id`,`DeliveryModel_deliverymodel_id`.`name` AS `deliverymodel_name`,cast(concat(coalesce(`Organization`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,coalesce((`Organization`.`status` = 'inactive'),0) AS `obsolescence_flag`,`Organization`.`obsolescence_date` AS `obsolescence_date`,cast(concat(coalesce(`Organization_parent_id`.`name`,'')) as char charset utf8mb4) AS `parent_id_friendlyname`,coalesce((`Organization_parent_id`.`status` = 'inactive'),0) AS `parent_id_obsolescence_flag`,cast(concat(coalesce(`DeliveryModel_deliverymodel_id`.`name`,'')) as char charset utf8mb4) AS `deliverymodel_id_friendlyname` from ((`organization` `Organization` left join `organization` `Organization_parent_id` on((`Organization`.`parent_id` = `Organization_parent_id`.`id`))) left join `deliverymodel` `DeliveryModel_deliverymodel_id` on((`Organization`.`deliverymodel_id` = `DeliveryModel_deliverymodel_id`.`id`))) where (0 <> 1)
+SELECT DISTINCT
+	`Organization`.`id` AS `id`,
+	`Organization`.`name` AS `name`,
+	`Organization`.`code` AS `code`,
+	`Organization`.`status` AS `status`,
+	`Organization`.`parent_id` AS `parent_id`,
+	`Organization_parent_id`.`name` AS `parent_name`,
+	`Organization`.`deliverymodel_id` AS `deliverymodel_id`,
+	`DeliveryModel_deliverymodel_id`.`name` AS `deliverymodel_name`,
+	cast( concat( COALESCE ( `Organization`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	COALESCE (( `Organization`.`status` = 'inactive' ), 0 ) AS `obsolescence_flag`,
+	`Organization`.`obsolescence_date` AS `obsolescence_date`,
+	cast( concat( COALESCE ( `Organization_parent_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `parent_id_friendlyname`,
+	COALESCE (( `Organization_parent_id`.`status` = 'inactive' ), 0 ) AS `parent_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `DeliveryModel_deliverymodel_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `deliverymodel_id_friendlyname` 
+FROM
+	((
+			`organization` `Organization`
+			LEFT JOIN `organization` `Organization_parent_id` ON ((
+					`Organization`.`parent_id` = `Organization_parent_id`.`id` 
+				)))
+		LEFT JOIN `deliverymodel` `DeliveryModel_deliverymodel_id` ON ((
+				`Organization`.`deliverymodel_id` = `DeliveryModel_deliverymodel_id`.`id` 
+			))) 
+WHERE
+	(
+	0 <> 1)
 ```
 

@@ -5,6 +5,14 @@
 | friendlyname | varchar(255) *NULL*    |      |
 
 ```
-select distinct `FAQCategory`.`id` AS `id`,`FAQCategory`.`nam` AS `name`,cast(concat(coalesce(`FAQCategory`.`nam`,'')) as char charset utf8mb4) AS `friendlyname` from `faqcategory` `FAQCategory` where (0 <> 1)
+SELECT DISTINCT
+	`FAQCategory`.`id` AS `id`,
+	`FAQCategory`.`nam` AS `name`,
+	cast( concat( COALESCE ( `FAQCategory`.`nam`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname` 
+FROM
+	`faqcategory` `FAQCategory` 
+WHERE
+	(
+	0 <> 1)
 ```
 

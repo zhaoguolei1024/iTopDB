@@ -16,6 +16,47 @@
 | connectableci_id_obsolescence_flag | int [**0**]                                     |      |
 
 ```
-select distinct `lnkConnectableCIToNetworkDevice`.`id` AS `id`,`lnkConnectableCIToNetworkDevice`.`networkdevice_id` AS `networkdevice_id`,`NetworkDevice_networkdevice_id_FunctionalCI`.`name` AS `networkdevice_name`,`lnkConnectableCIToNetworkDevice`.`connectableci_id` AS `connectableci_id`,`ConnectableCI_connectableci_id_FunctionalCI`.`name` AS `connectableci_name`,`lnkConnectableCIToNetworkDevice`.`network_port` AS `network_port`,`lnkConnectableCIToNetworkDevice`.`device_port` AS `device_port`,`lnkConnectableCIToNetworkDevice`.`type` AS `connection_type`,cast(concat(coalesce(`lnkConnectableCIToNetworkDevice`.`networkdevice_id`,''),coalesce(' ',''),coalesce(`lnkConnectableCIToNetworkDevice`.`connectableci_id`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`NetworkDevice_networkdevice_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `networkdevice_id_friendlyname`,coalesce((`NetworkDevice_networkdevice_id_PhysicalDevice`.`status` = 'obsolete'),0) AS `networkdevice_id_obsolescence_flag`,cast(concat(coalesce(`ConnectableCI_connectableci_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `connectableci_id_friendlyname`,`ConnectableCI_connectableci_id_FunctionalCI`.`finalclass` AS `connectableci_id_finalclass_recall`,coalesce((`ConnectableCI_connectableci_id_PhysicalDevice`.`status` = 'obsolete'),0) AS `connectableci_id_obsolescence_flag` from ((`lnkconnectablecitonetworkdevice` `lnkConnectableCIToNetworkDevice` join (`physicaldevice` `NetworkDevice_networkdevice_id_PhysicalDevice` join `functionalci` `NetworkDevice_networkdevice_id_FunctionalCI` on((`NetworkDevice_networkdevice_id_PhysicalDevice`.`id` = `NetworkDevice_networkdevice_id_FunctionalCI`.`id`))) on((`lnkConnectableCIToNetworkDevice`.`networkdevice_id` = `NetworkDevice_networkdevice_id_PhysicalDevice`.`id`))) join (`physicaldevice` `ConnectableCI_connectableci_id_PhysicalDevice` join `functionalci` `ConnectableCI_connectableci_id_FunctionalCI` on((`ConnectableCI_connectableci_id_PhysicalDevice`.`id` = `ConnectableCI_connectableci_id_FunctionalCI`.`id`))) on((`lnkConnectableCIToNetworkDevice`.`connectableci_id` = `ConnectableCI_connectableci_id_PhysicalDevice`.`id`))) where ((0 <> coalesce((`NetworkDevice_networkdevice_id_PhysicalDevice`.`finalclass` = 'NetworkDevice'),1)) and (0 <> coalesce((`ConnectableCI_connectableci_id_PhysicalDevice`.`finalclass` in ('DatacenterDevice','NetworkDevice','Server','PC','Printer','StorageSystem','SANSwitch','TapeLibrary','NAS','ConnectableCI')),1)))
+SELECT DISTINCT
+	`lnkConnectableCIToNetworkDevice`.`id` AS `id`,
+	`lnkConnectableCIToNetworkDevice`.`networkdevice_id` AS `networkdevice_id`,
+	`NetworkDevice_networkdevice_id_FunctionalCI`.`name` AS `networkdevice_name`,
+	`lnkConnectableCIToNetworkDevice`.`connectableci_id` AS `connectableci_id`,
+	`ConnectableCI_connectableci_id_FunctionalCI`.`name` AS `connectableci_name`,
+	`lnkConnectableCIToNetworkDevice`.`network_port` AS `network_port`,
+	`lnkConnectableCIToNetworkDevice`.`device_port` AS `device_port`,
+	`lnkConnectableCIToNetworkDevice`.`type` AS `connection_type`,
+	cast(
+		concat(
+			COALESCE ( `lnkConnectableCIToNetworkDevice`.`networkdevice_id`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `lnkConnectableCIToNetworkDevice`.`connectableci_id`, '' )) AS CHAR charset utf8mb4 
+	) AS `friendlyname`,
+	cast( concat( COALESCE ( `NetworkDevice_networkdevice_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `networkdevice_id_friendlyname`,
+	COALESCE (( `NetworkDevice_networkdevice_id_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `networkdevice_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `ConnectableCI_connectableci_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `connectableci_id_friendlyname`,
+	`ConnectableCI_connectableci_id_FunctionalCI`.`finalclass` AS `connectableci_id_finalclass_recall`,
+	COALESCE (( `ConnectableCI_connectableci_id_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `connectableci_id_obsolescence_flag` 
+FROM
+	((
+			`lnkconnectablecitonetworkdevice` `lnkConnectableCIToNetworkDevice`
+			JOIN (
+				`physicaldevice` `NetworkDevice_networkdevice_id_PhysicalDevice`
+				JOIN `functionalci` `NetworkDevice_networkdevice_id_FunctionalCI` ON ((
+						`NetworkDevice_networkdevice_id_PhysicalDevice`.`id` = `NetworkDevice_networkdevice_id_FunctionalCI`.`id` 
+						))) ON ((
+					`lnkConnectableCIToNetworkDevice`.`networkdevice_id` = `NetworkDevice_networkdevice_id_PhysicalDevice`.`id` 
+				)))
+		JOIN (
+			`physicaldevice` `ConnectableCI_connectableci_id_PhysicalDevice`
+			JOIN `functionalci` `ConnectableCI_connectableci_id_FunctionalCI` ON ((
+					`ConnectableCI_connectableci_id_PhysicalDevice`.`id` = `ConnectableCI_connectableci_id_FunctionalCI`.`id` 
+					))) ON ((
+				`lnkConnectableCIToNetworkDevice`.`connectableci_id` = `ConnectableCI_connectableci_id_PhysicalDevice`.`id` 
+			))) 
+WHERE
+	((
+			0 <> COALESCE (( `NetworkDevice_networkdevice_id_PhysicalDevice`.`finalclass` = 'NetworkDevice' ), 1 )) 
+	AND (
+	0 <> COALESCE (( `ConnectableCI_connectableci_id_PhysicalDevice`.`finalclass` IN ( 'DatacenterDevice', 'NetworkDevice', 'Server', 'PC', 'Printer', 'StorageSystem', 'SANSwitch', 'TapeLibrary', 'NAS', 'ConnectableCI' )), 1 )))
 ```
 

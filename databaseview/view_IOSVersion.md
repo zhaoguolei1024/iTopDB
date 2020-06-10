@@ -9,6 +9,30 @@
 | brand_id_friendlyname | varchar(255) *NULL*                |      |
 
 ```
-select distinct `IOSVersion`.`id` AS `id`,`IOSVersion_Typology`.`name` AS `name`,`IOSVersion`.`brand_id` AS `brand_id`,`Brand_brand_id_Typology`.`name` AS `brand_name`,`IOSVersion_Typology`.`finalclass` AS `finalclass`,cast(concat(coalesce(`Brand_brand_id_Typology`.`name`,''),coalesce(' ',''),coalesce(`IOSVersion_Typology`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`Brand_brand_id_Typology`.`name`,'')) as char charset utf8mb4) AS `brand_id_friendlyname` from ((`iosversion` `IOSVersion` join `typology` `Brand_brand_id_Typology` on((`IOSVersion`.`brand_id` = `Brand_brand_id_Typology`.`id`))) join `typology` `IOSVersion_Typology` on((`IOSVersion`.`id` = `IOSVersion_Typology`.`id`))) where (0 <> coalesce((`Brand_brand_id_Typology`.`finalclass` = 'Brand'),1))
+SELECT DISTINCT
+	`IOSVersion`.`id` AS `id`,
+	`IOSVersion_Typology`.`name` AS `name`,
+	`IOSVersion`.`brand_id` AS `brand_id`,
+	`Brand_brand_id_Typology`.`name` AS `brand_name`,
+	`IOSVersion_Typology`.`finalclass` AS `finalclass`,
+	cast(
+		concat(
+			COALESCE ( `Brand_brand_id_Typology`.`name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `IOSVersion_Typology`.`name`, '' )) AS CHAR charset utf8mb4 
+	) AS `friendlyname`,
+	cast( concat( COALESCE ( `Brand_brand_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `brand_id_friendlyname` 
+FROM
+	((
+			`iosversion` `IOSVersion`
+			JOIN `typology` `Brand_brand_id_Typology` ON ((
+					`IOSVersion`.`brand_id` = `Brand_brand_id_Typology`.`id` 
+				)))
+		JOIN `typology` `IOSVersion_Typology` ON ((
+				`IOSVersion`.`id` = `IOSVersion_Typology`.`id` 
+			))) 
+WHERE
+	(
+	0 <> COALESCE (( `Brand_brand_id_Typology`.`finalclass` = 'Brand' ), 1 ))
 ```
 

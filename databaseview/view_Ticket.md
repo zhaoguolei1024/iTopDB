@@ -32,6 +32,72 @@
 | Ticketprivate_log_index     | blob *NULL*                                              |      |
 
 ```
-select distinct `Ticket`.`id` AS `id`,`Ticket`.`operational_status` AS `operational_status`,`Ticket`.`ref` AS `ref`,`Ticket`.`org_id` AS `org_id`,`Organization_org_id`.`name` AS `org_name`,`Ticket`.`caller_id` AS `caller_id`,`Person_caller_id_Contact`.`name` AS `caller_name`,`Ticket`.`team_id` AS `team_id`,`Team_team_id_Contact`.`email` AS `team_name`,`Ticket`.`agent_id` AS `agent_id`,`Person_agent_id_Contact`.`name` AS `agent_name`,`Ticket`.`title` AS `title`,`Ticket`.`description` AS `description`,`Ticket`.`start_date` AS `start_date`,`Ticket`.`end_date` AS `end_date`,`Ticket`.`last_update` AS `last_update`,`Ticket`.`close_date` AS `close_date`,`Ticket`.`private_log` AS `private_log`,`Ticket`.`finalclass` AS `finalclass`,cast(concat(coalesce(`Ticket`.`ref`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`Organization_org_id`.`name`,'')) as char charset utf8mb4) AS `org_id_friendlyname`,coalesce((`Organization_org_id`.`status` = 'inactive'),0) AS `org_id_obsolescence_flag`,cast(concat(coalesce(`Person_caller_id`.`first_name`,''),coalesce(' ',''),coalesce(`Person_caller_id_Contact`.`name`,'')) as char charset utf8mb4) AS `caller_id_friendlyname`,coalesce((`Person_caller_id_Contact`.`status` = 'inactive'),0) AS `caller_id_obsolescence_flag`,cast(concat(coalesce(`Team_team_id_Contact`.`name`,'')) as char charset utf8mb4) AS `team_id_friendlyname`,coalesce((`Team_team_id_Contact`.`status` = 'inactive'),0) AS `team_id_obsolescence_flag`,cast(concat(coalesce(`Person_agent_id`.`first_name`,''),coalesce(' ',''),coalesce(`Person_agent_id_Contact`.`name`,'')) as char charset utf8mb4) AS `agent_id_friendlyname`,coalesce((`Person_agent_id_Contact`.`status` = 'inactive'),0) AS `agent_id_obsolescence_flag`,`Ticket`.`description_format` AS `Ticketdescription_format`,`Ticket`.`private_log_index` AS `Ticketprivate_log_index` from ((((`ticket` `Ticket` join `organization` `Organization_org_id` on((`Ticket`.`org_id` = `Organization_org_id`.`id`))) left join (`person` `Person_caller_id` join `contact` `Person_caller_id_Contact` on((`Person_caller_id`.`id` = `Person_caller_id_Contact`.`id`))) on((`Ticket`.`caller_id` = `Person_caller_id`.`id`))) left join `contact` `Team_team_id_Contact` on((`Ticket`.`team_id` = `Team_team_id_Contact`.`id`))) left join (`person` `Person_agent_id` join `contact` `Person_agent_id_Contact` on((`Person_agent_id`.`id` = `Person_agent_id_Contact`.`id`))) on((`Ticket`.`agent_id` = `Person_agent_id`.`id`))) where (0 <> coalesce((`Team_team_id_Contact`.`finalclass` = 'Team'),1))
+SELECT DISTINCT
+	`Ticket`.`id` AS `id`,
+	`Ticket`.`operational_status` AS `operational_status`,
+	`Ticket`.`ref` AS `ref`,
+	`Ticket`.`org_id` AS `org_id`,
+	`Organization_org_id`.`name` AS `org_name`,
+	`Ticket`.`caller_id` AS `caller_id`,
+	`Person_caller_id_Contact`.`name` AS `caller_name`,
+	`Ticket`.`team_id` AS `team_id`,
+	`Team_team_id_Contact`.`email` AS `team_name`,
+	`Ticket`.`agent_id` AS `agent_id`,
+	`Person_agent_id_Contact`.`name` AS `agent_name`,
+	`Ticket`.`title` AS `title`,
+	`Ticket`.`description` AS `description`,
+	`Ticket`.`start_date` AS `start_date`,
+	`Ticket`.`end_date` AS `end_date`,
+	`Ticket`.`last_update` AS `last_update`,
+	`Ticket`.`close_date` AS `close_date`,
+	`Ticket`.`private_log` AS `private_log`,
+	`Ticket`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `Ticket`.`ref`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	cast( concat( COALESCE ( `Organization_org_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `org_id_friendlyname`,
+	COALESCE (( `Organization_org_id`.`status` = 'inactive' ), 0 ) AS `org_id_obsolescence_flag`,
+	cast(
+		concat(
+			COALESCE ( `Person_caller_id`.`first_name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `Person_caller_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 
+	) AS `caller_id_friendlyname`,
+	COALESCE (( `Person_caller_id_Contact`.`status` = 'inactive' ), 0 ) AS `caller_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Team_team_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `team_id_friendlyname`,
+	COALESCE (( `Team_team_id_Contact`.`status` = 'inactive' ), 0 ) AS `team_id_obsolescence_flag`,
+	cast(
+		concat(
+			COALESCE ( `Person_agent_id`.`first_name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `Person_agent_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 
+	) AS `agent_id_friendlyname`,
+	COALESCE (( `Person_agent_id_Contact`.`status` = 'inactive' ), 0 ) AS `agent_id_obsolescence_flag`,
+	`Ticket`.`description_format` AS `Ticketdescription_format`,
+	`Ticket`.`private_log_index` AS `Ticketprivate_log_index` 
+FROM
+	((((
+					`ticket` `Ticket`
+					JOIN `organization` `Organization_org_id` ON ((
+							`Ticket`.`org_id` = `Organization_org_id`.`id` 
+						)))
+				LEFT JOIN (
+					`person` `Person_caller_id`
+					JOIN `contact` `Person_caller_id_Contact` ON ((
+							`Person_caller_id`.`id` = `Person_caller_id_Contact`.`id` 
+							))) ON ((
+						`Ticket`.`caller_id` = `Person_caller_id`.`id` 
+					)))
+			LEFT JOIN `contact` `Team_team_id_Contact` ON ((
+					`Ticket`.`team_id` = `Team_team_id_Contact`.`id` 
+				)))
+		LEFT JOIN (
+			`person` `Person_agent_id`
+			JOIN `contact` `Person_agent_id_Contact` ON ((
+					`Person_agent_id`.`id` = `Person_agent_id_Contact`.`id` 
+					))) ON ((
+				`Ticket`.`agent_id` = `Person_agent_id`.`id` 
+			))) 
+WHERE
+	(
+	0 <> COALESCE (( `Team_team_id_Contact`.`finalclass` = 'Team' ), 1 ))
 ```
 

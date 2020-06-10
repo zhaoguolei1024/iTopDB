@@ -15,6 +15,52 @@
 | vlan_id_friendlyname                          | varchar(255) *NULL*    |      |
 
 ```
-select distinct `lnkPhysicalInterfaceToVLAN`.`id` AS `id`,`lnkPhysicalInterfaceToVLAN`.`physicalinterface_id` AS `physicalinterface_id`,`PhysicalInterface_physicalinterface_id_NetworkInterface`.`name` AS `physicalinterface_name`,`PhysicalInterface_physicalinterface_id`.`connectableci_id` AS `physicalinterface_device_id`,`ConnectableCI_connectableci_id_FunctionalCI`.`name` AS `physicalinterface_device_name`,`lnkPhysicalInterfaceToVLAN`.`vlan_id` AS `vlan_id`,`VLAN_vlan_id`.`vlan_tag` AS `vlan_tag`,cast(concat(coalesce(`lnkPhysicalInterfaceToVLAN`.`physicalinterface_id`,''),coalesce(' ',''),coalesce(`lnkPhysicalInterfaceToVLAN`.`vlan_id`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`PhysicalInterface_physicalinterface_id_NetworkInterface`.`name`,''),coalesce(' ',''),coalesce(`ConnectableCI_connectableci_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `physicalinterface_id_friendlyname`,coalesce(coalesce((`ConnectableCI_connectableci_id_PhysicalDevice`.`status` = 'obsolete'),0),0) AS `physicalinterface_id_obsolescence_flag`,cast(concat(coalesce(`ConnectableCI_connectableci_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `physicalinterface_device_id_friendlyname`,coalesce((`ConnectableCI_connectableci_id_PhysicalDevice`.`status` = 'obsolete'),0) AS `physicalinterface_device_id_obsolescence_flag`,cast(concat(coalesce(`VLAN_vlan_id`.`vlan_tag`,'')) as char charset utf8mb4) AS `vlan_id_friendlyname` from ((`lnkphysicalinterfacetovlan` `lnkPhysicalInterfaceToVLAN` join ((`physicalinterface` `PhysicalInterface_physicalinterface_id` join (`physicaldevice` `ConnectableCI_connectableci_id_PhysicalDevice` join `functionalci` `ConnectableCI_connectableci_id_FunctionalCI` on((`ConnectableCI_connectableci_id_PhysicalDevice`.`id` = `ConnectableCI_connectableci_id_FunctionalCI`.`id`))) on((`PhysicalInterface_physicalinterface_id`.`connectableci_id` = `ConnectableCI_connectableci_id_PhysicalDevice`.`id`))) join `networkinterface` `PhysicalInterface_physicalinterface_id_NetworkInterface` on((`PhysicalInterface_physicalinterface_id`.`id` = `PhysicalInterface_physicalinterface_id_NetworkInterface`.`id`))) on((`lnkPhysicalInterfaceToVLAN`.`physicalinterface_id` = `PhysicalInterface_physicalinterface_id`.`id`))) join `vlan` `VLAN_vlan_id` on((`lnkPhysicalInterfaceToVLAN`.`vlan_id` = `VLAN_vlan_id`.`id`))) where (0 <> coalesce((`ConnectableCI_connectableci_id_PhysicalDevice`.`finalclass` in ('DatacenterDevice','NetworkDevice','Server','PC','Printer','StorageSystem','SANSwitch','TapeLibrary','NAS','ConnectableCI')),1))
+SELECT DISTINCT
+	`lnkPhysicalInterfaceToVLAN`.`id` AS `id`,
+	`lnkPhysicalInterfaceToVLAN`.`physicalinterface_id` AS `physicalinterface_id`,
+	`PhysicalInterface_physicalinterface_id_NetworkInterface`.`name` AS `physicalinterface_name`,
+	`PhysicalInterface_physicalinterface_id`.`connectableci_id` AS `physicalinterface_device_id`,
+	`ConnectableCI_connectableci_id_FunctionalCI`.`name` AS `physicalinterface_device_name`,
+	`lnkPhysicalInterfaceToVLAN`.`vlan_id` AS `vlan_id`,
+	`VLAN_vlan_id`.`vlan_tag` AS `vlan_tag`,
+	cast(
+		concat(
+			COALESCE ( `lnkPhysicalInterfaceToVLAN`.`physicalinterface_id`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `lnkPhysicalInterfaceToVLAN`.`vlan_id`, '' )) AS CHAR charset utf8mb4 
+	) AS `friendlyname`,
+	cast(
+		concat(
+			COALESCE ( `PhysicalInterface_physicalinterface_id_NetworkInterface`.`name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `ConnectableCI_connectableci_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 
+	) AS `physicalinterface_id_friendlyname`,
+	COALESCE ( COALESCE (( `ConnectableCI_connectableci_id_PhysicalDevice`.`status` = 'obsolete' ), 0 ), 0 ) AS `physicalinterface_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `ConnectableCI_connectableci_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `physicalinterface_device_id_friendlyname`,
+	COALESCE (( `ConnectableCI_connectableci_id_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `physicalinterface_device_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `VLAN_vlan_id`.`vlan_tag`, '' )) AS CHAR charset utf8mb4 ) AS `vlan_id_friendlyname` 
+FROM
+	((
+			`lnkphysicalinterfacetovlan` `lnkPhysicalInterfaceToVLAN`
+			JOIN ((
+					`physicalinterface` `PhysicalInterface_physicalinterface_id`
+					JOIN (
+						`physicaldevice` `ConnectableCI_connectableci_id_PhysicalDevice`
+						JOIN `functionalci` `ConnectableCI_connectableci_id_FunctionalCI` ON ((
+								`ConnectableCI_connectableci_id_PhysicalDevice`.`id` = `ConnectableCI_connectableci_id_FunctionalCI`.`id` 
+								))) ON ((
+							`PhysicalInterface_physicalinterface_id`.`connectableci_id` = `ConnectableCI_connectableci_id_PhysicalDevice`.`id` 
+						)))
+				JOIN `networkinterface` `PhysicalInterface_physicalinterface_id_NetworkInterface` ON ((
+						`PhysicalInterface_physicalinterface_id`.`id` = `PhysicalInterface_physicalinterface_id_NetworkInterface`.`id` 
+						))) ON ((
+					`lnkPhysicalInterfaceToVLAN`.`physicalinterface_id` = `PhysicalInterface_physicalinterface_id`.`id` 
+				)))
+		JOIN `vlan` `VLAN_vlan_id` ON ((
+				`lnkPhysicalInterfaceToVLAN`.`vlan_id` = `VLAN_vlan_id`.`id` 
+			))) 
+WHERE
+	(
+	0 <> COALESCE (( `ConnectableCI_connectableci_id_PhysicalDevice`.`finalclass` IN ( 'DatacenterDevice', 'NetworkDevice', 'Server', 'PC', 'Printer', 'StorageSystem', 'SANSwitch', 'TapeLibrary', 'NAS', 'ConnectableCI' )), 1 ))
 ```
 

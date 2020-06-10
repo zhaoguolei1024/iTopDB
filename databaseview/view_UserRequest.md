@@ -108,6 +108,190 @@
 | UserRequestprivate_log_index          | blob *NULL*                                                  |      |
 
 ```
-select distinct `UserRequest`.`id` AS `id`,`UserRequest_Ticket`.`operational_status` AS `operational_status`,`UserRequest_Ticket`.`ref` AS `ref`,`UserRequest_Ticket`.`org_id` AS `org_id`,`Organization_org_id`.`name` AS `org_name`,`UserRequest_Ticket`.`caller_id` AS `caller_id`,`Person_caller_id_Contact`.`name` AS `caller_name`,`UserRequest_Ticket`.`team_id` AS `team_id`,`Team_team_id_Contact`.`email` AS `team_name`,`UserRequest_Ticket`.`agent_id` AS `agent_id`,`Person_agent_id_Contact`.`name` AS `agent_name`,`UserRequest_Ticket`.`title` AS `title`,`UserRequest_Ticket`.`description` AS `description`,`UserRequest_Ticket`.`start_date` AS `start_date`,`UserRequest_Ticket`.`end_date` AS `end_date`,`UserRequest_Ticket`.`last_update` AS `last_update`,`UserRequest_Ticket`.`close_date` AS `close_date`,`UserRequest_Ticket`.`private_log` AS `private_log`,`UserRequest`.`status` AS `status`,`UserRequest`.`request_type` AS `request_type`,`UserRequest`.`impact` AS `impact`,`UserRequest`.`priority` AS `priority`,`UserRequest`.`urgency` AS `urgency`,`UserRequest`.`origin` AS `origin`,`UserRequest`.`approver_id` AS `approver_id`,`Person_approver_id_Contact`.`email` AS `approver_email`,`UserRequest`.`service_id` AS `service_id`,`Service_service_id`.`name` AS `service_name`,`UserRequest`.`servicesubcategory_id` AS `servicesubcategory_id`,`ServiceSubcategory_servicesubcategory_id`.`name` AS `servicesubcategory_name`,`UserRequest`.`escalation_flag` AS `escalation_flag`,`UserRequest`.`escalation_reason` AS `escalation_reason`,`UserRequest`.`assignment_date` AS `assignment_date`,`UserRequest`.`resolution_date` AS `resolution_date`,`UserRequest`.`last_pending_date` AS `last_pending_date`,`UserRequest`.`cumulatedpending_timespent` AS `cumulatedpending`,`UserRequest`.`tto_timespent` AS `tto`,`UserRequest`.`ttr_timespent` AS `ttr`,`UserRequest`.`tto_100_deadline` AS `tto_escalation_deadline`,`UserRequest`.`tto_100_passed` AS `sla_tto_passed`,`UserRequest`.`tto_100_overrun` AS `sla_tto_over`,`UserRequest`.`ttr_100_deadline` AS `ttr_escalation_deadline`,`UserRequest`.`ttr_100_passed` AS `sla_ttr_passed`,`UserRequest`.`ttr_100_overrun` AS `sla_ttr_over`,`UserRequest`.`time_spent` AS `time_spent`,`UserRequest`.`resolution_code` AS `resolution_code`,`UserRequest`.`solution` AS `solution`,`UserRequest`.`pending_reason` AS `pending_reason`,`UserRequest`.`parent_request_id` AS `parent_request_id`,`UserRequest_parent_request_id_Ticket`.`ref` AS `parent_request_ref`,`UserRequest`.`parent_incident_id` AS `parent_incident_id`,`Incident_parent_incident_id_Ticket`.`ref` AS `parent_incident_ref`,`UserRequest`.`parent_problem_id` AS `parent_problem_id`,`Problem_parent_problem_id_Ticket`.`ref` AS `parent_problem_ref`,`UserRequest`.`parent_change_id` AS `parent_change_id`,`Change_parent_change_id_Ticket`.`ref` AS `parent_change_ref`,`UserRequest`.`public_log` AS `public_log`,`UserRequest`.`user_satisfaction` AS `user_satisfaction`,`UserRequest`.`user_commment` AS `user_comment`,`UserRequest_Ticket`.`finalclass` AS `finalclass`,cast(concat(coalesce(`UserRequest_Ticket`.`ref`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`Organization_org_id`.`name`,'')) as char charset utf8mb4) AS `org_id_friendlyname`,coalesce((`Organization_org_id`.`status` = 'inactive'),0) AS `org_id_obsolescence_flag`,cast(concat(coalesce(`Person_caller_id`.`first_name`,''),coalesce(' ',''),coalesce(`Person_caller_id_Contact`.`name`,'')) as char charset utf8mb4) AS `caller_id_friendlyname`,coalesce((`Person_caller_id_Contact`.`status` = 'inactive'),0) AS `caller_id_obsolescence_flag`,cast(concat(coalesce(`Team_team_id_Contact`.`name`,'')) as char charset utf8mb4) AS `team_id_friendlyname`,coalesce((`Team_team_id_Contact`.`status` = 'inactive'),0) AS `team_id_obsolescence_flag`,cast(concat(coalesce(`Person_agent_id`.`first_name`,''),coalesce(' ',''),coalesce(`Person_agent_id_Contact`.`name`,'')) as char charset utf8mb4) AS `agent_id_friendlyname`,coalesce((`Person_agent_id_Contact`.`status` = 'inactive'),0) AS `agent_id_obsolescence_flag`,cast(concat(coalesce(`Person_approver_id`.`first_name`,''),coalesce(' ',''),coalesce(`Person_approver_id_Contact`.`name`,'')) as char charset utf8mb4) AS `approver_id_friendlyname`,coalesce((`Person_approver_id_Contact`.`status` = 'inactive'),0) AS `approver_id_obsolescence_flag`,cast(concat(coalesce(`Service_service_id`.`name`,'')) as char charset utf8mb4) AS `service_id_friendlyname`,cast(concat(coalesce(`ServiceSubcategory_servicesubcategory_id`.`name`,'')) as char charset utf8mb4) AS `servicesubcategory_id_friendlyname`,cast(concat(coalesce(`UserRequest_parent_request_id_Ticket`.`ref`,'')) as char charset utf8mb4) AS `parent_request_id_friendlyname`,cast(concat(coalesce(`Incident_parent_incident_id_Ticket`.`ref`,'')) as char charset utf8mb4) AS `parent_incident_id_friendlyname`,cast(concat(coalesce(`Problem_parent_problem_id_Ticket`.`ref`,'')) as char charset utf8mb4) AS `parent_problem_id_friendlyname`,cast(concat(coalesce(`Change_parent_change_id_Ticket`.`ref`,'')) as char charset utf8mb4) AS `parent_change_id_friendlyname`,`Change_parent_change_id_Ticket`.`finalclass` AS `parent_change_id_finalclass_recall`,`UserRequest`.`cumulatedpending_started` AS `UserRequestcumulatedpending_started`,`UserRequest`.`cumulatedpending_laststart` AS `UserRequestcumulatedpending_laststart`,`UserRequest`.`cumulatedpending_stopped` AS `UserRequestcumulatedpending_stopped`,`UserRequest`.`tto_started` AS `UserRequesttto_started`,`UserRequest`.`tto_laststart` AS `UserRequesttto_laststart`,`UserRequest`.`tto_stopped` AS `UserRequesttto_stopped`,`UserRequest`.`tto_75_deadline` AS `UserRequesttto_75_deadline`,`UserRequest`.`tto_75_passed` AS `UserRequesttto_75_passed`,`UserRequest`.`tto_75_triggered` AS `UserRequesttto_75_triggered`,`UserRequest`.`tto_75_overrun` AS `UserRequesttto_75_overrun`,`UserRequest`.`tto_100_deadline` AS `UserRequesttto_100_deadline`,`UserRequest`.`tto_100_passed` AS `UserRequesttto_100_passed`,`UserRequest`.`tto_100_triggered` AS `UserRequesttto_100_triggered`,`UserRequest`.`tto_100_overrun` AS `UserRequesttto_100_overrun`,`UserRequest`.`ttr_started` AS `UserRequestttr_started`,`UserRequest`.`ttr_laststart` AS `UserRequestttr_laststart`,`UserRequest`.`ttr_stopped` AS `UserRequestttr_stopped`,`UserRequest`.`ttr_75_deadline` AS `UserRequestttr_75_deadline`,`UserRequest`.`ttr_75_passed` AS `UserRequestttr_75_passed`,`UserRequest`.`ttr_75_triggered` AS `UserRequestttr_75_triggered`,`UserRequest`.`ttr_75_overrun` AS `UserRequestttr_75_overrun`,`UserRequest`.`ttr_100_deadline` AS `UserRequestttr_100_deadline`,`UserRequest`.`ttr_100_passed` AS `UserRequestttr_100_passed`,`UserRequest`.`ttr_100_triggered` AS `UserRequestttr_100_triggered`,`UserRequest`.`ttr_100_overrun` AS `UserRequestttr_100_overrun`,`UserRequest`.`public_log_index` AS `UserRequestpublic_log_index`,`UserRequest_Ticket`.`description_format` AS `UserRequestdescription_format`,`UserRequest_Ticket`.`private_log_index` AS `UserRequestprivate_log_index` from ((((((((`ticket_request` `UserRequest` left join (`person` `Person_approver_id` join `contact` `Person_approver_id_Contact` on((`Person_approver_id`.`id` = `Person_approver_id_Contact`.`id`))) on((`UserRequest`.`approver_id` = `Person_approver_id`.`id`))) left join `service` `Service_service_id` on((`UserRequest`.`service_id` = `Service_service_id`.`id`))) left join `servicesubcategory` `ServiceSubcategory_servicesubcategory_id` on((`UserRequest`.`servicesubcategory_id` = `ServiceSubcategory_servicesubcategory_id`.`id`))) left join `ticket` `UserRequest_parent_request_id_Ticket` on((`UserRequest`.`parent_request_id` = `UserRequest_parent_request_id_Ticket`.`id`))) left join `ticket` `Incident_parent_incident_id_Ticket` on((`UserRequest`.`parent_incident_id` = `Incident_parent_incident_id_Ticket`.`id`))) left join `ticket` `Problem_parent_problem_id_Ticket` on((`UserRequest`.`parent_problem_id` = `Problem_parent_problem_id_Ticket`.`id`))) left join `ticket` `Change_parent_change_id_Ticket` on((`UserRequest`.`parent_change_id` = `Change_parent_change_id_Ticket`.`id`))) join ((((`ticket` `UserRequest_Ticket` join `organization` `Organization_org_id` on((`UserRequest_Ticket`.`org_id` = `Organization_org_id`.`id`))) left join (`person` `Person_caller_id` join `contact` `Person_caller_id_Contact` on((`Person_caller_id`.`id` = `Person_caller_id_Contact`.`id`))) on((`UserRequest_Ticket`.`caller_id` = `Person_caller_id`.`id`))) left join `contact` `Team_team_id_Contact` on((`UserRequest_Ticket`.`team_id` = `Team_team_id_Contact`.`id`))) left join (`person` `Person_agent_id` join `contact` `Person_agent_id_Contact` on((`Person_agent_id`.`id` = `Person_agent_id_Contact`.`id`))) on((`UserRequest_Ticket`.`agent_id` = `Person_agent_id`.`id`))) on((`UserRequest`.`id` = `UserRequest_Ticket`.`id`))) where ((0 <> coalesce((`Team_team_id_Contact`.`finalclass` = 'Team'),1)) and (0 <> coalesce((`UserRequest_parent_request_id_Ticket`.`finalclass` = 'UserRequest'),1)) and (0 <> coalesce((`Incident_parent_incident_id_Ticket`.`finalclass` = 'Incident'),1)) and (0 <> coalesce((`Problem_parent_problem_id_Ticket`.`finalclass` = 'Problem'),1)) and (0 <> coalesce((`Change_parent_change_id_Ticket`.`finalclass` in ('RoutineChange','ApprovedChange','NormalChange','EmergencyChange','Change')),1)))
+SELECT DISTINCT
+	`UserRequest`.`id` AS `id`,
+	`UserRequest_Ticket`.`operational_status` AS `operational_status`,
+	`UserRequest_Ticket`.`ref` AS `ref`,
+	`UserRequest_Ticket`.`org_id` AS `org_id`,
+	`Organization_org_id`.`name` AS `org_name`,
+	`UserRequest_Ticket`.`caller_id` AS `caller_id`,
+	`Person_caller_id_Contact`.`name` AS `caller_name`,
+	`UserRequest_Ticket`.`team_id` AS `team_id`,
+	`Team_team_id_Contact`.`email` AS `team_name`,
+	`UserRequest_Ticket`.`agent_id` AS `agent_id`,
+	`Person_agent_id_Contact`.`name` AS `agent_name`,
+	`UserRequest_Ticket`.`title` AS `title`,
+	`UserRequest_Ticket`.`description` AS `description`,
+	`UserRequest_Ticket`.`start_date` AS `start_date`,
+	`UserRequest_Ticket`.`end_date` AS `end_date`,
+	`UserRequest_Ticket`.`last_update` AS `last_update`,
+	`UserRequest_Ticket`.`close_date` AS `close_date`,
+	`UserRequest_Ticket`.`private_log` AS `private_log`,
+	`UserRequest`.`status` AS `status`,
+	`UserRequest`.`request_type` AS `request_type`,
+	`UserRequest`.`impact` AS `impact`,
+	`UserRequest`.`priority` AS `priority`,
+	`UserRequest`.`urgency` AS `urgency`,
+	`UserRequest`.`origin` AS `origin`,
+	`UserRequest`.`approver_id` AS `approver_id`,
+	`Person_approver_id_Contact`.`email` AS `approver_email`,
+	`UserRequest`.`service_id` AS `service_id`,
+	`Service_service_id`.`name` AS `service_name`,
+	`UserRequest`.`servicesubcategory_id` AS `servicesubcategory_id`,
+	`ServiceSubcategory_servicesubcategory_id`.`name` AS `servicesubcategory_name`,
+	`UserRequest`.`escalation_flag` AS `escalation_flag`,
+	`UserRequest`.`escalation_reason` AS `escalation_reason`,
+	`UserRequest`.`assignment_date` AS `assignment_date`,
+	`UserRequest`.`resolution_date` AS `resolution_date`,
+	`UserRequest`.`last_pending_date` AS `last_pending_date`,
+	`UserRequest`.`cumulatedpending_timespent` AS `cumulatedpending`,
+	`UserRequest`.`tto_timespent` AS `tto`,
+	`UserRequest`.`ttr_timespent` AS `ttr`,
+	`UserRequest`.`tto_100_deadline` AS `tto_escalation_deadline`,
+	`UserRequest`.`tto_100_passed` AS `sla_tto_passed`,
+	`UserRequest`.`tto_100_overrun` AS `sla_tto_over`,
+	`UserRequest`.`ttr_100_deadline` AS `ttr_escalation_deadline`,
+	`UserRequest`.`ttr_100_passed` AS `sla_ttr_passed`,
+	`UserRequest`.`ttr_100_overrun` AS `sla_ttr_over`,
+	`UserRequest`.`time_spent` AS `time_spent`,
+	`UserRequest`.`resolution_code` AS `resolution_code`,
+	`UserRequest`.`solution` AS `solution`,
+	`UserRequest`.`pending_reason` AS `pending_reason`,
+	`UserRequest`.`parent_request_id` AS `parent_request_id`,
+	`UserRequest_parent_request_id_Ticket`.`ref` AS `parent_request_ref`,
+	`UserRequest`.`parent_incident_id` AS `parent_incident_id`,
+	`Incident_parent_incident_id_Ticket`.`ref` AS `parent_incident_ref`,
+	`UserRequest`.`parent_problem_id` AS `parent_problem_id`,
+	`Problem_parent_problem_id_Ticket`.`ref` AS `parent_problem_ref`,
+	`UserRequest`.`parent_change_id` AS `parent_change_id`,
+	`Change_parent_change_id_Ticket`.`ref` AS `parent_change_ref`,
+	`UserRequest`.`public_log` AS `public_log`,
+	`UserRequest`.`user_satisfaction` AS `user_satisfaction`,
+	`UserRequest`.`user_commment` AS `user_comment`,
+	`UserRequest_Ticket`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `UserRequest_Ticket`.`ref`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	cast( concat( COALESCE ( `Organization_org_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `org_id_friendlyname`,
+	COALESCE (( `Organization_org_id`.`status` = 'inactive' ), 0 ) AS `org_id_obsolescence_flag`,
+	cast(
+		concat(
+			COALESCE ( `Person_caller_id`.`first_name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `Person_caller_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 
+	) AS `caller_id_friendlyname`,
+	COALESCE (( `Person_caller_id_Contact`.`status` = 'inactive' ), 0 ) AS `caller_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Team_team_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `team_id_friendlyname`,
+	COALESCE (( `Team_team_id_Contact`.`status` = 'inactive' ), 0 ) AS `team_id_obsolescence_flag`,
+	cast(
+		concat(
+			COALESCE ( `Person_agent_id`.`first_name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `Person_agent_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 
+	) AS `agent_id_friendlyname`,
+	COALESCE (( `Person_agent_id_Contact`.`status` = 'inactive' ), 0 ) AS `agent_id_obsolescence_flag`,
+	cast(
+		concat(
+			COALESCE ( `Person_approver_id`.`first_name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `Person_approver_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 
+	) AS `approver_id_friendlyname`,
+	COALESCE (( `Person_approver_id_Contact`.`status` = 'inactive' ), 0 ) AS `approver_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Service_service_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `service_id_friendlyname`,
+	cast( concat( COALESCE ( `ServiceSubcategory_servicesubcategory_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `servicesubcategory_id_friendlyname`,
+	cast( concat( COALESCE ( `UserRequest_parent_request_id_Ticket`.`ref`, '' )) AS CHAR charset utf8mb4 ) AS `parent_request_id_friendlyname`,
+	cast( concat( COALESCE ( `Incident_parent_incident_id_Ticket`.`ref`, '' )) AS CHAR charset utf8mb4 ) AS `parent_incident_id_friendlyname`,
+	cast( concat( COALESCE ( `Problem_parent_problem_id_Ticket`.`ref`, '' )) AS CHAR charset utf8mb4 ) AS `parent_problem_id_friendlyname`,
+	cast( concat( COALESCE ( `Change_parent_change_id_Ticket`.`ref`, '' )) AS CHAR charset utf8mb4 ) AS `parent_change_id_friendlyname`,
+	`Change_parent_change_id_Ticket`.`finalclass` AS `parent_change_id_finalclass_recall`,
+	`UserRequest`.`cumulatedpending_started` AS `UserRequestcumulatedpending_started`,
+	`UserRequest`.`cumulatedpending_laststart` AS `UserRequestcumulatedpending_laststart`,
+	`UserRequest`.`cumulatedpending_stopped` AS `UserRequestcumulatedpending_stopped`,
+	`UserRequest`.`tto_started` AS `UserRequesttto_started`,
+	`UserRequest`.`tto_laststart` AS `UserRequesttto_laststart`,
+	`UserRequest`.`tto_stopped` AS `UserRequesttto_stopped`,
+	`UserRequest`.`tto_75_deadline` AS `UserRequesttto_75_deadline`,
+	`UserRequest`.`tto_75_passed` AS `UserRequesttto_75_passed`,
+	`UserRequest`.`tto_75_triggered` AS `UserRequesttto_75_triggered`,
+	`UserRequest`.`tto_75_overrun` AS `UserRequesttto_75_overrun`,
+	`UserRequest`.`tto_100_deadline` AS `UserRequesttto_100_deadline`,
+	`UserRequest`.`tto_100_passed` AS `UserRequesttto_100_passed`,
+	`UserRequest`.`tto_100_triggered` AS `UserRequesttto_100_triggered`,
+	`UserRequest`.`tto_100_overrun` AS `UserRequesttto_100_overrun`,
+	`UserRequest`.`ttr_started` AS `UserRequestttr_started`,
+	`UserRequest`.`ttr_laststart` AS `UserRequestttr_laststart`,
+	`UserRequest`.`ttr_stopped` AS `UserRequestttr_stopped`,
+	`UserRequest`.`ttr_75_deadline` AS `UserRequestttr_75_deadline`,
+	`UserRequest`.`ttr_75_passed` AS `UserRequestttr_75_passed`,
+	`UserRequest`.`ttr_75_triggered` AS `UserRequestttr_75_triggered`,
+	`UserRequest`.`ttr_75_overrun` AS `UserRequestttr_75_overrun`,
+	`UserRequest`.`ttr_100_deadline` AS `UserRequestttr_100_deadline`,
+	`UserRequest`.`ttr_100_passed` AS `UserRequestttr_100_passed`,
+	`UserRequest`.`ttr_100_triggered` AS `UserRequestttr_100_triggered`,
+	`UserRequest`.`ttr_100_overrun` AS `UserRequestttr_100_overrun`,
+	`UserRequest`.`public_log_index` AS `UserRequestpublic_log_index`,
+	`UserRequest_Ticket`.`description_format` AS `UserRequestdescription_format`,
+	`UserRequest_Ticket`.`private_log_index` AS `UserRequestprivate_log_index` 
+FROM
+	((((((((
+									`ticket_request` `UserRequest`
+									LEFT JOIN (
+										`person` `Person_approver_id`
+										JOIN `contact` `Person_approver_id_Contact` ON ((
+												`Person_approver_id`.`id` = `Person_approver_id_Contact`.`id` 
+												))) ON ((
+											`UserRequest`.`approver_id` = `Person_approver_id`.`id` 
+										)))
+								LEFT JOIN `service` `Service_service_id` ON ((
+										`UserRequest`.`service_id` = `Service_service_id`.`id` 
+									)))
+							LEFT JOIN `servicesubcategory` `ServiceSubcategory_servicesubcategory_id` ON ((
+									`UserRequest`.`servicesubcategory_id` = `ServiceSubcategory_servicesubcategory_id`.`id` 
+								)))
+						LEFT JOIN `ticket` `UserRequest_parent_request_id_Ticket` ON ((
+								`UserRequest`.`parent_request_id` = `UserRequest_parent_request_id_Ticket`.`id` 
+							)))
+					LEFT JOIN `ticket` `Incident_parent_incident_id_Ticket` ON ((
+							`UserRequest`.`parent_incident_id` = `Incident_parent_incident_id_Ticket`.`id` 
+						)))
+				LEFT JOIN `ticket` `Problem_parent_problem_id_Ticket` ON ((
+						`UserRequest`.`parent_problem_id` = `Problem_parent_problem_id_Ticket`.`id` 
+					)))
+			LEFT JOIN `ticket` `Change_parent_change_id_Ticket` ON ((
+					`UserRequest`.`parent_change_id` = `Change_parent_change_id_Ticket`.`id` 
+				)))
+		JOIN ((((
+						`ticket` `UserRequest_Ticket`
+						JOIN `organization` `Organization_org_id` ON ((
+								`UserRequest_Ticket`.`org_id` = `Organization_org_id`.`id` 
+							)))
+					LEFT JOIN (
+						`person` `Person_caller_id`
+						JOIN `contact` `Person_caller_id_Contact` ON ((
+								`Person_caller_id`.`id` = `Person_caller_id_Contact`.`id` 
+								))) ON ((
+							`UserRequest_Ticket`.`caller_id` = `Person_caller_id`.`id` 
+						)))
+				LEFT JOIN `contact` `Team_team_id_Contact` ON ((
+						`UserRequest_Ticket`.`team_id` = `Team_team_id_Contact`.`id` 
+					)))
+			LEFT JOIN (
+				`person` `Person_agent_id`
+				JOIN `contact` `Person_agent_id_Contact` ON ((
+						`Person_agent_id`.`id` = `Person_agent_id_Contact`.`id` 
+						))) ON ((
+					`UserRequest_Ticket`.`agent_id` = `Person_agent_id`.`id` 
+				))) ON ((
+				`UserRequest`.`id` = `UserRequest_Ticket`.`id` 
+			))) 
+WHERE
+	((
+			0 <> COALESCE (( `Team_team_id_Contact`.`finalclass` = 'Team' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `UserRequest_parent_request_id_Ticket`.`finalclass` = 'UserRequest' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `Incident_parent_incident_id_Ticket`.`finalclass` = 'Incident' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `Problem_parent_problem_id_Ticket`.`finalclass` = 'Problem' ), 1 )) 
+	AND (
+	0 <> COALESCE (( `Change_parent_change_id_Ticket`.`finalclass` IN ( 'RoutineChange', 'ApprovedChange', 'NormalChange', 'EmergencyChange', 'Change' )), 1 )))
 ```
 

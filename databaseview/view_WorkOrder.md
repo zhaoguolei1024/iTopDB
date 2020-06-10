@@ -23,6 +23,51 @@
 | WorkOrderlog_index          | blob *NULL*                             |      |
 
 ```
-select distinct `WorkOrder`.`id` AS `id`,`WorkOrder`.`name` AS `name`,`WorkOrder`.`status` AS `status`,`WorkOrder`.`description` AS `description`,`WorkOrder`.`ticket_id` AS `ticket_id`,`Ticket_ticket_id`.`ref` AS `ticket_ref`,`WorkOrder`.`team_id` AS `team_id`,`Team_team_id_Contact`.`email` AS `team_name`,`WorkOrder`.`owner_id` AS `agent_id`,`Person_agent_id_Contact`.`email` AS `agent_email`,`WorkOrder`.`start_date` AS `start_date`,`WorkOrder`.`end_date` AS `end_date`,`WorkOrder`.`log` AS `log`,cast(concat(coalesce(`WorkOrder`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`Ticket_ticket_id`.`ref`,'')) as char charset utf8mb4) AS `ticket_id_friendlyname`,`Ticket_ticket_id`.`finalclass` AS `ticket_id_finalclass_recall`,cast(concat(coalesce(`Team_team_id_Contact`.`name`,'')) as char charset utf8mb4) AS `team_id_friendlyname`,coalesce((`Team_team_id_Contact`.`status` = 'inactive'),0) AS `team_id_obsolescence_flag`,cast(concat(coalesce(`Person_agent_id`.`first_name`,''),coalesce(' ',''),coalesce(`Person_agent_id_Contact`.`name`,'')) as char charset utf8mb4) AS `agent_id_friendlyname`,coalesce((`Person_agent_id_Contact`.`status` = 'inactive'),0) AS `agent_id_obsolescence_flag`,`WorkOrder`.`log_index` AS `WorkOrderlog_index` from (((`workorder` `WorkOrder` join `ticket` `Ticket_ticket_id` on((`WorkOrder`.`ticket_id` = `Ticket_ticket_id`.`id`))) join `contact` `Team_team_id_Contact` on((`WorkOrder`.`team_id` = `Team_team_id_Contact`.`id`))) left join (`person` `Person_agent_id` join `contact` `Person_agent_id_Contact` on((`Person_agent_id`.`id` = `Person_agent_id_Contact`.`id`))) on((`WorkOrder`.`owner_id` = `Person_agent_id`.`id`))) where (0 <> coalesce((`Team_team_id_Contact`.`finalclass` = 'Team'),1))
+SELECT DISTINCT
+	`WorkOrder`.`id` AS `id`,
+	`WorkOrder`.`name` AS `name`,
+	`WorkOrder`.`status` AS `status`,
+	`WorkOrder`.`description` AS `description`,
+	`WorkOrder`.`ticket_id` AS `ticket_id`,
+	`Ticket_ticket_id`.`ref` AS `ticket_ref`,
+	`WorkOrder`.`team_id` AS `team_id`,
+	`Team_team_id_Contact`.`email` AS `team_name`,
+	`WorkOrder`.`owner_id` AS `agent_id`,
+	`Person_agent_id_Contact`.`email` AS `agent_email`,
+	`WorkOrder`.`start_date` AS `start_date`,
+	`WorkOrder`.`end_date` AS `end_date`,
+	`WorkOrder`.`log` AS `log`,
+	cast( concat( COALESCE ( `WorkOrder`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	cast( concat( COALESCE ( `Ticket_ticket_id`.`ref`, '' )) AS CHAR charset utf8mb4 ) AS `ticket_id_friendlyname`,
+	`Ticket_ticket_id`.`finalclass` AS `ticket_id_finalclass_recall`,
+	cast( concat( COALESCE ( `Team_team_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `team_id_friendlyname`,
+	COALESCE (( `Team_team_id_Contact`.`status` = 'inactive' ), 0 ) AS `team_id_obsolescence_flag`,
+	cast(
+		concat(
+			COALESCE ( `Person_agent_id`.`first_name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `Person_agent_id_Contact`.`name`, '' )) AS CHAR charset utf8mb4 
+	) AS `agent_id_friendlyname`,
+	COALESCE (( `Person_agent_id_Contact`.`status` = 'inactive' ), 0 ) AS `agent_id_obsolescence_flag`,
+	`WorkOrder`.`log_index` AS `WorkOrderlog_index` 
+FROM
+	(((
+				`workorder` `WorkOrder`
+				JOIN `ticket` `Ticket_ticket_id` ON ((
+						`WorkOrder`.`ticket_id` = `Ticket_ticket_id`.`id` 
+					)))
+			JOIN `contact` `Team_team_id_Contact` ON ((
+					`WorkOrder`.`team_id` = `Team_team_id_Contact`.`id` 
+				)))
+		LEFT JOIN (
+			`person` `Person_agent_id`
+			JOIN `contact` `Person_agent_id_Contact` ON ((
+					`Person_agent_id`.`id` = `Person_agent_id_Contact`.`id` 
+					))) ON ((
+				`WorkOrder`.`owner_id` = `Person_agent_id`.`id` 
+			))) 
+WHERE
+	(
+	0 <> COALESCE (( `Team_team_id_Contact`.`finalclass` = 'Team' ), 1 ))
 ```
 

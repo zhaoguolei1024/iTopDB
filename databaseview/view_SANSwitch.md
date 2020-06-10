@@ -51,6 +51,121 @@
 | powerB_id_obsolescence_flag    | int [**0**]                                                  |      |
 
 ```
-select distinct `SANSwitch_DatacenterDevice`.`id` AS `id`,`SANSwitch_FunctionalCI`.`name` AS `name`,`SANSwitch_FunctionalCI`.`description` AS `description`,`SANSwitch_FunctionalCI`.`org_id` AS `org_id`,`Organization_org_id`.`name` AS `organization_name`,`SANSwitch_FunctionalCI`.`business_criticity` AS `business_criticity`,`SANSwitch_FunctionalCI`.`move2production` AS `move2production`,`SANSwitch_PhysicalDevice`.`serialnumber` AS `serialnumber`,`SANSwitch_PhysicalDevice`.`location_id` AS `location_id`,`Location_location_id`.`name` AS `location_name`,`SANSwitch_PhysicalDevice`.`status` AS `status`,`SANSwitch_PhysicalDevice`.`brand_id` AS `brand_id`,`Brand_brand_id_Typology`.`name` AS `brand_name`,`SANSwitch_PhysicalDevice`.`model_id` AS `model_id`,`Model_model_id_Typology`.`name` AS `model_name`,`SANSwitch_PhysicalDevice`.`asset_number` AS `asset_number`,`SANSwitch_PhysicalDevice`.`purchase_date` AS `purchase_date`,`SANSwitch_PhysicalDevice`.`end_of_warranty` AS `end_of_warranty`,`SANSwitch_DatacenterDevice`.`rack_id` AS `rack_id`,`Rack_rack_id_FunctionalCI`.`name` AS `rack_name`,`SANSwitch_DatacenterDevice`.`enclosure_id` AS `enclosure_id`,`Enclosure_enclosure_id_FunctionalCI`.`name` AS `enclosure_name`,`SANSwitch_DatacenterDevice`.`nb_u` AS `nb_u`,`SANSwitch_DatacenterDevice`.`managementip` AS `managementip`,`SANSwitch_DatacenterDevice`.`powera_id` AS `powerA_id`,`PowerConnection_powerA_id_FunctionalCI`.`name` AS `powerA_name`,`SANSwitch_DatacenterDevice`.`powerB_id` AS `powerB_id`,`PowerConnection_powerB_id_FunctionalCI`.`name` AS `powerB_name`,`SANSwitch_DatacenterDevice`.`redundancy` AS `redundancy`,`SANSwitch_FunctionalCI`.`finalclass` AS `finalclass`,cast(concat(coalesce(`SANSwitch_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,coalesce((`SANSwitch_PhysicalDevice`.`status` = 'obsolete'),0) AS `obsolescence_flag`,`SANSwitch_FunctionalCI`.`obsolescence_date` AS `obsolescence_date`,cast(concat(coalesce(`Organization_org_id`.`name`,'')) as char charset utf8mb4) AS `org_id_friendlyname`,coalesce((`Organization_org_id`.`status` = 'inactive'),0) AS `org_id_obsolescence_flag`,cast(concat(coalesce(`Location_location_id`.`name`,'')) as char charset utf8mb4) AS `location_id_friendlyname`,coalesce((`Location_location_id`.`status` = 'inactive'),0) AS `location_id_obsolescence_flag`,cast(concat(coalesce(`Brand_brand_id_Typology`.`name`,'')) as char charset utf8mb4) AS `brand_id_friendlyname`,cast(concat(coalesce(`Model_model_id_Typology`.`name`,'')) as char charset utf8mb4) AS `model_id_friendlyname`,cast(concat(coalesce(`Rack_rack_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `rack_id_friendlyname`,coalesce((`Rack_rack_id_PhysicalDevice`.`status` = 'obsolete'),0) AS `rack_id_obsolescence_flag`,cast(concat(coalesce(`Enclosure_enclosure_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `enclosure_id_friendlyname`,coalesce((`Enclosure_enclosure_id_PhysicalDevice`.`status` = 'obsolete'),0) AS `enclosure_id_obsolescence_flag`,cast(concat(coalesce(`PowerConnection_powerA_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `powerA_id_friendlyname`,`PowerConnection_powerA_id_FunctionalCI`.`finalclass` AS `powerA_id_finalclass_recall`,coalesce((`PowerConnection_powerA_id_PhysicalDevice`.`status` = 'obsolete'),0) AS `powerA_id_obsolescence_flag`,cast(concat(coalesce(`PowerConnection_powerB_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `powerB_id_friendlyname`,`PowerConnection_powerB_id_FunctionalCI`.`finalclass` AS `powerB_id_finalclass_recall`,coalesce((`PowerConnection_powerB_id_PhysicalDevice`.`status` = 'obsolete'),0) AS `powerB_id_obsolescence_flag` from ((((((`datacenterdevice` `SANSwitch_DatacenterDevice` left join (`physicaldevice` `Rack_rack_id_PhysicalDevice` join `functionalci` `Rack_rack_id_FunctionalCI` on((`Rack_rack_id_PhysicalDevice`.`id` = `Rack_rack_id_FunctionalCI`.`id`))) on((`SANSwitch_DatacenterDevice`.`rack_id` = `Rack_rack_id_PhysicalDevice`.`id`))) left join (`physicaldevice` `Enclosure_enclosure_id_PhysicalDevice` join `functionalci` `Enclosure_enclosure_id_FunctionalCI` on((`Enclosure_enclosure_id_PhysicalDevice`.`id` = `Enclosure_enclosure_id_FunctionalCI`.`id`))) on((`SANSwitch_DatacenterDevice`.`enclosure_id` = `Enclosure_enclosure_id_PhysicalDevice`.`id`))) left join (`physicaldevice` `PowerConnection_powerA_id_PhysicalDevice` join `functionalci` `PowerConnection_powerA_id_FunctionalCI` on((`PowerConnection_powerA_id_PhysicalDevice`.`id` = `PowerConnection_powerA_id_FunctionalCI`.`id`))) on((`SANSwitch_DatacenterDevice`.`powera_id` = `PowerConnection_powerA_id_PhysicalDevice`.`id`))) left join (`physicaldevice` `PowerConnection_powerB_id_PhysicalDevice` join `functionalci` `PowerConnection_powerB_id_FunctionalCI` on((`PowerConnection_powerB_id_PhysicalDevice`.`id` = `PowerConnection_powerB_id_FunctionalCI`.`id`))) on((`SANSwitch_DatacenterDevice`.`powerB_id` = `PowerConnection_powerB_id_PhysicalDevice`.`id`))) join (((`physicaldevice` `SANSwitch_PhysicalDevice` left join `location` `Location_location_id` on((`SANSwitch_PhysicalDevice`.`location_id` = `Location_location_id`.`id`))) left join `typology` `Brand_brand_id_Typology` on((`SANSwitch_PhysicalDevice`.`brand_id` = `Brand_brand_id_Typology`.`id`))) left join `typology` `Model_model_id_Typology` on((`SANSwitch_PhysicalDevice`.`model_id` = `Model_model_id_Typology`.`id`))) on((`SANSwitch_DatacenterDevice`.`id` = `SANSwitch_PhysicalDevice`.`id`))) join (`functionalci` `SANSwitch_FunctionalCI` join `organization` `Organization_org_id` on((`SANSwitch_FunctionalCI`.`org_id` = `Organization_org_id`.`id`))) on((`SANSwitch_DatacenterDevice`.`id` = `SANSwitch_FunctionalCI`.`id`))) where ((0 <> coalesce((`Brand_brand_id_Typology`.`finalclass` = 'Brand'),1)) and (0 <> coalesce((`Model_model_id_Typology`.`finalclass` = 'Model'),1)) and (0 <> coalesce((`Rack_rack_id_PhysicalDevice`.`finalclass` = 'Rack'),1)) and (0 <> coalesce((`Enclosure_enclosure_id_PhysicalDevice`.`finalclass` = 'Enclosure'),1)) and (0 <> coalesce((`PowerConnection_powerA_id_PhysicalDevice`.`finalclass` in ('PowerSource','PDU','PowerConnection')),1)) and (0 <> coalesce((`PowerConnection_powerB_id_PhysicalDevice`.`finalclass` in ('PowerSource','PDU','PowerConnection')),1)) and (0 <> coalesce((`SANSwitch_DatacenterDevice`.`finalclass` = 'SANSwitch'),1)))
+SELECT DISTINCT
+	`SANSwitch_DatacenterDevice`.`id` AS `id`,
+	`SANSwitch_FunctionalCI`.`name` AS `name`,
+	`SANSwitch_FunctionalCI`.`description` AS `description`,
+	`SANSwitch_FunctionalCI`.`org_id` AS `org_id`,
+	`Organization_org_id`.`name` AS `organization_name`,
+	`SANSwitch_FunctionalCI`.`business_criticity` AS `business_criticity`,
+	`SANSwitch_FunctionalCI`.`move2production` AS `move2production`,
+	`SANSwitch_PhysicalDevice`.`serialnumber` AS `serialnumber`,
+	`SANSwitch_PhysicalDevice`.`location_id` AS `location_id`,
+	`Location_location_id`.`name` AS `location_name`,
+	`SANSwitch_PhysicalDevice`.`status` AS `status`,
+	`SANSwitch_PhysicalDevice`.`brand_id` AS `brand_id`,
+	`Brand_brand_id_Typology`.`name` AS `brand_name`,
+	`SANSwitch_PhysicalDevice`.`model_id` AS `model_id`,
+	`Model_model_id_Typology`.`name` AS `model_name`,
+	`SANSwitch_PhysicalDevice`.`asset_number` AS `asset_number`,
+	`SANSwitch_PhysicalDevice`.`purchase_date` AS `purchase_date`,
+	`SANSwitch_PhysicalDevice`.`end_of_warranty` AS `end_of_warranty`,
+	`SANSwitch_DatacenterDevice`.`rack_id` AS `rack_id`,
+	`Rack_rack_id_FunctionalCI`.`name` AS `rack_name`,
+	`SANSwitch_DatacenterDevice`.`enclosure_id` AS `enclosure_id`,
+	`Enclosure_enclosure_id_FunctionalCI`.`name` AS `enclosure_name`,
+	`SANSwitch_DatacenterDevice`.`nb_u` AS `nb_u`,
+	`SANSwitch_DatacenterDevice`.`managementip` AS `managementip`,
+	`SANSwitch_DatacenterDevice`.`powera_id` AS `powerA_id`,
+	`PowerConnection_powerA_id_FunctionalCI`.`name` AS `powerA_name`,
+	`SANSwitch_DatacenterDevice`.`powerB_id` AS `powerB_id`,
+	`PowerConnection_powerB_id_FunctionalCI`.`name` AS `powerB_name`,
+	`SANSwitch_DatacenterDevice`.`redundancy` AS `redundancy`,
+	`SANSwitch_FunctionalCI`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `SANSwitch_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	COALESCE (( `SANSwitch_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `obsolescence_flag`,
+	`SANSwitch_FunctionalCI`.`obsolescence_date` AS `obsolescence_date`,
+	cast( concat( COALESCE ( `Organization_org_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `org_id_friendlyname`,
+	COALESCE (( `Organization_org_id`.`status` = 'inactive' ), 0 ) AS `org_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Location_location_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `location_id_friendlyname`,
+	COALESCE (( `Location_location_id`.`status` = 'inactive' ), 0 ) AS `location_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Brand_brand_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `brand_id_friendlyname`,
+	cast( concat( COALESCE ( `Model_model_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `model_id_friendlyname`,
+	cast( concat( COALESCE ( `Rack_rack_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `rack_id_friendlyname`,
+	COALESCE (( `Rack_rack_id_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `rack_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Enclosure_enclosure_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `enclosure_id_friendlyname`,
+	COALESCE (( `Enclosure_enclosure_id_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `enclosure_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `PowerConnection_powerA_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `powerA_id_friendlyname`,
+	`PowerConnection_powerA_id_FunctionalCI`.`finalclass` AS `powerA_id_finalclass_recall`,
+	COALESCE (( `PowerConnection_powerA_id_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `powerA_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `PowerConnection_powerB_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `powerB_id_friendlyname`,
+	`PowerConnection_powerB_id_FunctionalCI`.`finalclass` AS `powerB_id_finalclass_recall`,
+	COALESCE (( `PowerConnection_powerB_id_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `powerB_id_obsolescence_flag` 
+FROM
+	((((((
+							`datacenterdevice` `SANSwitch_DatacenterDevice`
+							LEFT JOIN (
+								`physicaldevice` `Rack_rack_id_PhysicalDevice`
+								JOIN `functionalci` `Rack_rack_id_FunctionalCI` ON ((
+										`Rack_rack_id_PhysicalDevice`.`id` = `Rack_rack_id_FunctionalCI`.`id` 
+										))) ON ((
+									`SANSwitch_DatacenterDevice`.`rack_id` = `Rack_rack_id_PhysicalDevice`.`id` 
+								)))
+						LEFT JOIN (
+							`physicaldevice` `Enclosure_enclosure_id_PhysicalDevice`
+							JOIN `functionalci` `Enclosure_enclosure_id_FunctionalCI` ON ((
+									`Enclosure_enclosure_id_PhysicalDevice`.`id` = `Enclosure_enclosure_id_FunctionalCI`.`id` 
+									))) ON ((
+								`SANSwitch_DatacenterDevice`.`enclosure_id` = `Enclosure_enclosure_id_PhysicalDevice`.`id` 
+							)))
+					LEFT JOIN (
+						`physicaldevice` `PowerConnection_powerA_id_PhysicalDevice`
+						JOIN `functionalci` `PowerConnection_powerA_id_FunctionalCI` ON ((
+								`PowerConnection_powerA_id_PhysicalDevice`.`id` = `PowerConnection_powerA_id_FunctionalCI`.`id` 
+								))) ON ((
+							`SANSwitch_DatacenterDevice`.`powera_id` = `PowerConnection_powerA_id_PhysicalDevice`.`id` 
+						)))
+				LEFT JOIN (
+					`physicaldevice` `PowerConnection_powerB_id_PhysicalDevice`
+					JOIN `functionalci` `PowerConnection_powerB_id_FunctionalCI` ON ((
+							`PowerConnection_powerB_id_PhysicalDevice`.`id` = `PowerConnection_powerB_id_FunctionalCI`.`id` 
+							))) ON ((
+						`SANSwitch_DatacenterDevice`.`powerB_id` = `PowerConnection_powerB_id_PhysicalDevice`.`id` 
+					)))
+			JOIN (((
+						`physicaldevice` `SANSwitch_PhysicalDevice`
+						LEFT JOIN `location` `Location_location_id` ON ((
+								`SANSwitch_PhysicalDevice`.`location_id` = `Location_location_id`.`id` 
+							)))
+					LEFT JOIN `typology` `Brand_brand_id_Typology` ON ((
+							`SANSwitch_PhysicalDevice`.`brand_id` = `Brand_brand_id_Typology`.`id` 
+						)))
+				LEFT JOIN `typology` `Model_model_id_Typology` ON ((
+						`SANSwitch_PhysicalDevice`.`model_id` = `Model_model_id_Typology`.`id` 
+						))) ON ((
+					`SANSwitch_DatacenterDevice`.`id` = `SANSwitch_PhysicalDevice`.`id` 
+				)))
+		JOIN (
+			`functionalci` `SANSwitch_FunctionalCI`
+			JOIN `organization` `Organization_org_id` ON ((
+					`SANSwitch_FunctionalCI`.`org_id` = `Organization_org_id`.`id` 
+					))) ON ((
+				`SANSwitch_DatacenterDevice`.`id` = `SANSwitch_FunctionalCI`.`id` 
+			))) 
+WHERE
+	((
+			0 <> COALESCE (( `Brand_brand_id_Typology`.`finalclass` = 'Brand' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `Model_model_id_Typology`.`finalclass` = 'Model' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `Rack_rack_id_PhysicalDevice`.`finalclass` = 'Rack' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `Enclosure_enclosure_id_PhysicalDevice`.`finalclass` = 'Enclosure' ), 1 )) 
+		AND (
+		0 <> COALESCE (( `PowerConnection_powerA_id_PhysicalDevice`.`finalclass` IN ( 'PowerSource', 'PDU', 'PowerConnection' )), 1 )) 
+		AND (
+		0 <> COALESCE (( `PowerConnection_powerB_id_PhysicalDevice`.`finalclass` IN ( 'PowerSource', 'PDU', 'PowerConnection' )), 1 )) 
+	AND (
+	0 <> COALESCE (( `SANSwitch_DatacenterDevice`.`finalclass` = 'SANSwitch' ), 1 )))
 ```
 

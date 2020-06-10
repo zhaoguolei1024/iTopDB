@@ -18,6 +18,46 @@
 | virtualmachine_id_obsolescence_flag | int [**0**]                                |      |
 
 ```
-select distinct `LogicalInterface`.`id` AS `id`,`LogicalInterface_NetworkInterface`.`name` AS `name`,`LogicalInterface_IPInterface`.`ipaddress` AS `ipaddress`,`LogicalInterface_IPInterface`.`macaddress` AS `macaddress`,`LogicalInterface_IPInterface`.`comment` AS `comment`,`LogicalInterface_IPInterface`.`ipgateway` AS `ipgateway`,`LogicalInterface_IPInterface`.`ipmask` AS `ipmask`,`LogicalInterface_IPInterface`.`speed` AS `speed`,`LogicalInterface`.`virtualmachine_id` AS `virtualmachine_id`,`VirtualMachine_virtualmachine_id_FunctionalCI`.`name` AS `virtualmachine_name`,`LogicalInterface_NetworkInterface`.`finalclass` AS `finalclass`,cast(concat(coalesce(`LogicalInterface_NetworkInterface`.`name`,''),coalesce(' ',''),coalesce(`VirtualMachine_virtualmachine_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,coalesce(coalesce((`VirtualMachine_virtualmachine_id_VirtualDevice`.`status` = 'obsolete'),0),0) AS `obsolescence_flag`,`LogicalInterface_NetworkInterface`.`obsolescence_date` AS `obsolescence_date`,cast(concat(coalesce(`VirtualMachine_virtualmachine_id_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `virtualmachine_id_friendlyname`,coalesce((`VirtualMachine_virtualmachine_id_VirtualDevice`.`status` = 'obsolete'),0) AS `virtualmachine_id_obsolescence_flag` from (((`logicalinterface` `LogicalInterface` join (`virtualdevice` `VirtualMachine_virtualmachine_id_VirtualDevice` join `functionalci` `VirtualMachine_virtualmachine_id_FunctionalCI` on((`VirtualMachine_virtualmachine_id_VirtualDevice`.`id` = `VirtualMachine_virtualmachine_id_FunctionalCI`.`id`))) on((`LogicalInterface`.`virtualmachine_id` = `VirtualMachine_virtualmachine_id_VirtualDevice`.`id`))) join `ipinterface` `LogicalInterface_IPInterface` on((`LogicalInterface`.`id` = `LogicalInterface_IPInterface`.`id`))) join `networkinterface` `LogicalInterface_NetworkInterface` on((`LogicalInterface`.`id` = `LogicalInterface_NetworkInterface`.`id`))) where (0 <> coalesce((`VirtualMachine_virtualmachine_id_VirtualDevice`.`finalclass` = 'VirtualMachine'),1))
+SELECT DISTINCT
+	`LogicalInterface`.`id` AS `id`,
+	`LogicalInterface_NetworkInterface`.`name` AS `name`,
+	`LogicalInterface_IPInterface`.`ipaddress` AS `ipaddress`,
+	`LogicalInterface_IPInterface`.`macaddress` AS `macaddress`,
+	`LogicalInterface_IPInterface`.`comment` AS `comment`,
+	`LogicalInterface_IPInterface`.`ipgateway` AS `ipgateway`,
+	`LogicalInterface_IPInterface`.`ipmask` AS `ipmask`,
+	`LogicalInterface_IPInterface`.`speed` AS `speed`,
+	`LogicalInterface`.`virtualmachine_id` AS `virtualmachine_id`,
+	`VirtualMachine_virtualmachine_id_FunctionalCI`.`name` AS `virtualmachine_name`,
+	`LogicalInterface_NetworkInterface`.`finalclass` AS `finalclass`,
+	cast(
+		concat(
+			COALESCE ( `LogicalInterface_NetworkInterface`.`name`, '' ),
+			COALESCE ( ' ', '' ),
+		COALESCE ( `VirtualMachine_virtualmachine_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 
+	) AS `friendlyname`,
+	COALESCE ( COALESCE (( `VirtualMachine_virtualmachine_id_VirtualDevice`.`status` = 'obsolete' ), 0 ), 0 ) AS `obsolescence_flag`,
+	`LogicalInterface_NetworkInterface`.`obsolescence_date` AS `obsolescence_date`,
+	cast( concat( COALESCE ( `VirtualMachine_virtualmachine_id_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `virtualmachine_id_friendlyname`,
+	COALESCE (( `VirtualMachine_virtualmachine_id_VirtualDevice`.`status` = 'obsolete' ), 0 ) AS `virtualmachine_id_obsolescence_flag` 
+FROM
+	(((
+				`logicalinterface` `LogicalInterface`
+				JOIN (
+					`virtualdevice` `VirtualMachine_virtualmachine_id_VirtualDevice`
+					JOIN `functionalci` `VirtualMachine_virtualmachine_id_FunctionalCI` ON ((
+							`VirtualMachine_virtualmachine_id_VirtualDevice`.`id` = `VirtualMachine_virtualmachine_id_FunctionalCI`.`id` 
+							))) ON ((
+						`LogicalInterface`.`virtualmachine_id` = `VirtualMachine_virtualmachine_id_VirtualDevice`.`id` 
+					)))
+			JOIN `ipinterface` `LogicalInterface_IPInterface` ON ((
+					`LogicalInterface`.`id` = `LogicalInterface_IPInterface`.`id` 
+				)))
+		JOIN `networkinterface` `LogicalInterface_NetworkInterface` ON ((
+				`LogicalInterface`.`id` = `LogicalInterface_NetworkInterface`.`id` 
+			))) 
+WHERE
+	(
+	0 <> COALESCE (( `VirtualMachine_virtualmachine_id_VirtualDevice`.`finalclass` = 'VirtualMachine' ), 1 ))
 ```
 

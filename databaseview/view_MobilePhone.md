@@ -33,6 +33,68 @@
 | model_id_friendlyname         | varchar(255) *NULL*                                          |      |
 
 ```
-select distinct `MobilePhone`.`id` AS `id`,`MobilePhone_FunctionalCI`.`name` AS `name`,`MobilePhone_FunctionalCI`.`description` AS `description`,`MobilePhone_FunctionalCI`.`org_id` AS `org_id`,`Organization_org_id`.`name` AS `organization_name`,`MobilePhone_FunctionalCI`.`business_criticity` AS `business_criticity`,`MobilePhone_FunctionalCI`.`move2production` AS `move2production`,`MobilePhone_PhysicalDevice`.`serialnumber` AS `serialnumber`,`MobilePhone_PhysicalDevice`.`location_id` AS `location_id`,`Location_location_id`.`name` AS `location_name`,`MobilePhone_PhysicalDevice`.`status` AS `status`,`MobilePhone_PhysicalDevice`.`brand_id` AS `brand_id`,`Brand_brand_id_Typology`.`name` AS `brand_name`,`MobilePhone_PhysicalDevice`.`model_id` AS `model_id`,`Model_model_id_Typology`.`name` AS `model_name`,`MobilePhone_PhysicalDevice`.`asset_number` AS `asset_number`,`MobilePhone_PhysicalDevice`.`purchase_date` AS `purchase_date`,`MobilePhone_PhysicalDevice`.`end_of_warranty` AS `end_of_warranty`,`MobilePhone_TelephonyCI`.`phonenumber` AS `phonenumber`,`MobilePhone`.`imei` AS `imei`,`MobilePhone`.`hw_pin` AS `hw_pin`,`MobilePhone_FunctionalCI`.`finalclass` AS `finalclass`,cast(concat(coalesce(`MobilePhone_FunctionalCI`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,coalesce((`MobilePhone_PhysicalDevice`.`status` = 'obsolete'),0) AS `obsolescence_flag`,`MobilePhone_FunctionalCI`.`obsolescence_date` AS `obsolescence_date`,cast(concat(coalesce(`Organization_org_id`.`name`,'')) as char charset utf8mb4) AS `org_id_friendlyname`,coalesce((`Organization_org_id`.`status` = 'inactive'),0) AS `org_id_obsolescence_flag`,cast(concat(coalesce(`Location_location_id`.`name`,'')) as char charset utf8mb4) AS `location_id_friendlyname`,coalesce((`Location_location_id`.`status` = 'inactive'),0) AS `location_id_obsolescence_flag`,cast(concat(coalesce(`Brand_brand_id_Typology`.`name`,'')) as char charset utf8mb4) AS `brand_id_friendlyname`,cast(concat(coalesce(`Model_model_id_Typology`.`name`,'')) as char charset utf8mb4) AS `model_id_friendlyname` from (((`mobilephone` `MobilePhone` join `telephonyci` `MobilePhone_TelephonyCI` on((`MobilePhone`.`id` = `MobilePhone_TelephonyCI`.`id`))) join (((`physicaldevice` `MobilePhone_PhysicalDevice` left join `location` `Location_location_id` on((`MobilePhone_PhysicalDevice`.`location_id` = `Location_location_id`.`id`))) left join `typology` `Brand_brand_id_Typology` on((`MobilePhone_PhysicalDevice`.`brand_id` = `Brand_brand_id_Typology`.`id`))) left join `typology` `Model_model_id_Typology` on((`MobilePhone_PhysicalDevice`.`model_id` = `Model_model_id_Typology`.`id`))) on((`MobilePhone`.`id` = `MobilePhone_PhysicalDevice`.`id`))) join (`functionalci` `MobilePhone_FunctionalCI` join `organization` `Organization_org_id` on((`MobilePhone_FunctionalCI`.`org_id` = `Organization_org_id`.`id`))) on((`MobilePhone`.`id` = `MobilePhone_FunctionalCI`.`id`))) where ((0 <> coalesce((`Brand_brand_id_Typology`.`finalclass` = 'Brand'),1)) and (0 <> coalesce((`Model_model_id_Typology`.`finalclass` = 'Model'),1)))
+SELECT DISTINCT
+	`MobilePhone`.`id` AS `id`,
+	`MobilePhone_FunctionalCI`.`name` AS `name`,
+	`MobilePhone_FunctionalCI`.`description` AS `description`,
+	`MobilePhone_FunctionalCI`.`org_id` AS `org_id`,
+	`Organization_org_id`.`name` AS `organization_name`,
+	`MobilePhone_FunctionalCI`.`business_criticity` AS `business_criticity`,
+	`MobilePhone_FunctionalCI`.`move2production` AS `move2production`,
+	`MobilePhone_PhysicalDevice`.`serialnumber` AS `serialnumber`,
+	`MobilePhone_PhysicalDevice`.`location_id` AS `location_id`,
+	`Location_location_id`.`name` AS `location_name`,
+	`MobilePhone_PhysicalDevice`.`status` AS `status`,
+	`MobilePhone_PhysicalDevice`.`brand_id` AS `brand_id`,
+	`Brand_brand_id_Typology`.`name` AS `brand_name`,
+	`MobilePhone_PhysicalDevice`.`model_id` AS `model_id`,
+	`Model_model_id_Typology`.`name` AS `model_name`,
+	`MobilePhone_PhysicalDevice`.`asset_number` AS `asset_number`,
+	`MobilePhone_PhysicalDevice`.`purchase_date` AS `purchase_date`,
+	`MobilePhone_PhysicalDevice`.`end_of_warranty` AS `end_of_warranty`,
+	`MobilePhone_TelephonyCI`.`phonenumber` AS `phonenumber`,
+	`MobilePhone`.`imei` AS `imei`,
+	`MobilePhone`.`hw_pin` AS `hw_pin`,
+	`MobilePhone_FunctionalCI`.`finalclass` AS `finalclass`,
+	cast( concat( COALESCE ( `MobilePhone_FunctionalCI`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	COALESCE (( `MobilePhone_PhysicalDevice`.`status` = 'obsolete' ), 0 ) AS `obsolescence_flag`,
+	`MobilePhone_FunctionalCI`.`obsolescence_date` AS `obsolescence_date`,
+	cast( concat( COALESCE ( `Organization_org_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `org_id_friendlyname`,
+	COALESCE (( `Organization_org_id`.`status` = 'inactive' ), 0 ) AS `org_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Location_location_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `location_id_friendlyname`,
+	COALESCE (( `Location_location_id`.`status` = 'inactive' ), 0 ) AS `location_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Brand_brand_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `brand_id_friendlyname`,
+	cast( concat( COALESCE ( `Model_model_id_Typology`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `model_id_friendlyname` 
+FROM
+	(((
+				`mobilephone` `MobilePhone`
+				JOIN `telephonyci` `MobilePhone_TelephonyCI` ON ((
+						`MobilePhone`.`id` = `MobilePhone_TelephonyCI`.`id` 
+					)))
+			JOIN (((
+						`physicaldevice` `MobilePhone_PhysicalDevice`
+						LEFT JOIN `location` `Location_location_id` ON ((
+								`MobilePhone_PhysicalDevice`.`location_id` = `Location_location_id`.`id` 
+							)))
+					LEFT JOIN `typology` `Brand_brand_id_Typology` ON ((
+							`MobilePhone_PhysicalDevice`.`brand_id` = `Brand_brand_id_Typology`.`id` 
+						)))
+				LEFT JOIN `typology` `Model_model_id_Typology` ON ((
+						`MobilePhone_PhysicalDevice`.`model_id` = `Model_model_id_Typology`.`id` 
+						))) ON ((
+					`MobilePhone`.`id` = `MobilePhone_PhysicalDevice`.`id` 
+				)))
+		JOIN (
+			`functionalci` `MobilePhone_FunctionalCI`
+			JOIN `organization` `Organization_org_id` ON ((
+					`MobilePhone_FunctionalCI`.`org_id` = `Organization_org_id`.`id` 
+					))) ON ((
+				`MobilePhone`.`id` = `MobilePhone_FunctionalCI`.`id` 
+			))) 
+WHERE
+	((
+			0 <> COALESCE (( `Brand_brand_id_Typology`.`finalclass` = 'Brand' ), 1 )) 
+	AND (
+	0 <> COALESCE (( `Model_model_id_Typology`.`finalclass` = 'Model' ), 1 )))
 ```
 

@@ -21,6 +21,37 @@
 | problem_id_friendlyname  | varchar(255) *NULL*                                          |      |
 
 ```
-select distinct `KnownError`.`id` AS `id`,`KnownError`.`name` AS `name`,`KnownError`.`cust_id` AS `org_id`,`Organization_org_id`.`name` AS `cust_name`,`KnownError`.`problem_id` AS `problem_id`,`Problem_problem_id_Ticket`.`ref` AS `problem_ref`,`KnownError`.`symptom` AS `symptom`,`KnownError`.`rootcause` AS `root_cause`,`KnownError`.`workaround` AS `workaround`,`KnownError`.`solution` AS `solution`,`KnownError`.`error_code` AS `error_code`,`KnownError`.`domain` AS `domain`,`KnownError`.`vendor` AS `vendor`,`KnownError`.`model` AS `model`,`KnownError`.`version` AS `version`,cast(concat(coalesce(`KnownError`.`name`,'')) as char charset utf8mb4) AS `friendlyname`,cast(concat(coalesce(`Organization_org_id`.`name`,'')) as char charset utf8mb4) AS `org_id_friendlyname`,coalesce((`Organization_org_id`.`status` = 'inactive'),0) AS `org_id_obsolescence_flag`,cast(concat(coalesce(`Problem_problem_id_Ticket`.`ref`,'')) as char charset utf8mb4) AS `problem_id_friendlyname` from ((`knownerror` `KnownError` join `organization` `Organization_org_id` on((`KnownError`.`cust_id` = `Organization_org_id`.`id`))) left join `ticket` `Problem_problem_id_Ticket` on((`KnownError`.`problem_id` = `Problem_problem_id_Ticket`.`id`))) where (0 <> coalesce((`Problem_problem_id_Ticket`.`finalclass` = 'Problem'),1))
+SELECT DISTINCT
+	`KnownError`.`id` AS `id`,
+	`KnownError`.`name` AS `name`,
+	`KnownError`.`cust_id` AS `org_id`,
+	`Organization_org_id`.`name` AS `cust_name`,
+	`KnownError`.`problem_id` AS `problem_id`,
+	`Problem_problem_id_Ticket`.`ref` AS `problem_ref`,
+	`KnownError`.`symptom` AS `symptom`,
+	`KnownError`.`rootcause` AS `root_cause`,
+	`KnownError`.`workaround` AS `workaround`,
+	`KnownError`.`solution` AS `solution`,
+	`KnownError`.`error_code` AS `error_code`,
+	`KnownError`.`domain` AS `domain`,
+	`KnownError`.`vendor` AS `vendor`,
+	`KnownError`.`model` AS `model`,
+	`KnownError`.`version` AS `version`,
+	cast( concat( COALESCE ( `KnownError`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `friendlyname`,
+	cast( concat( COALESCE ( `Organization_org_id`.`name`, '' )) AS CHAR charset utf8mb4 ) AS `org_id_friendlyname`,
+	COALESCE (( `Organization_org_id`.`status` = 'inactive' ), 0 ) AS `org_id_obsolescence_flag`,
+	cast( concat( COALESCE ( `Problem_problem_id_Ticket`.`ref`, '' )) AS CHAR charset utf8mb4 ) AS `problem_id_friendlyname` 
+FROM
+	((
+			`knownerror` `KnownError`
+			JOIN `organization` `Organization_org_id` ON ((
+					`KnownError`.`cust_id` = `Organization_org_id`.`id` 
+				)))
+		LEFT JOIN `ticket` `Problem_problem_id_Ticket` ON ((
+				`KnownError`.`problem_id` = `Problem_problem_id_Ticket`.`id` 
+			))) 
+WHERE
+	(
+	0 <> COALESCE (( `Problem_problem_id_Ticket`.`finalclass` = 'Problem' ), 1 ))
 ```
 
