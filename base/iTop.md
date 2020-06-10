@@ -1,3 +1,5 @@
+即IT运营门户（IT Operation Portal），是一个开源web应用程序，用于IT环境的日常运营。它基于ITIL最佳实践，而又不拘泥于任何具体流程。它很灵活，可以适应不管是非正 式的、务实的流程，还是严格遵循ITIL的流程。它的核心是CMDB，即配置管理数据库（Configuration Management Data Base）。
+
 ## 一、IT专业人士
 
 ### 降低服务成本并提高客户满意度。
