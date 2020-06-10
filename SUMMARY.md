@@ -451,7 +451,8 @@
 - [问题管理](backfunction/ProblemManagement.md)
 - [变更管理](backfunction/ChangeManagement.md)
 - [服务管理](backfunction/ServiceManagement.md)
-- [数据管理](backfunction/DataAdministration.md)
+- [数据管理]
+    - [CSV导入](backfunction/ServiceManagement/csvimport.md)
 - [管理工具](backfunction/AdminTools.md)
 - [配置工具](backfunction/ConfigurationTools.md)
 - [System工具](backfunction/SystemTools.md)
@@ -519,6 +520,7 @@
 ## 常见问题 <a id="question"></a>
 
 - [角色汉化](question/hanhua.md)
+- [导入导出乱码](question/randomcode.md)
 - [数据导入与同步](question/dataquestion.md)
 - [其他](question/other.md)
 
