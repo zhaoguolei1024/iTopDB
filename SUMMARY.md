@@ -53,7 +53,7 @@
   - [contracttype](databasetable/C/contracttype.md)
   - [customercontract](databasetable/C/customercontract.md)
 - [D（9）]
-  - [databasetableschema](databasetable/D/databasetableschema.md)
+  - [databaseschema](databasetable/D/databaseschema.md)
   - [datacenterdevice](databasetable/D/datacenterdevice.md)
   - [dbserver](databasetable/D/dbserver.md)
   - [deliverymodel](databasetable/D/deliverymodel.md)
