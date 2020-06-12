@@ -1,14 +1,18 @@
-| 列           | 类型                                       | 注释 |
-| :----------- | ------------------------------------------ | ---- |
-| id           | int *自动增量*                             |      |
-| rack_id      | int *NULL* [**0**]                         |      |
-| enclosure_id | int *NULL* [**0**]                         |      |
-| nb_u         | int *NULL*                                 |      |
-| managementip | varchar(255) *NULL* []                     |      |
-| powera_id    | int *NULL* [**0**]                         |      |
-| powerB_id    | int *NULL* [**0**]                         |      |
-| redundancy   | varchar(20) *NULL* [**1**]                 |      |
-| finalclass   | varchar(255) *NULL* [**DatacenterDevice**] |      |
+datacenterdevice
+
+数据中心设备
+
+| 列           | 类型                                       | 注释            |
+| :----------- | ------------------------------------------ | --------------- |
+| id           | int *自动增量*                             | 自增ID          |
+| rack_id      | int *NULL* [**0**]                         | 机柜            |
+| enclosure_id | int *NULL* [**0**]                         | 机位            |
+| nb_u         | int *NULL*                                 | 高度            |
+| managementip | varchar(255) *NULL* []                     | 管理IP，IP 地址 |
+| powera_id    | int *NULL* [**0**]                         | 电源A           |
+| powerB_id    | int *NULL* [**0**]                         | 电源B           |
+| redundancy   | varchar(20) *NULL* [**1**]                 | 冗余            |
+| finalclass   | varchar(255) *NULL* [**DatacenterDevice**] | 二级配置项      |
 
 ### 索引
 
