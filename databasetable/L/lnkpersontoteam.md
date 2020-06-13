@@ -1,9 +1,15 @@
-| 列        | 类型               | 注释 |
-| :-------- | ------------------ | ---- |
-| id        | int *自动增量*     |      |
-| team_id   | int *NULL* [**0**] |      |
-| person_id | int *NULL* [**0**] |      |
-| role_id   | int *NULL* [**0**] |      |
+lnkpersontoteam
+
+链接 个体 / 团队 (lnkPersonToTeam)
+
+
+
+| 列        | 类型               | 注释   |
+| :-------- | ------------------ | ------ |
+| id        | int *自动增量*     | 自增ID |
+| team_id   | int *NULL* [**0**] | 团队   |
+| person_id | int *NULL* [**0**] | 个体   |
+| role_id   | int *NULL* [**0**] | 角色   |
 
 ### 索引
 

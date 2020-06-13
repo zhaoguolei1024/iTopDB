@@ -1,5 +1,7 @@
 ## brand
 
+拓扑 (Typology) >> Brand
+
 品牌
 
 | 列   | 类型           | 注释   |

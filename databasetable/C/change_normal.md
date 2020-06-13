@@ -1,5 +1,7 @@
 change_normal
 
+工单 (Ticket) >> 变更 (Change) >> 已批准的变更 (ApprovedChange) >> NormalChange
+
 正常变更
 
 | 列                 | 类型            | 注释     |

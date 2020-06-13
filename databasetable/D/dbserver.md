@@ -1,3 +1,5 @@
+dbserver
+
 数据库服务器
 
 功能配置项 (FunctionalCI) >> 软件实例 (SoftwareInstance) >> DBServer

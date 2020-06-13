@@ -1,6 +1,6 @@
 documenttype
 
-文档 (Document) >> DocumentFile
+拓扑 (Typology) >> DocumentType
 
 文档类型
 

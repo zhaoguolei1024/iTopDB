@@ -1,5 +1,7 @@
 change_approved
 
+工单 (Ticket) >> 变更 (Change) >> ApprovedChange
+
 已变更的批准
 
 | 列               | 类型                                     | 注释     |

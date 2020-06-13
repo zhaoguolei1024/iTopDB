@@ -1,5 +1,7 @@
 contacttype
 
+拓扑 (Typology) >> ContactType
+
 联系人类型
 
 | 列   | 类型           | 注释   |

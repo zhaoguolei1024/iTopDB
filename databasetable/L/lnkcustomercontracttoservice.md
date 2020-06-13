@@ -1,9 +1,15 @@
-| 列                  | 类型               | 注释 |
-| :------------------ | ------------------ | ---- |
-| id                  | int *自动增量*     |      |
-| customercontract_id | int *NULL* [**0**] |      |
-| service_id          | int *NULL* [**0**] |      |
-| sla_id              | int *NULL* [**0**] |      |
+lnkcustomercontracttoservice
+
+关联 客户合同/服务 (lnkCustomerContractToService)
+
+
+
+| 列                  | 类型               | 注释     |
+| :------------------ | ------------------ | -------- |
+| id                  | int *自动增量*     | 自增ID   |
+| customercontract_id | int *NULL* [**0**] | 客户合同 |
+| service_id          | int *NULL* [**0**] | 服务     |
+| sla_id              | int *NULL* [**0**] | SLA      |
 
 ### 索引
 

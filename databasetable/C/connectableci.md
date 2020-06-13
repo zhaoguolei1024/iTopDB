@@ -1,5 +1,7 @@
 connectableci
 
+功能配置项 (FunctionalCI) >> 物理设备 (PhysicalDevice) >> ConnectableCI
+
 可连接的配置项
 
 | 列         | 类型                                    | 注释       |

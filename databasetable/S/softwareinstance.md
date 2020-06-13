@@ -1,12 +1,18 @@
-| 列                 | 类型                                       | 注释 |
-| :----------------- | ------------------------------------------ | ---- |
-| id                 | int *自动增量*                             |      |
-| functionalci_id    | int *NULL* [**0**]                         |      |
-| software_id        | int *NULL* [**0**]                         |      |
-| softwarelicence_id | int *NULL* [**0**]                         |      |
-| path               | varchar(255) *NULL* []                     |      |
-| status             | enum('active','inactive') *NULL*           |      |
-| finalclass         | varchar(255) *NULL* [**SoftwareInstance**] |      |
+softwareinstance
+
+软件实例 (SoftwareInstance)
+
+功能配置项 (FunctionalCI) >> SoftwareInstance
+
+| 列                 | 类型                                       | 注释                                 |
+| :----------------- | ------------------------------------------ | ------------------------------------ |
+| id                 | int *自动增量*                             | 自增ID                               |
+| functionalci_id    | int *NULL* [**0**]                         | 配置项ID                             |
+| software_id        | int *NULL* [**0**]                         | 软件ID                               |
+| softwarelicence_id | int *NULL* [**0**]                         | 软件许可证ID                         |
+| path               | varchar(255) *NULL* []                     | 路径                                 |
+| status             | enum('active','inactive') *NULL*           | 状态，启用 (active), 停用 (inactive) |
+| finalclass         | varchar(255) *NULL* [**SoftwareInstance**] | 二级配置项                           |
 
 ### 索引
 
