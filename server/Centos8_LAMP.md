@@ -79,8 +79,6 @@ lnmp restart
 
 ![image-20200619190458750](..\assets\image-20200619190458750.png)
 
-![image-20200619190516321](C:\Users\Administrator.DESKTOP-64FS8N1\AppData\Roaming\Typora\typora-user-images\image-20200619190516321.png)
-
 ![image-20200619190538169](..\assets\image-20200619190538169.png)
 
 ![image-20200619190606552](..\assets\image-20200619190606552.png)
