@@ -7,7 +7,7 @@
 ```
 首先要打开需要维护的文档地址：
 
-https://www.itopdb.com/doc/start/index.html#/itopdb/server/Windows.md
+https://doc.itopdb.com/doc/start/index.html#/itopdb/server/Windows.md
 ```
 
 
