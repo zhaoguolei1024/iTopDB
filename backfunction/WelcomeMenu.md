@@ -6,7 +6,7 @@
 
 ###  欢迎模块 默认显示的是配置项和服务台的信息
 
-![welcome1](..\assets\welcome1.png)
+![image](https://user-images.githubusercontent.com/74246577/116018564-e0a10c00-a674-11eb-96a7-53b2551cbfda.png)
 
 ###  欢迎模块 可以把我们经常要使用的信息添加到的快捷方式里 例如：(把联系人添加到我的快捷方式里)
 
