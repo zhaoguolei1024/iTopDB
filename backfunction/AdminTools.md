@@ -4,7 +4,7 @@
 
 ### 管理工具
 
-![glgj1](..\assets\glgj1.jpg)
+![glgj1](../assets/glgj1.jpg)
 
 <center>管理工具模块（角色）</center>
 
