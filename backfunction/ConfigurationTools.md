@@ -131,7 +131,7 @@ CSV导入适用于：
 
 
 
-![pz2](..\assets\pz2.jpg)
+![pz2](../assets/pz2.jpg)
 
 <center>通知</center>
 
