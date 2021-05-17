@@ -20,7 +20,7 @@
 
   
 
-  ![fwgl1](..\assets\fwgl1.jpg)
+  ![fwgl1](../assets/fwgl1.jpg)
 
   <center>图1-1 客户合同</center>
 
@@ -28,7 +28,7 @@
 
   #### 一个供应商合同可以记录所有你与你的供应商之间的（关于技术支持，维护，硬件合同等）的合约。这非常有助于你快速检索到这些信息以及更好的关联合同的续签流程。同事你还可以链接涵盖在供应商同内的配置项。对于每个客户的合同你都可以链接与它相关的所有文档和联系人，见图1-2。
 
-  ![fwgl2](..\assets\fwgl2.jpg)
+  ![fwgl2](../assets/fwgl2.jpg)
 
 <center>图1-2 供应商合同</center>
 
@@ -50,7 +50,7 @@
 
   #### 每一个IT服务提供者都可以定义他自己的服务列表。服务被用来描述一个用户的请求或一个事件的表征，见图1-3。
 
-![fwgl3](..\assets\fwgl3.jpg)
+![fwgl3](../assets/fwgl3.jpg)
 
 <center>图1-3 服务目录</center>
 
@@ -70,7 +70,7 @@
 
   #### 一个子服务和用户请求是相关的（事件或者用户请求）。这样做是为了实现自动完成一个用户请求或事件的条件，见图1-4。
 
-![fwgl4](..\assets\fwgl4.jpg)
+![fwgl4](../assets/fwgl4.jpg)
 
 <center>图1-4 子服务</center>
 
@@ -78,7 +78,7 @@
 
 #### 一个服务级别协议是一组服务级别目标。它定义了一个服务提供者和顾客对于一组给定的服务之间的协议。每一个IT部门都可以定义自己的SLA列表，一个SLA可以有多个SLT,见图1-5。
 
-![fwgl5](..\assets\fwgl5.jpg)
+![fwgl5](../assets/fwgl5.jpg)
 
 <center>图1-6 SLA</center>
 
@@ -99,7 +99,7 @@
   * 值 （只能是int整数类型）
   * 单位 （小时，分钟）
 
-![fwgl6](..\assets\fwgl6.jpg)
+![fwgl6](../assets/fwgl6.jpg)
 
 <center>图1-6 SLT</center>
 
@@ -113,7 +113,7 @@
 
 #### 注意：如果一个给定客户没有定义大交付模式可用，那么就不能给这个客户创建工单的，见图1-7。
 
-![fwgl7](..\assets\fwgl7.jpg)
+![fwgl7](../assets/fwgl7.jpg)
 
 <center>图1-7 交付模式</center>
 
