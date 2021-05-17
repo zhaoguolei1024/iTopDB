@@ -1,12 +1,8 @@
-## 该文档尚未维护，点击下方链接加入我们一起来学习维护
-
-[点击此处加入QQ群【iTopDB.com】](https://jq.qq.com/?_wv=1027&k=iY5f6Yys) QQ群号：657615256
-
 ### 配置
 
 ### 1.编辑被指文件
 
-![pz1](..\assets\pz1.jpg)
+![pz1](../assets/pz1.jpg)
 
 <center>配置文件</center>
 
