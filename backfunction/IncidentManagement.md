@@ -6,41 +6,41 @@
 
 #### 1.服务台人员用admin（超级管理员，拥有最高权限）账号登陆系统，进入iTop系统后，选择事件管理后，选择事件管理--新建事件，进入登记事件页面，登记后指派给工程师Jules Verne（办理人），见图1-1。
 
-![](..\assets\sjgl1.jpg)
+![](../assets/sjgl1.jpg)
 
 <center>图1-1 事件单指派</center>
 
 #### 2.办理人接到工单，用他的账号123456登录，登录后点击事件管理--指派给我的事件。如图1-2。
 
-![sjgl2](..\assets\sjgl2.jpg)
+![sjgl2](../assets/sjgl2.jpg)
 
 <center>图1-2本人的事件单</center>
 
 #### 3.点击事件编号，查看事件工单详细内容，见图1-3
 
-![sjgl3](..\assets\sjgl3.jpg)
+![sjgl3](../assets/sjgl3.jpg)
 
 <center>图1-3 事件内容浏览</center>
 
 #### 4.工程师Jules Verne因无法处理而将工单转给工程师2，于是点击 其他操作 下拉列表的”重新指派“，对手上的事件工单进行升级转派：选择好重指派的办理人后，点击下方”重指派“，即可完成升级转派动作；见图1-4
 
-![sjgl4](..\assets\sjgl4.jpg)
+![sjgl4](../assets/sjgl4.jpg)
 
 <center>图1-4 事件单指派</center>
 
 #### 5.工程师2使用帐号登录，查看事件工单，通过属性选择卡的日志以及选项卡历史可以查到历史记录和派单操作，见图1-5，图1-6
 
-![sjgl5](..\assets\sjgl5.jpg)
+![sjgl5](../assets/sjgl5.jpg)
 
 <center>图1-5 事件单内容浏览</center>
 
-![sjgl6](..\assets\sjgl6.jpg)
+![sjgl6](../assets/sjgl6.jpg)
 
 <center>图1-6，事件操作流程记录浏览</center>
 
 #### 6.点击其他操作 列表下拉的”标记为已解决“，填写相应解决方案，然后点下下方”标记为已解决“，见图1-7。
 
-![sjgl7](..\assets\sjgl7.jpg)
+![sjgl7](../assets/sjgl7.jpg)
 
 #### 7.点击【其他操作】下拉列表的【关闭】，进入到关闭环节，填写用户满意度并关闭工单。
 
