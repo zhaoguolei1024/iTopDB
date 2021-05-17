@@ -1,7 +1,3 @@
-## 该文档尚未维护，点击下方链接加入我们一起来学习维护
-
-[点击此处加入QQ群【iTopDB.com】](https://jq.qq.com/?_wv=1027&k=iY5f6Yys) QQ群号：657615256
-
 ### 1-1-1问题管理
 
  #### 问题管理包含两个部分，分别是问题管理和已知错误管理。
@@ -18,19 +14,19 @@
 
 #### 问题经理使用帐号登录系统，点击左侧[问题管理]--【新问题】，点击新建，如图1-1。
 
-![wtgl1](..\assets\wtgl1.jpg)
+![wtgl1](../assets/wtgl1.jpg)
 
 <center>图1-1 问题管理创建页面</center>
 
 #### 2.指派问题，如图1-2。
 
-![wtgl2](..\assets\wtgl2.jpg)
+![wtgl2](../assets/wtgl2.jpg)
 
 <center>图1-2 问题管理单指派选项</center>
 
 #### 3.查看【问题管理】--【我的问题】，看到目前有一个问题待处理：如图1-3。
 
-![wtgl3](..\assets\wtgl3.jpg)
+![wtgl3](../assets/wtgl3.jpg)
 
 <center>图1-3 本人处理的问题管理单</center>
 
@@ -38,13 +34,13 @@
 
 #### 4.问题经理思考，分析后，对该问题进行处理并完成在系统内的信息维护：标记完成，关闭问题：见图1-4。
 
-![wtgl4](..\assets\wtgl4.jpg)
+![wtgl4](../assets/wtgl4.jpg)
 
 <center>图1-4 将问题管理标记为完成</center>
 
 #### 5.申请关闭后，显示所有的字段内容，见图1-5。
 
-![wtgl5](..\assets\wtgl5.jpg)
+![wtgl5](../assets/wtgl5.jpg)
 
 <center>图1-5 问题管理单内容浏览</center>
 
@@ -56,13 +52,13 @@
 
 #### 1.创建已知错误，【问题管理】--【新的已知错误】，点“创建”完成。见图1-6。
 
-![wtgl6](..\assets\wtgl6.jpg)
+![wtgl6](../assets/wtgl6.jpg)
 
 <center>图1-6 已知错误单创建页面</center>
 
 #### 2.创建页面，见图1-7。
 
-![wtgl7](..\assets\wtgl7.jpg)
+![wtgl7](../assets/wtgl7.jpg)
 
 <center>图1-7 已知错误内容预览</center>
 
