@@ -12,7 +12,7 @@ https://doc.itopdb.com/doc/start/index.html#/itopdb/server/Windows.md
 
 
 
-![image-20200609104236345](..\assets\image-20200609104236345.png)
+![image-20200609104236345](../assets/image-20200609104236345.png)
 
 
 
@@ -26,7 +26,7 @@ https://doc.itopdb.com/doc/start/index.html#/itopdb/server/Windows.md
 
 
 
-![image-20200609104347787](..\assets\image-20200609104347787.png)
+![image-20200609104347787](../assets/image-20200609104347787.png)
 
 
 ```
@@ -38,9 +38,9 @@ markdown语法学习（https://www.runoob.com/markdown/md-tutorial.html）
 
 “此处是新增内容”
 ```
-![image-20200609104648137](..\assets\image-20200609104648137.png)
+![image-20200609104648137](../assets/image-20200609104648137.png)
 
-![image-20200609104756064](..\assets\image-20200609104756064.png)
+![image-20200609104756064](../assets/image-20200609104756064.png)
 
 
 ```

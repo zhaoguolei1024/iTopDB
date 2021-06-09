@@ -2,7 +2,7 @@
 
 如果您已经知道，请在此处**[访问iTop 2.7](https://www.itophub.io/wiki/page?id=2_7_0%3Astart)**文档Wiki！
 
-[![img](..\assets\download-itop.png)](https://sourceforge.net/projects/itop/files/latest/download?source=directory)
+[![img](../assets/download-itop.png)](https://sourceforge.net/projects/itop/files/latest/download?source=directory)
 
 ## 关于iTop
 

@@ -2,7 +2,7 @@
 
 ### 汉化效果：
 
-![image-20200609094459568](..\assets\juesehanhua.png)
+![image-20200609094459568](../assets/juesehanhua.png)
 
 ### 汉化操作：
 ```
