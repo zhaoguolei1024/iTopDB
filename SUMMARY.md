@@ -467,7 +467,7 @@
 - [FAQ](webfunction/faq.md)
 - [已关闭的工单](webfunction/closed-tickets-for-portal-user.md)
 
-## 扩展插件 <a id="itopextensions"></a>
+## iTop扩展 <a id="itopextensions"></a>
 
 - [Admin tools delegation](itopextensions/Admin tools delegation.md)
 - [Approval process automation](itopextensions/Approval process automation.md)
