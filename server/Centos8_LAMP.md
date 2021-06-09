@@ -30,7 +30,7 @@ iTop安装包下载地址：https://sourceforge.net/projects/itop/
 
 ![image-20200619190115624](../assets/image-20200619190115624.png)
 
-PHP安装LDAP扩展 
+PHP安装LDAP扩展
 
 ```
 cd /data/lnmp1.7/src && tar jxvf php-7.4.6.tar.bz2 && cd php-7.4.6/ext
