@@ -28,9 +28,9 @@
 ## 官方中文wiki <a id="wiki"></a>
 
 - [什么是iTop](wiki/whatisitop.md)
-- [iTop文档2.7]
-  - [首页](wiki/27home.md)
-
+- [iTop官方文档]
+  - [2.7](wiki/27home.md)
+  - [3.0](wiki/30home.md)
 
 ## 数据库表结构 <a id="databasetable"></a>
 
