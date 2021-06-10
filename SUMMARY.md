@@ -84,7 +84,7 @@
 - [K（2）]
   - [key_value_store](databasetable/K/key_value_store.md)
   - [knownerror](databasetable/K/knownerror.md)
-- [L（35-）]
+- [L（35）]
   - [licence](databasetable/L/licence.md)
   - [lnkapplicationsolutiontobusinessprocess](databasetable/L/lnkapplicationsolutiontobusinessprocess.md)
   - [lnkapplicationsolutiontofunctionalci](databasetable/L/lnkapplicationsolutiontofunctionalci.md)
