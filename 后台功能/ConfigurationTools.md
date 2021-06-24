@@ -71,6 +71,8 @@
   			'enabled' => true,
   			'itop_backup_incident' => '',
 
+####删除密码安全性策略
+https://www.itophub.io/wiki/page?do=export_code&id=3_0_0%3Aadmin%3Apassword-policy&codeblock=0
 
 
 ### 2.同步数据源
